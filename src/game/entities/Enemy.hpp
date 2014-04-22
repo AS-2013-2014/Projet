@@ -19,7 +19,8 @@
 
 #include "LivingEntity.hpp"
 
-class Enemy : public LivingEntity{
+class Enemy : public LivingEntity
+{
 };
 
 #endif

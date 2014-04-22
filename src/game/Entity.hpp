@@ -17,7 +17,8 @@
 #ifndef H_ENTITY
 #define H_ENTITY
 
-class Entity{
+class Entity
+{
 };
 
 #endif

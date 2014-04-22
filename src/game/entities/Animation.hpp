@@ -19,7 +19,8 @@
 
 #include "Graphic.hpp"
 
-class Animation : public Graphic{
+class Animation : public Graphic
+{
 };
 
 #endif

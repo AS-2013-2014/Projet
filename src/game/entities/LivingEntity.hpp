@@ -19,7 +19,8 @@
 
 #include "../Entity.hpp"
 
-class LivingEntity : public Entity{
+class LivingEntity : public Entity
+{
 };
 
 #endif

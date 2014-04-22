@@ -17,7 +17,8 @@
 #ifndef H_SCENE
 #define H_SCENE
 
-class Scene{
+class Scene
+{
 };
 
 #endif

@@ -19,7 +19,8 @@
 
 #include "Platform.hpp"
 
-class Elevator : public Platform{
+class Elevator : public Platform
+{
 };
 
 #endif

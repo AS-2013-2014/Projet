@@ -19,7 +19,8 @@
 
 #include "LivingEntity.hpp"
 
-class Player : public LivingEntity{
+class Player : public LivingEntity
+{
 };
 
 #endif

@@ -19,7 +19,8 @@
 
 #include "../Entity.hpp"
 
-class Graphic : public Entity{
+class Graphic : public Entity
+{
 };
 
 #endif

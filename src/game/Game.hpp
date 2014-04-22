@@ -17,7 +17,8 @@
 #ifndef H_GAME
 #define H_GAME
 
-class Game{
+class Game
+{
 };
 
 #endif

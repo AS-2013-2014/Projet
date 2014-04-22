@@ -19,7 +19,8 @@
 
 #include "../Entity.hpp"
 
-class Platform : public Entity{
+class Platform : public Entity
+{
 };
 
 #endif
