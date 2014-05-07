@@ -21,9 +21,9 @@
 
 int main(int argc, char** argv)
 {
-  //instruction unique pour tout le programme
-  //initialise le gestionnaire de ressources
-  Resources resources;
+	//instruction unique pour tout le programme
+	//initialise le gestionnaire de ressources
+	Resources resources;
 
 	return 0;
 }
