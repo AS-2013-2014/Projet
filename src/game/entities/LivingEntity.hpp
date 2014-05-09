@@ -1,26 +1,30 @@
-
+﻿
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
 /*                                                                          */
-/* Categorie: physic                                                        */
+/* Categorie: moteur physique                                               */
 /*                                                                          */
-/* Fonction(s):                                                             */
+/* Fonction(s):  récupération vitesse                                       */
 /*--------------------------------------------------------------------------*/
-/* Description: Une entité vivante                                          */
+/* Description:  classe mère de toutes les entitées pouvant se déplacer     */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef H_LIVING_ENTITY
-#define H_LIVING_ENTITY
-
-#include "../Entity.hpp"
-
-class LivingEntity : public Entity
-{
-};
-
+#ifndef LIVING_ENTITY
+#define LIVING_ENTITY
+	public class LivingEntity: public Entity{
+		
+		float dx; // vitesse en x
+		float dy; // vitesse en y
+		
+		public:
+			LivingEntity (float x, float y, float z,float dx = 0, float dy = 0);
+			float getdx() const;
+			float getdy() const;
+			void move(float dx, float dy);
+	}
 #endif
