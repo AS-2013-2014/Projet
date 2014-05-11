@@ -1,5 +1,5 @@
 #ifndef CST
-#define CST=1
+#define CST
 
 // math
 #define PI 3.14159265
