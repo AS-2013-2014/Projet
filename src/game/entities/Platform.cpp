@@ -9,7 +9,7 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	:Entity(x,y,z,length,width)
 {
 	Entity::rect.setRotation(angle);
-	Entity::rect.setPosistion(sf::Vector2f(x,y))
+	Entity::rect.setPosition(sf::Vector2f(x,y));
 	sf::Vector2f pt0 = rect.getTransform().transformPoint(Entity::rect.getPoint(0));
 	sf::Vector2f pt1 = rect.getTransform().transformPoint(Entity::rect.getPoint(1));
 	sf::Vector2f pt2 = rect.getTransform().transformPoint(Entity::rect.getPoint(2));

@@ -26,12 +26,14 @@
 
 		public:
 			sf::RectangleShape rect;
-			Entity(sf:Vector2i coord , float z , int length , int width);
-			Entity(int x , int y , float z , int length , int width));
+			Entity(sf::Vector2i coord , float z , int length , int width);
+			Entity(int x , int y , float z , int length , int width);
 			sf::Vector2i getCoord() const;
 			int getX()const;
 			int getY()const;
 			float getZ() const;
+      int getLength() const;
+      int getWidth() const;
 	};
 
 #endif

@@ -20,30 +20,31 @@
 Entity::Entity(sf::Vector2i coord, float z ,int length , int width){
 	this->coord=coord;
 	this->z=z;
-	rect=sf::RectangleShape(sf::vector2f(length,width));
-	rect.setPosition(coord);
+	rect=sf::RectangleShape(sf::Vector2f(length,width));
+	rect.setPosition(sf::Vector2f(coord));
 }
-Entity::Entity(int x, int y, int z){
+
+Entity::Entity(int x, int y, float z, int length, int width){
 	coord=sf::Vector2i(x,y);
 	this->z=z;
-	rect=sf::RectangleShape(sf::vector2f(length,width));
-	rect.setPosition(coord);
+	rect=sf::RectangleShape(sf::Vector2f(length,width));
+	rect.setPosition(sf::Vector2f(coord));
 }
-sf::Vector2f Entity::getCoord () const {
+sf::Vector2i Entity::getCoord () const {
 	return coord;
 }
-float Entity::getZ(){
+float Entity::getZ() const{
 	return z;
 }
-int Entity::getX(){
-	return x;
+int Entity::getX() const{
+	return coord.x;
 }
-int Entity::getY(){
-	return y;
+int Entity::getY() const{
+	return coord.y;
 }
-int Entity::getLength(){
+int Entity::getLength() const{
 	return rect.getSize().x;
 }
-int Entity::getWidth(){
+int Entity::getWidth() const{
 	return rect.getSize().y;
 }

@@ -1,6 +1,26 @@
-#ifndef PI
-#define PI
 
-const float PI=3.1415;
+/****************************************************************************/
+/* DUT INFO AS - Projet AS */
+/* */
+/* */
+/* Categorie: game */
+/* */
+/* Fonction(s): */
+/*--------------------------------------------------------------------------*/
+/* Description: Le jeu en lui même */
+/* */
+/* */
+/* */
+/* */
+/****************************************************************************/
+
+#ifndef H_GAME
+#define H_GAME
+
+class Game
+{
+  public:
+    static const float PI;
+};
 
 #endif
