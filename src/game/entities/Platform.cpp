@@ -42,7 +42,7 @@ bool Platform::intersect(Segment s) const {
 	return s1.intersect(s) || s2.intersect(s) || s3.intersect(s) || s4.intersect(s);
 }
 
-vector<float> Platform:getOtherX(){
+vector<float> Platform::getOtherX(){
 	sf::Vector2f pt1 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(1));
 	sf::Vector2f pt2 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(2));
 	sf::Vector2f pt3 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(3));
