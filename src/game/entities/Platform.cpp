@@ -21,11 +21,11 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	this->type=type;
 	this->skin=skin;
 }
-Platform::Platform(sf::Vector2i coord, float z, int lenght, int width, float angle, int type, int skin)
-	:Entity(coord,z)
+Platform::Platform(sf::Vector2i coord, float z, int length, int width, float angle, int type, int skin)
+	:Entity(coord,z, length, width)
 {
 	Entity::rect.setRotation(angle);
-	Entity::rect.setPosistion(coord)
+	Entity::rect.setPosition(sf::Vector2f(coord));
 	sf::Vector2f pt0 = rect.getTransform().transformPoint(Entity::rect.getPoint(0));
 	sf::Vector2f pt1 = rect.getTransform().transformPoint(Entity::rect.getPoint(1));
 	sf::Vector2f pt2 = rect.getTransform().transformPoint(Entity::rect.getPoint(2));
@@ -37,16 +37,20 @@ Platform::Platform(sf::Vector2i coord, float z, int lenght, int width, float ang
 	this->type=type;
 	this->skin=skin;
 }
-Platform::Platform(){};
+
+Platform::Platform():Entity(0,0,0,0,0)
+{
+}
+
 bool Platform::intersect(Segment s) const {
 	return s1.intersect(s) || s2.intersect(s) || s3.intersect(s) || s4.intersect(s);
 }
 
-vector<float> Platform::getOtherX(){
+std::vector<float> Platform::getOtherX(){
 	sf::Vector2f pt1 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(1));
 	sf::Vector2f pt2 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(2));
 	sf::Vector2f pt3 = Entity::rect.getTransform().transformPoint(Entity::rect.getPoint(3));
-	vector<float> ohters;
+  std::vector<float> others;
 	others.push_back(pt1.x);
 	others.push_back(pt2.x);
 	others.push_back(pt3.x);

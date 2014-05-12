@@ -2,7 +2,7 @@ LIBS=-lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 
 #main
 run: main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o
-	g++ main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o -o run $(LIBS)
+	g++ main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o -o run $(LIBS)
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
