@@ -14,23 +14,28 @@
 /*                                                                          */
 /****************************************************************************/
 
-public class Player: public LivingEntity{
-	bool double_jump;
-	
-	Player(float x , float y , float z , float dx , float dy){
-		LivingEntity(x,y,z,dx,dy);
-		double_jump = false;
-	}
-	
-	bool getDoubleJump(){
-		return double_jump;
-	}
-	
-	void doubleJump(){
-		double_jump = true;
-	}
-	
-	void landing(){
-		double_jump = false;
-	}
+#include "Player.hpp"
+#include <SFML/Graphics.hpp>
+
+Player::Player(sf::Vector2i coord, float z , int length , int width , sf::Vector2f movement)
+    :LivingEntity(coord,z, length, width , movement)
+{
+	double_jump = false;
 }
+
+Player::Player(int x , int y , float z , int length , int width , sf::Vector2f movement)
+    :LivingEntity(x , y , z , length, width , movement)
+{
+	double_jump = false;
+}
+
+bool Player::getDoubleJump(){
+	return double_jump;
+}
+void Player::doubleJump(){
+	double_jump = true;
+}
+void Player::landing(){
+	double_jump = false;
+}
+

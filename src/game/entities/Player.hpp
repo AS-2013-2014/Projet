@@ -16,14 +16,20 @@
 
 #ifndef PLAYER
 #define PLAYER
-	class Player: public LivingEntity{
+
+#include "Player.hpp"
+#include "LivingEntity.hpp"
+#include <SFML/Graphics.hpp>
+
+	class Player: public LivingEntity {
 		bool double_jump;
-		
+
 		public:
-		
-		Player(float x=0,float y=0,float z=0, float dx=0, float dy=0);
-		void getDoubleJump();
+
+		Player(sf::Vector2i coord, float z ,int length , int width , sf::Vector2f movement);
+		Player(int x , int y , float z , int length , int width , sf::Vector2f movement);
+		bool getDoubleJump();
 		void doubleJump();
 		void landing();
-	}
+	};
 #endif

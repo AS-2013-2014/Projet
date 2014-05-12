@@ -14,17 +14,24 @@
 /*                                                                          */
 /****************************************************************************/
 
-#ifned ENTITY
+#ifndef ENTITY
 #define ENTITY
-	public class Entity{
-		float x; //coordonnées en x
-		float y; //coordonnées en y
-		float z; //coordonnées en z
-		
+#include <SFML/Graphics.hpp>
+
+	class Entity{
+		protected:
+			sf::Vector2i coord;
+			float z;
+			
+
 		public:
-			Entity(int x=0; int y=0; int z=0;);
-			float getx() const;
-			float gety() const;
-			float getz() const;
-	}
+			sf::RectangleShape rect;
+			Entity(sf:Vector2i coord , float z , int length , int width);
+			Entity(int x , int y , float z , int length , int width));
+			sf::Vector2i getCoord() const;
+			int getX()const;
+			int getY()const;
+			float getZ() const;
+	};
+
 #endif

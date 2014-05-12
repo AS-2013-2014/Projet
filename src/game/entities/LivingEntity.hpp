@@ -16,15 +16,18 @@
 
 #ifndef LIVING_ENTITY
 #define LIVING_ENTITY
-	public class LivingEntity: public Entity{
-		
-		float dx; // vitesse en x
-		float dy; // vitesse en y
-		
+
+#include <SFML/Graphics.hpp>
+#include "Entity.hpp"
+
+	class LivingEntity: public Entity{
+
+		sf::Vector2f movement
+
 		public:
-			LivingEntity (float x, float y, float z,float dx = 0, float dy = 0);
-			float getdx() const;
-			float getdy() const;
-			void move(float dx, float dy);
-	}
+			LivingEntity (sf::Vector2i coord , float z = 0, int length , int width ,sf::Vector2f movement);
+			LivingEntity (int x, int y , float z = 0 , int length , int width ,sf::Vector2f movement);
+			sf::Vector2f getMovement() const;
+			void move(sf::Vector2f movement);
+	};
 #endif

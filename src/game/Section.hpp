@@ -1,7 +1,7 @@
 
 /****************************************************************************/
-/*                       DUT INFO AS - Projet AS                             */
-/*                                                                            */
+/*                       DUT INFO AS - Projet AS                                */
+/*                                                                                            */
 /*                                                                                            */
 /* Categorie: moteur physique                                                    */
 /*                                                                          */
@@ -14,31 +14,15 @@
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef SCENE
-#define SCENE
+#ifndef SECTION
+#define SECTION
 
-#include "Section.hpp"
-#include "entities/Platform.hpp"
-#include <math.h>
-#include <iostream>
-#include <fstream>
 #include <vector>
-#include <string>
-#include <stdlib.h> // atof, atoi
+#include "entities/Platform.hpp"
 
-#define SECTION_WIDTH 300
-
-class Scene
-{
+class Section {
 	public:
-	std::vector<Section> sections;
 	std::vector<Platform> platforms;
-	int width;
-	int nb_sections;
-	Scene(const std::string &file);
+	Section();
 };
-
-Platform readPlateform(std::string line);
-int readLvlWidth(std::string line);
-
 #endif

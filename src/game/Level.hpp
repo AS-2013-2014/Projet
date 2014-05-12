@@ -14,8 +14,8 @@
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef SCENE
-#define SCENE
+#ifndef LEVEL
+#define LEVEL
 
 #include "Section.hpp"
 #include "entities/Platform.hpp"
@@ -24,21 +24,20 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <stdlib.h> // atof, atoi
 
 #define SECTION_WIDTH 300
 
-class Scene
+class Level
 {
 	public:
 	std::vector<Section> sections;
-	std::vector<Platform> platforms;
+	std::vector<Platform> platforms;// à retirer ?
 	int width;
 	int nb_sections;
-	Scene(const std::string &file);
+	Level(std::string file);
 };
 
-Platform readPlateform(std::string line);
-int readLvlWidth(std::string line);
+void read_plateform(int tab[], std::string line);
+int read_lvl_width(std::string line);
 
 #endif
