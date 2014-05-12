@@ -48,3 +48,13 @@ int Entity::getLength() const{
 int Entity::getWidth() const{
 	return rect.getSize().y;
 }
+
+void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+  states.transform *= getTransform();
+  states.texture = NULL;
+	
+	target.draw(rect, states);
+}
+
+

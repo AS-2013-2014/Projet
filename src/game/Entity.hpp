@@ -18,11 +18,12 @@
 #define ENTITY
 #include <SFML/Graphics.hpp>
 
-	class Entity{
+	class Entity : public sf::Drawable, public sf::Transformable{
 		protected:
+			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 			sf::Vector2i coord;
 			float z;
-			
 
 		public:
 			sf::RectangleShape rect;

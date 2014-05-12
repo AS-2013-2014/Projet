@@ -54,4 +54,6 @@ std::vector<float> Platform::getOtherX(){
 	others.push_back(pt1.x);
 	others.push_back(pt2.x);
 	others.push_back(pt3.x);
+
+	return others;
 }
