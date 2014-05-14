@@ -1,7 +1,8 @@
 
 #include "Scene.hpp"
+#include "Game.hpp"
 
-Scene::Scene(const std::string &file)
+Scene::Scene(Game *_game, const std::string &file): game(_game)
 {
     std::ifstream lvl_file(file.c_str(),std::ios::in);
 
@@ -52,8 +53,16 @@ Scene::Scene(const std::string &file)
 			//fermer le fichier
 			lvl_file.close();
 		}
+
+	for(int i = 0; i < 10; i++)
+		graphics.push_back(new Graphic(0,0,i,200,50,0));
 }
 
+Scene::~Scene()
+{
+	for(int i = 0; i < graphics.size(); i++)
+		delete graphics[i];
+}
 
 Platform readPlateform(std::string line)
 {
@@ -144,16 +153,107 @@ int readLvlWidth(std::string line)
 	return width;
 }
 
+bool Scene::loadGraphics(const std::string& file)
+{
+	std::ifstream graph_file(file.c_str());
+	if(graph_file)
+	{
+		//fichier ouvert
+		std::string line;
+		std::stringstream sline;
+
+		//lecture de chaque ligne
+		while(getline(graph_file, line))
+		{
+			sline.clear();
+			sline.str(line);
+
+			//extraction des informations
+			int x, y, w, h, r;
+			float z;
+			std::string type, src;
+
+			std::stringstream ss;
+			int sbuff = 256;
+			char buff[sbuff];
+			
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> x;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> y;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> z;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> w;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> h;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> r;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> type;
+
+			sline.getline(buff, sbuff, ';');
+			ss.clear();
+			ss.str(buff);
+			ss >> src;
+
+			if(type == "I")
+			{
+				
+			}
+		}
+	}
+}
+
 void Scene::frame(float time)
 {
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  states.transform *= getTransform();
-  states.texture = NULL;
-	
-	//target.draw(element, states);
+	states.transform *= getTransform();
+	states.texture = NULL;
+
+	sf::Vector2f view = game->getWindow().getView().getSize();
+
+	for(int i = 0; i < graphics.size(); i++)
+	{
+		Graphic& gr = *(graphics[i]);
+
+		//calcul pour l'affichage
+		float pc = (10.0-(float)gr.z)/10.0;
+		float x = ((float)gr.x-cam.x)*pc+view.x/2.0;
+		float y = ((float)gr.y-cam.y)*pc+view.y/2.0;
+		float a = (10.0-(float)gr.z)/10.0;
+		float r = gr.r;
+
+		gr.setPosition(x,y);
+		gr.setScale(pc,pc);
+		gr.setRotation(r);
+
+		target.draw(gr, states);
+	}
 }
+
 
 

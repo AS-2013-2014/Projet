@@ -19,15 +19,20 @@
 
 #include "Section.hpp"
 #include "entities/Platform.hpp"
+#include "entities/Graphic.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <stdlib.h> // atof, atoi
 #include <SFML/Graphics.hpp>
 
 #define SECTION_WIDTH 300
+
+//parent pointer
+class Game;
 
 class Scene : public sf::Drawable, public sf::Transformable
 {
@@ -36,12 +41,23 @@ class Scene : public sf::Drawable, public sf::Transformable
 	std::vector<Platform> platforms;
 	int width;
 	int nb_sections;
-	Scene(const std::string &file);
 
+	Scene(Game *game,const std::string &file);
+	~Scene();
+
+	bool loadGraphics(const std::string& file);
 	void frame(float time);
 
+	//accesseurs
+	sf::Vector2f& getCam(){ return cam; }
+
 	private:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	std::vector<Graphic*> graphics;
+	sf::Vector2f cam;
+
+	Game *game;
 };
 
 Platform readPlateform(std::string line);
