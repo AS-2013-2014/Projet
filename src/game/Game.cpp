@@ -8,6 +8,7 @@ const float Game::PI=3.1415;
 Game::Game(sf::RenderWindow& _window) : scene(this,"base.lvl")
 {
 	window = &_window;
+  scene.loadGraphics("base.graph");
 }
 
 void Game::frame(float time)

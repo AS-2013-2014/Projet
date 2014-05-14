@@ -53,11 +53,6 @@ Scene::Scene(Game *_game, const std::string &file): game(_game)
 			//fermer le fichier
 			lvl_file.close();
 		}
-
-	//test d'éléments graphiques
-	for(int i = 0; i < 36; i++)
-		graphics.push_back(new WImage(0,0,i/36.0*10,100,200,i*10,"images/test2.png"));
-	std::sort(graphics.begin(), graphics.end(), Graphic::sort);
 }
 
 Scene::~Scene()
@@ -221,9 +216,11 @@ bool Scene::loadGraphics(const std::string& file)
 
 			if(type == "I")
 			{
-				
+        graphics.push_back(new WImage(x,y,z,w,h,r,"images/"+src));
 			}
 		}
+
+    std::sort(graphics.begin(), graphics.end(), Graphic::sort);
 	}
 }
 
