@@ -26,6 +26,10 @@ int main(int argc, char** argv)
 	//initialise le gestionnaire de ressources
 	Resources resources;
 
+	//chargements de ressources de test
+	Resources::loadTexture("images/test2.png");
+	Resources::loadTexture("images/test.png");
+
   sf::RenderWindow window(sf::VideoMode(800,600), "Test");
   window.setFramerateLimit(50);
   sf::Clock clock;

@@ -54,8 +54,10 @@ Scene::Scene(Game *_game, const std::string &file): game(_game)
 			lvl_file.close();
 		}
 
-	for(int i = 0; i < 10; i++)
-		graphics.push_back(new Graphic(0,0,i,200,50,0));
+	//test d'éléments graphiques
+	for(int i = 0; i < 36; i++)
+		graphics.push_back(new WImage(0,0,i/36.0*10,100,200,i*10,"images/test2.png"));
+	std::sort(graphics.begin(), graphics.end(), Graphic::sort);
 }
 
 Scene::~Scene()

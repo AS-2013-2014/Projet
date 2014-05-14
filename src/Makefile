@@ -2,8 +2,8 @@ LIBS=-lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 OPT=-g
 
 #main
-run: main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o
-	g++ main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o -o run $(LIBS) $(OPT)
+run: main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o WImage.o
+	g++ main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o WImage.o -o run $(LIBS) $(OPT)
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o $(OPT)
@@ -44,6 +44,10 @@ Platform.o: game/entities/Platform.cpp game/entities/Platform.hpp
 
 Graphic.o: game/entities/Graphic.cpp game/entities/Graphic.hpp
 	g++ -c game/entities/Graphic.cpp -o Graphic.o $(OPT)
+
+WImage.o: game/entities/WImage.cpp game/entities/WImage.hpp
+	g++ -c game/entities/WImage.cpp -o WImage.o $(OPT)
+
 
 
 

@@ -19,7 +19,7 @@
 
 #include "Section.hpp"
 #include "entities/Platform.hpp"
-#include "entities/Graphic.hpp"
+#include "entities/WImage.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>
