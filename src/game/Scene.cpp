@@ -53,12 +53,19 @@ Scene::Scene(Game *_game, const std::string &file): game(_game)
 			//fermer le fichier
 			lvl_file.close();
 		}
+
+  //chargement du shader
+	sh_fade = new sf::Shader;
+	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
+    sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 }
 
 Scene::~Scene()
 {
 	for(int i = 0; i < graphics.size(); i++)
 		delete graphics[i];
+
+	delete sh_fade;
 }
 
 Platform readPlateform(std::string line)
@@ -253,6 +260,14 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
   //fond
   target.draw(background, states);
 
+	//utilisation du shader
+	if(background.getTexture() != NULL){
+		states.shader = sh_fade;
+		sh_fade->setParameter("background", *background.getTexture());
+		sh_fade->setParameter("width", game->getWindow().getSize().x);
+		sh_fade->setParameter("height", game->getWindow().getSize().y);
+	}
+
 	for(int i = 0; i < graphics.size(); i++)
 	{
 		Graphic& gr = *(graphics[i]);
@@ -264,6 +279,10 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		float a = (10.0-(float)gr.z)/10.0;
 		float r = gr.r;
 
+		//parametre du shader
+		sh_fade->setParameter("a", a);
+
+		//transformation
 		gr.setPosition(x,y);
 		gr.setScale(pc,pc);
 		gr.setRotation(r);

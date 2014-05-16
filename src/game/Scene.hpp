@@ -60,6 +60,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 
 	Game *game;
   sf::Sprite background;
+  sf::Shader* sh_fade;
 };
 
 Platform readPlateform(std::string line);
