@@ -12,7 +12,6 @@ void Graphic::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	sf::RectangleShape rect(sf::Vector2f(w,h));
 	rect.setFillColor(sf::Color(255,255,255));
-	rect.setOrigin(w/2, h/2);
 	
 	target.draw(rect, states);
 }

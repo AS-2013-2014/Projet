@@ -46,6 +46,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	~Scene();
 
 	bool loadGraphics(const std::string& file);
+  void setBackground(const std::string file);
 	void frame(float time);
 
 	//accesseurs
@@ -58,6 +59,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	sf::Vector2f cam;
 
 	Game *game;
+  sf::Sprite background;
 };
 
 Platform readPlateform(std::string line);

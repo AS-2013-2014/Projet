@@ -29,6 +29,7 @@ int main(int argc, char** argv)
 	//chargements de ressources de test
 	Resources::loadTexture("images/test2.png");
 	Resources::loadTexture("images/test.png");
+  Resources::loadTexture("images/fond.jpg");
 
   sf::RenderWindow window(sf::VideoMode(800,600), "Test");
   window.setFramerateLimit(50);

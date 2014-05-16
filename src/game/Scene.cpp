@@ -150,6 +150,12 @@ int readLvlWidth(std::string line)
 	return width;
 }
 
+void Scene::setBackground(const std::string file){
+  sf::Texture* tex = Resources::getTexture(file);
+  if(tex != NULL)
+    background.setTexture(*tex);
+}
+
 bool Scene::loadGraphics(const std::string& file)
 {
 	std::ifstream graph_file(file.c_str());
@@ -158,6 +164,18 @@ bool Scene::loadGraphics(const std::string& file)
 		//fichier ouvert
 		std::string line;
 		std::stringstream sline;
+    std::stringstream ss;
+    int sbuff = 256;
+    char buff[sbuff];
+			
+
+    //lecture de la ligne d'en tête, le chargement du fond
+    if(getline(graph_file, line)){
+      sline.str(line);
+      sline.getline(buff,sbuff,';'); 
+      sline.getline(buff,sbuff,';'); 
+      setBackground("images/"+std::string(buff));
+    }
 
 		//lecture de chaque ligne
 		while(getline(graph_file, line))
@@ -170,10 +188,7 @@ bool Scene::loadGraphics(const std::string& file)
 			float z;
 			std::string type, src;
 
-			std::stringstream ss;
-			int sbuff = 256;
-			char buff[sbuff];
-			
+		
 			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
@@ -234,6 +249,9 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	states.texture = NULL;
 
 	sf::Vector2f view = game->getWindow().getView().getSize();
+
+  //fond
+  target.draw(background, states);
 
 	for(int i = 0; i < graphics.size(); i++)
 	{
