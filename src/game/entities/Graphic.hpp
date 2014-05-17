@@ -33,6 +33,8 @@ class Graphic : public sf::Drawable, public sf::Transformable//: public Entity
 			return lhs->z > rhs->z;
 		}
 
+		virtual void frame(float time){}
+
 	protected:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

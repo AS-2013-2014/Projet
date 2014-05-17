@@ -20,6 +20,7 @@
 #include "Section.hpp"
 #include "entities/Platform.hpp"
 #include "entities/WImage.hpp"
+#include "entities/WAnimation.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>

@@ -240,6 +240,30 @@ bool Scene::loadGraphics(const std::string& file)
 			{
         graphics.push_back(new WImage(x,y,z,w,h,r,"images/"+src));
 			}
+			else if(type == "A")
+			{
+				int wc,hc;
+				float fps;
+
+				sline.getline(buff, sbuff, ';');
+				ss.clear();
+				ss.str(buff);
+				ss >> wc;
+
+				sline.getline(buff, sbuff, ';');
+				ss.clear();
+				ss.str(buff);
+				ss >> hc;
+
+				sline.getline(buff, sbuff, ';');
+				ss.clear();
+				ss.str(buff);
+				ss >> fps;
+
+				WAnimation* an = new WAnimation(x,y,z,w,h,r,"images/"+src,wc,hc,fps);
+				an->play();
+        graphics.push_back(an);
+			}
 		}
 
     std::sort(graphics.begin(), graphics.end(), Graphic::sort);
@@ -248,6 +272,8 @@ bool Scene::loadGraphics(const std::string& file)
 
 void Scene::frame(float time)
 {
+	for(int i = 0; i < graphics.size(); i++)
+		graphics[i]->frame(time);
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const

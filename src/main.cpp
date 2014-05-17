@@ -30,6 +30,8 @@ int main(int argc, char** argv)
 	Resources::loadTexture("images/test2.png");
 	Resources::loadTexture("images/test.png");
   Resources::loadTexture("images/fond.jpg");
+  Resources::loadTexture("images/fire.png");
+  Resources::loadTexture("images/aura.png");
 
   sf::RenderWindow window(sf::VideoMode(800,600), "Test");
   window.setFramerateLimit(50);
