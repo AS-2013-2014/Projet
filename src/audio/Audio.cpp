@@ -22,7 +22,7 @@ void    Audio::setSound(const int lequel){
                         sound.setBuffer(sdBuff);
                         sound.play();
                         sf::sleep(sf::seconds(0));break;
-        case COGNE_PLATEFORM: if (!sdBuff.loadFromFile("cogne.ogg"))
+        case COGNER_PLATEFORME: if (!sdBuff.loadFromFile("cogne.ogg"))
                             return;
                         sound.setBuffer(sdBuff);
                         sound.play();
@@ -83,7 +83,7 @@ void    Audio::setSound(const int lequel){
                         sf::sleep(sf::seconds(0));
                         break;
         default : //return;
-
+            break;
     }
 
 }
