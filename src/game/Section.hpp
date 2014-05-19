@@ -22,7 +22,7 @@
 
 class Section {
 	public:
-	std::vector<Platform> platforms;
+	std::vector<Platform*> platforms;
 	Section();
 };
 #endif
