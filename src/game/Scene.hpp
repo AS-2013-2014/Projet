@@ -66,7 +66,7 @@ class Scene : public sf::Drawable, public sf::Transformable
     sf::Shader* sh_fade;
 };
 
-Platform* readPlateform(std::string line);
+Platform* readPlatform(std::string line);
 int readLvlWidth(std::string line);
 
 #endif
