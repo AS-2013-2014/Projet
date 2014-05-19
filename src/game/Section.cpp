@@ -18,3 +18,9 @@
 
 Section::Section(){}
 
+Section::~Section()
+{
+	for(int i = 0; i < platforms.size(); i++)
+		delete platforms[i];
+}
+
