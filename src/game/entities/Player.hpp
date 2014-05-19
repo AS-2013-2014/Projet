@@ -26,8 +26,8 @@
 
 		public:
 
-		Player(sf::Vector2i coord, float z ,int length , int width , sf::Vector2f movement);
-		Player(int x , int y , float z , int length , int width , sf::Vector2f movement);
+		Player(sf::Vector2i coord, float z ,int length , int width , float angle, sf::Vector2f movement);
+		Player(int x , int y , float z , int length , int width , float angle, sf::Vector2f movement);
 		bool getDoubleJump();
 		void doubleJump();
 		void landing();

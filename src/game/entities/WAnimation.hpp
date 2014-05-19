@@ -1,40 +1,47 @@
-﻿
+
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
 /*                                                                          */
-/* Categorie: moteur physique                                               */
+/* Categorie: graphic                                                       */
 /*                                                                          */
-/* Fonction(s): recupération coordonées                                     */
+/* Fonction(s):                                                             */
 /*--------------------------------------------------------------------------*/
-/* Description:  classe mère de toutes les entitées                         */
+/* Description: Une animation                                               */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef ENTITY
-#define ENTITY
-#include <SFML/Graphics.hpp>
+#ifndef H_WANIMATION
+#define H_WANIMATION
 
-	class Entity : public sf::Drawable, public sf::Transformable{
-		protected:
-			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+#include "Graphic.hpp"
+#include "../../misc/Resources.hpp"
 
-			sf::Vector2i coord;
-			float z;
-			sf::Vector2i size;
+class WAnimation : public Graphic
+{
+	public:
+		WAnimation(int x, int y, float z, int w, int h, int r, const std::string& file, int wc, int hc, float fps, bool loop = true);
 
-		public:
-			Entity(sf::Vector2i coord , float z , int length , int width, float angle);
-			Entity(int x , int y , float z , int length , int width, float angle);
-			sf::Vector2i getCoord() const;
-			int getX()const;
-			int getY()const;
-			float getZ() const;
-      int getLength() const;
-      int getWidth() const;
-	};
+    virtual void frame(float time);
+
+    void play();
+    void stop();
+
+    bool isPlaying(){ return playing; }
+
+	private:
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+		sf::Sprite sprite;
+		int wc, hc;
+    bool playing, loop;
+		float fps;
+		float elapsed, frame_time;
+    sf::Vector2f size;
+		int current;
+};
 
 #endif

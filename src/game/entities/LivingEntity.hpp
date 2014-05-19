@@ -25,8 +25,8 @@
 		sf::Vector2f movement
 
 		public:
-			LivingEntity (sf::Vector2i coord , float z = 0, int length , int width ,sf::Vector2f movement);
-			LivingEntity (int x, int y , float z = 0 , int length , int width ,sf::Vector2f movement);
+			LivingEntity (sf::Vector2i coord , float z = 0, int length , int width,float angle  ,sf::Vector2f movement);
+			LivingEntity (int x, int y , float z = 0 , int length , int width,float angle  ,sf::Vector2f movement);
 			sf::Vector2f getMovement() const;
 			void move(sf::Vector2f movement);
 	};

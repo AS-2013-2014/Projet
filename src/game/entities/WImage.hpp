@@ -1,40 +1,34 @@
-﻿
+
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
 /*                                                                          */
-/* Categorie: moteur physique                                               */
+/* Categorie: graphic                                                       */
 /*                                                                          */
-/* Fonction(s): recupération coordonées                                     */
+/* Fonction(s):                                                             */
 /*--------------------------------------------------------------------------*/
-/* Description:  classe mère de toutes les entitées                         */
+/* Description: Une image de la scène (world image)                         */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef ENTITY
-#define ENTITY
-#include <SFML/Graphics.hpp>
+#ifndef H_WIMAGE
+#define H_WIMAGE
 
-	class Entity : public sf::Drawable, public sf::Transformable{
-		protected:
-			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+#include "Graphic.hpp"
+#include "../../misc/Resources.hpp"
 
-			sf::Vector2i coord;
-			float z;
-			sf::Vector2i size;
+class WImage : public Graphic
+{
+	public:
+		WImage(int x, int y, float z, int w, int h, int r, const std::string& file);
 
-		public:
-			Entity(sf::Vector2i coord , float z , int length , int width, float angle);
-			Entity(int x , int y , float z , int length , int width, float angle);
-			sf::Vector2i getCoord() const;
-			int getX()const;
-			int getY()const;
-			float getZ() const;
-      int getLength() const;
-      int getWidth() const;
-	};
+	private:
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+		sf::Sprite sprite;
+};
 
 #endif

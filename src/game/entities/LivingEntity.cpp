@@ -17,13 +17,13 @@
 #include "LivingEntity.hpp"
 #include <SFML/Graphics.hpp>
 
-LivingEntity::LivingEntity(sf::Vector2i coord, float z, int length , int width ,sf::Vector2f movement){
-	Entity(coord ,z, length, width);
+LivingEntity::LivingEntity(sf::Vector2i coord, float z, int length , int width,float angle ,sf::Vector2f movement){
+	Entity(coord ,z, length, width, angle);
 	this->movement=movement;
 }
 
-LivingEntity::LivingEntity(int x, int y, float z, int length , int width ,sf::Vector2f movement){
-	Entity(x , y , z, length, width);
+LivingEntity::LivingEntity(int x, int y, float z, int length , int width,float angle  ,sf::Vector2f movement){
+	Entity(x , y , z, length, width, angle);
 	this->movement=movement;
 }
 
