@@ -1,3 +1,18 @@
+/****************************************************************************/
+/*                       DUT INFO AS - Projet AS                            */
+/*                                                                          */
+/*                                                                          */
+/* Categorie: moteur physique                                               */
+/*                                                                          */
+/* Fonction(s): Gestion des collisions                               	    */
+/*--------------------------------------------------------------------------*/
+/* Description: Les segments font office de hitbox pour gérer             	*/
+/* les collisions. Si le segment d'une entité coupe le segment d'une autre, */
+/* il y a collision.                                                        */
+/*                                                                          */
+/*                                                                          */
+/****************************************************************************/
+
 #include "Segment.hpp"
 
 
