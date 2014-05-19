@@ -52,7 +52,7 @@ void Scene::loadLevel(const std::string &file)
 		Platform* p;
 		while (line != "END")
 		{				
-				p = readPlateform(line);
+				p = readPlatform(line);
 
 				//on ajoute la plateforme aux entitées du niveau
 				entities.push_back(p);
@@ -81,7 +81,7 @@ void Scene::loadLevel(const std::string &file)
 	}
 }
 
-void Scene::addPlateform(Plateform* p) 
+void Scene::addPlatform(Platform* p) 
 {
 	//on ajoute la plateforme aux entitées du niveau
 	entities.push_back(p);
@@ -103,7 +103,7 @@ void Scene::addPlateform(Plateform* p)
 	}
 }
 
-Platform* readPlateform(std::string line)
+Platform* readPlatform(std::string line)
 {
 	int i = 0;
 
