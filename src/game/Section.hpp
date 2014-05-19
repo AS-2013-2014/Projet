@@ -24,5 +24,6 @@ class Section {
 	public:
 	std::vector<Platform*> platforms;
 	Section();
+	~Section();
 };
 #endif
