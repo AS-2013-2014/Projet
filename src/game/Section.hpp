@@ -9,7 +9,7 @@
 /*--------------------------------------------------------------------------*/
 /* Description: le niveau courrant est divisé en sections,                  */
 /* le moteur de collision ne teste les collisions du joueur                 */
-/* qu'avec les plateformes (mortelles ou non) de section où il se trouve    */
+/* qu'avec les plateformes (mortelles ou non) de la section où il se trouve */
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
