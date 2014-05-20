@@ -18,9 +18,8 @@
 #define SCENE
 
 #include "Section.hpp"
-#include "Game.hpp"
 #include "entities/Platform.hpp"
-#include "entities/Entity.hpp"
+#include "Entity.hpp"
 #include "entities/WImage.hpp"
 #include "entities/WAnimation.hpp"
 #include <math.h>
@@ -43,13 +42,14 @@ class Scene : public sf::Drawable, public sf::Transformable
 	std::vector<Section*> sections;
 	std::vector<Entity*> entities;
 
-	Scene(Game *game,const std::string &file);
+	Scene(Game *game);
 	~Scene();
 
 	bool loadGraphics(const std::string& file);
 	void setBackground(const std::string file);
 	void frame(float time);
 	void loadLevel(const std::string &file); // charge le fichier txt du level
+	void addPlatform(Platform* p);
 
 	//accesseurs
 	sf::Vector2f& getCam(){ return cam; }

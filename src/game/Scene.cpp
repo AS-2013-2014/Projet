@@ -1,10 +1,12 @@
 
 #include "Scene.hpp"
 
+//inclusion reflexive, ne pas retirer ni rajouter dans le .hpp
+#include "Game.hpp"
+
 
 Scene::Scene(Game *_game): game(_game)
 {
-		
 	this->width = 0;
 	this->nb_sections = 0;
 
@@ -176,7 +178,7 @@ Platform* readPlatform(std::string line)
     }
     int skin = atoi(tmp.c_str());
 
-    return Platform* = new Platform(x,y,z,length,width,angle,type,skin);
+    return new Platform(x,y,z,length,width,angle,type,skin);
 }
 
 int readLvlWidth(std::string line)
