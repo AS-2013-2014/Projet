@@ -17,8 +17,6 @@
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 
-// FIXME: draw
-
 Entity::Entity(sf::Vector2i coord, float z ,int length , int width, float angle){
 	this->coord=coord;
 	this->z=z;
@@ -53,10 +51,10 @@ int Entity::getWidth() const{
 	return size.y;
 }
 
+float Entity::getAngle() const{
+	return angle;
+}
+
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  states.transform *= getTransform();
-  states.texture = NULL;
-	
-//	target.draw(rect, states);
 }

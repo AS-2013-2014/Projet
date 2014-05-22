@@ -18,9 +18,6 @@ Scene::Scene(Game *_game): game(_game)
 
 Scene::~Scene()
 {
-	for(int i = 0; i < graphics.size(); i++)
-		delete graphics[i];
-	
 	for(int i = 0; i < entities.size(); i++)
 		delete entities[i];
 
@@ -55,25 +52,7 @@ void Scene::loadLevel(const std::string &file)
 		while (line != "END")
 		{				
 				p = readPlatform(line);
-
-				//on ajoute la plateforme aux entitées du niveau
-				entities.push_back(p);
-
-				//on ajoute la plateforme aux sections correspondantes
-				int section_min = (int)p->getX()/SECTION_WIDTH;
-				int section_max = (int)p->getX()/SECTION_WIDTH;
-				for (int i=0; i<3; i++)
-				{
-						if ((int)p->getOtherX()[i]/SECTION_WIDTH < section_min)
-								section_min = p->getOtherX()[i];
-
-						else if (p->getOtherX()[i]/SECTION_WIDTH > section_min)
-								section_max = p->getOtherX()[i];
-				}
-				for (int i=section_min; i<=section_max; i++)
-				{
-						sections[i]->platforms.push_back(p);
-				}
+				addPlatform(p);
 
 				getline(lvl_file,line);
 		}
@@ -91,6 +70,7 @@ void Scene::addPlatform(Platform* p)
 	//on ajoute la plateforme aux sections correspondantes
 	int section_min = (int)p->getX()/SECTION_WIDTH;
 	int section_max = (int)p->getX()/SECTION_WIDTH;
+
 	for (int i=0; i<3; i++)
 	{
 			if ((int)p->getOtherX()[i]/SECTION_WIDTH < section_min)
@@ -99,8 +79,10 @@ void Scene::addPlatform(Platform* p)
 			else if (p->getOtherX()[i]/SECTION_WIDTH > section_min)
 					section_max = p->getOtherX()[i];
 	}
+	
 	for (int i=section_min; i<=section_max; i++)
 	{
+		if(i >= 0 && i < sections.size())
 			sections[i]->platforms.push_back(p);
 	}
 }
@@ -127,6 +109,7 @@ Platform* readPlatform(std::string line)
     int y = atoi(tmp.c_str());
     i++;
 
+		/*
     tmp = "";
     while (line[i]!=':')
     {
@@ -135,6 +118,9 @@ Platform* readPlatform(std::string line)
     }
     float z = atof(tmp.c_str());
     i++;
+		*/
+		//pas de z dans la convention
+		float z = 1;
 
     tmp = "";
     while (line[i]!=':')
@@ -171,12 +157,16 @@ Platform* readPlatform(std::string line)
     int type = atoi(tmp.c_str());
     i++;
 
+		/*
     while (line[i]!=':')
     {
         tmp += line[i];
         i++;
     }
-    int skin = atoi(tmp.c_str());
+		*/
+		//int skin = atoi(tmp.c_str());
+		//changement au niveau de la convention du niveau
+		int skin = 0;
 
     return new Platform(x,y,z,length,width,angle,type,skin);
 }
@@ -275,7 +265,7 @@ bool Scene::loadGraphics(const std::string& file)
 
 			if(type == "I")
 			{
-        graphics.push_back(new WImage(x,y,z,w,h,r,"images/"+src));
+        entities.push_back(new WImage(x,y,z,w,h,r,"images/"+src));
 			}
 			else if(type == "A")
 			{
@@ -299,18 +289,19 @@ bool Scene::loadGraphics(const std::string& file)
 
 				WAnimation* an = new WAnimation(x,y,z,w,h,r,"images/"+src,wc,hc,fps);
 				an->play();
-        graphics.push_back(an);
+        entities.push_back(an);
 			}
 		}
 
-    std::sort(graphics.begin(), graphics.end(), Graphic::sort);
+		
+    std::sort(entities.begin(), entities.end(), Entity::sort);
 	}
 }
 
 void Scene::frame(float time)
 {
-	for(int i = 0; i < graphics.size(); i++)
-		graphics[i]->frame(time);
+	for(int i = 0; i < entities.size(); i++)
+		entities[i]->frame(time);
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -331,26 +322,26 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		sh_fade->setParameter("height", game->getWindow().getSize().y);
 	}
 
-	for(int i = 0; i < graphics.size(); i++)
+	for(int i = 0; i < entities.size(); i++)
 	{
-		Graphic& gr = *(graphics[i]);
+		Entity& e = *(entities[i]);
 
 		//calcul pour l'affichage
-		float pc = (10.0-(float)gr.z)/10.0;
-		float x = ((float)gr.x-cam.x)*pc+view.x/2.0;
-		float y = ((float)gr.y-cam.y)*pc+view.y/2.0;
-		float a = (10.0-(float)gr.z)/10.0;
-		float r = gr.r;
+		float pc = (10.0-(float)e.getZ())/10.0;
+		float x = ((float)e.getX()-cam.x)*pc+view.x/2.0;
+		float y = ((float)e.getY()-cam.y)*pc+view.y/2.0;
+		float a = (10.0-(float)e.getZ())/10.0;
+		float r = e.getAngle();
 
 		//parametre du shader
 		sh_fade->setParameter("a", a);
 
 		//transformation
-		gr.setPosition(x,y);
-		gr.setScale(pc,pc);
-		gr.setRotation(r);
+		e.setPosition(x,y);
+		e.setScale(pc,pc);
+		e.setRotation(r);
 
-		target.draw(gr, states);
+		target.draw(e, states);
 	}
 }
 

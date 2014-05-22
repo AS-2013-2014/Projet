@@ -8,9 +8,9 @@
 Platform::Platform(int x, int y, float z, int length, int width, float angle, int type, int skin)
 	:Entity(x,y,z,length,width,angle)
 {
+	//les operations de transformations sont effectuées par la scène
 	this->rect=sf::RectangleShape(sf::Vector2f(length,width));	
-	rect.setRotation(angle);
-	rect.setPosition(sf::Vector2f(x,y));
+	rect.setFillColor(sf::Color(0,0,0));
 	
 	sf::Vector2f pt0 = rect.getTransform().transformPoint(rect.getPoint(0));
 	sf::Vector2f pt1 = rect.getTransform().transformPoint(rect.getPoint(1));
@@ -64,4 +64,12 @@ std::vector<float> Platform::getOtherX(){
 	others.push_back(pt3.x);
 
 	return others;
+}
+
+void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+  states.transform *= getTransform();
+  states.texture = NULL;
+
+	target.draw(rect, states);
 }

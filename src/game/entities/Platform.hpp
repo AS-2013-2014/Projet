@@ -10,6 +10,8 @@
 class Platform: public Entity {
 	private:
 	sf::RectangleShape rect;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 	public:
 	Segment s1;
 	Segment s2;

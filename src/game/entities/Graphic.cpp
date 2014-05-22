@@ -1,7 +1,7 @@
 
 #include "Graphic.hpp"
 
-Graphic::Graphic(int _x, int _y, float _z, int _w, int _h, int _r):x(_x),y(_y),z(_z),w(_w),h(_h),r(_r)
+Graphic::Graphic(int x, int y, float z, int w, int h, int r):Entity(x,y,z,w,h,r)
 {
 }
 
@@ -10,7 +10,7 @@ void Graphic::draw(sf::RenderTarget& target, sf::RenderStates states) const
   states.transform *= getTransform();
   states.texture = NULL;
 
-	sf::RectangleShape rect(sf::Vector2f(w,h));
+	sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
 	rect.setFillColor(sf::Color(255,255,255));
 	
 	target.draw(rect, states);

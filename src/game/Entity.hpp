@@ -30,12 +30,20 @@
 			Entity(sf::Vector2i coord , float z , int length , int width, float angle);
 			Entity(int x , int y , float z , int length , int width, float angle);
 
+			//pour réordonner un vector de pointeur d'entités
+			static bool sort(Entity *lhs, Entity *rhs){
+				return lhs->getZ() > rhs->getZ();
+			}
+
+			virtual void frame(float time){}
+
 			sf::Vector2i getCoord() const;
 			int getX()const;
 			int getY()const;
 			float getZ() const;
       int getLength() const;
       int getWidth() const;
+			float getAngle() const;
 	};
 
 #endif
