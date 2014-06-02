@@ -22,7 +22,7 @@
 
 	class LivingEntity: public Entity{
 
-		sf::Vector2f movement
+		sf::Vector2f movement;
 
 		public:
 			LivingEntity (sf::Vector2i coord , float z = 0, int length , int width,float angle  ,sf::Vector2f movement);
