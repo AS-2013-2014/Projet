@@ -1,0 +1,218 @@
+#include "../include/debug.hpp"
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <SFML/Graphics.hpp>
+#include "../include/const.hpp"
+#include "../include/Scene.hpp"
+#include "../include/Segment.hpp"
+#include "../include/HitBox.hpp"
+#include "../include/Solid.hpp"
+#include "../include/Character.hpp"
+
+Character::Character()
+{
+}
+
+Character::Character(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox hb)
+	:	Solid(p, d, z, s),
+		scene(sc),
+		timer(0),
+		motion_angle(-90),
+		jumping(false),
+		double_jumping(false),
+		jumpCommand(false),
+		collided(false),
+		gapToReference(0)
+{
+	hitBox = hb;
+	hitBox.move(p);
+}
+
+void Character::move(sf::Vector2f d)
+{
+	position += d;
+	rectangle.move(d);
+	hitBox.move(d);
+	float viewOrd = (scene->getViewPosition()).y;
+	if(position.y < viewOrd + 150)
+		scene->moveView(sf::Vector2f(0, (d.y < 0)?d.y:0));
+	else if(position.y > viewOrd+600 - 300)
+	{
+		if(viewOrd < 0)
+			scene->moveView(sf::Vector2f(0, (d.y > 0)?d.y:0));
+		else
+			scene->resetViewY();
+	}
+}
+
+void Character::jump()
+{
+	jumpCommand = true;
+}
+
+void Character::move(const std::vector<Solid>& solids)
+{
+	gapToReference = position.x - REF_X*600 - scene->getViewPosition().x;
+	float rad = motion_angle*PI/180;
+	float dx = 0;
+	float dy = 0;
+
+	// déplacement normal
+	if(motion_angle >= -MAX_MOVE_ANGLE)
+	{
+		if(motion_angle <= MAX_MOVE_ANGLE)
+		{
+			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/2);
+			dy = GRAVITY * timer - 4;
+		}
+		if(motion_angle <= 90)
+		{
+			if(!jumping && jumpCommand)	
+			{
+
+#ifdef DEBUG
+std::cout << "jumping ..." << "   angle = " << motion_angle << std::endl;
+#endif
+
+				if(timer > 20)
+					double_jumping = true;
+				jumping = true;
+				timer = 1;
+			}
+		}
+	}
+
+	// chute libre
+	else if(motion_angle < MAX_MOVE_ANGLE && motion_angle >= MAX_MOVE_ANGLE-180)
+	{
+		dx = SPEED * cos(rad);
+		dy = GRAVITY * timer;
+	}
+
+	// mode saut
+	if(jumping)
+	{
+		dx = SPEED * (1-sin(rad)*std::abs(sin(rad)));
+		dy = GRAVITY * timer - 10;
+		if(dy >= -DBLE_JUMP_SENSIBILITY && dy <= DBLE_JUMP_SENSIBILITY && !double_jumping && timer >= 10)
+		{
+			if(jumpCommand)
+			{
+				double_jumping = true;
+				timer = 1;
+			}
+		}
+		if(motion_angle == 90 && double_jumping) dx = SPEED;
+	}
+
+	float x1 = position.x;
+	float y1 = position.y;
+
+	float x2 = x1 + dx;
+	float y2 = y1 + dy;
+
+	float d = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+	int sub_pts = (int)round(d) - 1;
+
+	std::vector<sf::Vector2f> sub_positions;
+	sub_positions.push_back(sf::Vector2f(0, 0));
+	for(int p = 1; p <= sub_pts; p++)
+		sub_positions.push_back(sf::Vector2f(p*(x2-x1)/(sub_pts+1), p*(y2-y1)/(sub_pts+1)));
+	sub_positions.push_back(sf::Vector2f(x2-x1, y2-y1));
+
+	bool collisionDetected = false;
+
+#ifdef DEBUG
+std::cout << "foreseen move : (" << dx << ", " << dy << ")" << std::endl;
+std::cout << "sub positions : " << sub_positions.size() << std::endl;
+#endif
+
+	for(int cur_pos = 1; cur_pos < sub_positions.size() && !collisionDetected; cur_pos++)
+	{
+		for(int i = 0; i < solids.size() && !collisionDetected; i++)
+		{
+			for(int j = 0; j < hitBox.getSegments().size() && !collisionDetected; j++)
+			{
+				Segment new_segm(
+					hitBox.getSegments()[j].getP1() + sub_positions[cur_pos],
+					hitBox.getSegments()[j].getP2() + sub_positions[cur_pos]
+				);
+
+				if(solids[i].getHitBox().intersectsWith(new_segm))
+				{
+					collisionDetected = true;
+					jumping = false;
+					double_jumping = false;
+					timer = 1;
+					move(sub_positions[cur_pos-1]);
+
+#ifdef DEBUG
+std::cout << "collision, sub-moving by (" << sub_positions[cur_pos-1].x << ", " << sub_positions[cur_pos-1].y << ")" << std::endl;
+#endif
+
+					int angle = -90;
+					float angle_rad;
+					int pas = 1;
+					bool possible = false;
+					sf::Vector2f vect;
+					float module = 2;
+
+					while(!possible)
+					{
+						if(angle > MAX_MOVE_ANGLE)
+						{
+							angle = -91;
+							pas = -1;
+						}
+						else if(angle < MAX_MOVE_ANGLE-180)
+							break;
+						angle_rad = angle*PI/180;
+						possible = true;
+
+						vect = sf::Vector2f(module*cos(angle_rad), -module*sin(angle_rad));
+						for(int j = 0; (j < hitBox.getSegments().size()) && possible; j++)
+						{
+							Segment new_segm(
+								hitBox.getSegments()[j].getP1() + vect,
+								hitBox.getSegments()[j].getP2() + vect
+							);
+							for(int e = 0; e < solids.size(); e++)
+								possible = possible && !solids[e].getHitBox().intersectsWith(new_segm);
+						}
+						angle += pas;
+					}
+					angle -= pas;
+					if(!possible)
+						motion_angle = 90;
+					else
+						motion_angle = angle;
+
+#ifdef DEBUG
+std::cout << "compute angle : " << angle << "   possible = " << possible << std::endl;
+std::cout << "tested move : (" << vect.x << ", " << vect.y << ")" << std::endl;
+#endif
+
+				}
+			}
+		}
+	}
+	if(!collisionDetected)
+	{
+
+#ifdef DEBUG
+std::cout << "no collision, moving by (" << sub_positions.back().x << ", " << sub_positions.back().y << ")" << std::endl;
+#endif
+
+		move(sub_positions.back());
+		++ timer;
+	}
+	collided = collisionDetected;
+	jumpCommand = false;
+}
+
+void Character::move()
+{
+	// à ajouter : moteur de sélection des plate-formes à considérer
+	move(scene->getSolids());
+}
