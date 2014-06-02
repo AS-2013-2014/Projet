@@ -18,7 +18,7 @@
 #define LIVING_ENTITY
 
 #include <SFML/Graphics.hpp>
-#include "Entity.hpp"
+#include "../Entity.hpp"
 
 	class LivingEntity: public Entity{
 
