@@ -57,4 +57,11 @@ float Entity::getAngle() const{
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+  states.transform *= getTransform();
+  states.texture = NULL;
+
+  sf::RectangleShape r(sf::Vector2f(size.x, size.y));
+  r.setFillColor(sf::Color(255,0,255));
+
+  target.draw(r, states);
 }

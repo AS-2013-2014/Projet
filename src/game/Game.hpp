@@ -19,6 +19,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Scene.hpp"
+#include "const.hpp"
 
 class Game
 {
@@ -30,7 +31,6 @@ class Game
 
 		void frame(float time);
 
-    static const float PI;
   private:
 		sf::RenderWindow* window;
 		Scene scene;

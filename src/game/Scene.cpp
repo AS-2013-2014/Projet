@@ -14,6 +14,25 @@ Scene::Scene(Game *_game): game(_game)
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
     sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
+
+  //creation du joueur
+	// hitBox du perso
+	std::vector<sf::Vector2f> hbPoints;
+	hbPoints.push_back(sf::Vector2f(10, 45));
+	hbPoints.push_back(sf::Vector2f(10, 5));
+	hbPoints.push_back(sf::Vector2f(35, 5));
+	hbPoints.push_back(sf::Vector2f(35, 45));
+	HitBox hitBoxPerso(hbPoints);
+
+	// ajout du perso
+	setCharacter(Character(
+		this,
+		sf::Vector2f(300, 0),
+		sf::Vector2f(100, 50),
+		0, 0, hitBoxPerso
+	));
+
+  entities.push_back(&character);
 }
 
 Scene::~Scene()
@@ -71,13 +90,23 @@ void Scene::addPlatform(Platform* p)
 	int section_min = (int)p->getX()/SECTION_WIDTH;
 	int section_max = (int)p->getX()/SECTION_WIDTH;
 
-	for (int i=0; i<3; i++)
+  std::vector<Segment> segs = p->getHitBox().getSegments();
+	for (int i=0; i < segs.size(); i++)
 	{
-			if ((int)p->getOtherX()[i]/SECTION_WIDTH < section_min)
-					section_min = p->getOtherX()[i];
+    
+			if (segs[i].getP1().x/SECTION_WIDTH < section_min)
+					section_min = segs[i].getP1().x;
 
-			else if (p->getOtherX()[i]/SECTION_WIDTH > section_min)
-					section_max = p->getOtherX()[i];
+			else if (segs[i].getP1().x/SECTION_WIDTH > section_min)
+					section_max = segs[i].getP1().x;
+
+ 
+			if (segs[i].getP2().x/SECTION_WIDTH < section_min)
+					section_min = segs[i].getP2().x;
+
+			else if (segs[i].getP2().x/SECTION_WIDTH > section_min)
+					section_max = segs[i].getP2().x;
+
 	}
 	
 	for (int i=section_min; i<=section_max; i++)
@@ -300,8 +329,12 @@ bool Scene::loadGraphics(const std::string& file)
 
 void Scene::frame(float time)
 {
+  cam.x += 4;
+
 	for(int i = 0; i < entities.size(); i++)
 		entities[i]->frame(time);
+
+  character.move();
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -345,5 +378,19 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
+void Scene::setCharacterAction(Character::Action a)
+{
+	switch(a)
+	{
+		case Character::JUMP :
+			character.jump();
+			break;
+	}
+}
+
+void Scene::setCharacter(Character c)
+{
+	character = c;
+}
 
 

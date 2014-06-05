@@ -22,6 +22,7 @@
 #include "Entity.hpp"
 #include "entities/WImage.hpp"
 #include "entities/WAnimation.hpp"
+#include "entities/Character.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>
@@ -51,19 +52,34 @@ class Scene : public sf::Drawable, public sf::Transformable
 	void loadLevel(const std::string &file); // charge le fichier txt du level
 	void addPlatform(Platform* p);
 
+
 	//accesseurs
 	sf::Vector2f& getCam(){ return cam; }
+  void setCam(const sf::Vector2f& v){ cam = v; }
+
+  std::vector<Solid*>& getSolids(){ return solids; }
+  void setCharacterAction(Character::Action);
+	void setCharacter(Character);
+
+	enum Action
+	{
+		BEGIN_PLATFORM_CREATION,
+		END_PLATFORM_CREATION
+	};
+  
 
 	private:
+  Character character;
 	int width;
 	int nb_sections;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::vector<Graphic*> graphics;
+  std::vector<Solid*> solids;
 	sf::Vector2f cam;
 
 	Game *game;
-    sf::Sprite background;
-    sf::Shader* sh_fade;
+  sf::Sprite background;
+  sf::Shader* sh_fade;
 };
 
 Platform* readPlatform(std::string line);
