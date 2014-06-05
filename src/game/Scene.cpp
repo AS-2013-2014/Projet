@@ -49,7 +49,7 @@ void Scene::loadLevel(const std::string &file)
 		//création des plateformes
 		getline(lvl_file,line);
 		Platform* p;
-		while (line != "END")
+		while (line.find("END") == std::string::npos)
 		{				
 				p = readPlatform(line);
 				addPlatform(p);
@@ -120,7 +120,7 @@ Platform* readPlatform(std::string line)
     i++;
 		*/
 		//pas de z dans la convention
-		float z = 1;
+		float z = 0;
 
     tmp = "";
     while (line[i]!=':')
