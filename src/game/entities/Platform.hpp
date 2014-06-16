@@ -9,7 +9,6 @@
 
 class Platform: public Solid {
 	private:
-	sf::RectangleShape rect;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	public:

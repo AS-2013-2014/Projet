@@ -5,9 +5,9 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	:Solid(x,y,z,length,width,angle)
 {
 	//les operations de transformations sont effectuées par la scène
-	this->rect=sf::RectangleShape(sf::Vector2f(length,width));	
+	sf::RectangleShape rect(sf::Vector2f(length,width));	
 	rect.setFillColor(sf::Color(0,0,0));
-  rect.setRotation(angle);
+        rect.setRotation(angle);
 	
   std::vector<sf::Vector2f> points;
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(0)));
@@ -24,7 +24,7 @@ Platform::Platform(sf::Vector2i coord, float z, int length, int width, float ang
 	:Solid(coord.x,coord.y,z,length,width,angle)
 {
 	//les operations de transformations sont effectuées par la scène
-	this->rect=sf::RectangleShape(sf::Vector2f(length,width));	
+	sf::RectangleShape rect(sf::Vector2f(length,width));	
 	rect.setFillColor(sf::Color(0,0,0));
   rect.setRotation(angle);
 	
@@ -41,12 +41,11 @@ Platform::Platform(sf::Vector2i coord, float z, int length, int width, float ang
 
 Platform::Platform():Solid(0,0,0,0,0,0)
 {
-}
-
-void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
+} void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   states.transform *= getTransform();
   states.texture = NULL;
 
-	target.draw(rect, states);
+  sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
+  rect.setFillColor(sf::Color(0,255,0));
+  target.draw(rect, states);
 }
