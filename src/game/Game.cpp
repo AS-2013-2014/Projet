@@ -1,10 +1,14 @@
 
 #include "Game.hpp"
 
+
+const float Game::PI=3.1415;
+
+
 Game::Game(sf::RenderWindow& _window) : scene(this)
 {
 	window = &_window;
-	scene.loadLevel("Level1_1.txt");
+	scene.loadLevel("levels/level1.txt");
   scene.loadGraphics("base.graph");
 }
 
