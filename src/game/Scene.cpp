@@ -25,7 +25,7 @@ Scene::Scene(Game *_game): game(_game)
 	HitBox hitBoxPerso(hbPoints);
 
 	// ajout du perso
-	setCharacter(Character(
+	setPlayer(Player(
 		this,
 		sf::Vector2f(300, 0),
 		sf::Vector2f(100, 50),
@@ -378,17 +378,17 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
-void Scene::setCharacterAction(Character::Action a)
+void Scene::setPlayerAction(Player::Action a)
 {
 	switch(a)
 	{
-		case Character::JUMP :
+		case Player::JUMP :
 			character.jump();
 			break;
 	}
 }
 
-void Scene::setCharacter(Character c)
+void Scene::setPlayer(Player c)
 {
 	character = c;
 }

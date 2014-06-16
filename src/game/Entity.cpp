@@ -61,7 +61,7 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
   states.texture = NULL;
 
   sf::RectangleShape r(sf::Vector2f(size.x, size.y));
-  r.setFillColor(sf::Color(255,0,255));
+  r.setFillColor(sf::Color(255,0,0));
 
   target.draw(r, states);
 }

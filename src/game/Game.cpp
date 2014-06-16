@@ -4,8 +4,8 @@
 Game::Game(sf::RenderWindow& _window) : scene(this)
 {
 	window = &_window;
-	scene.loadLevel("Level1_1.txt");
-  scene.loadGraphics("base.graph");
+	scene.loadLevel("level1.lvl");
+        scene.loadGraphics("base.graph");
 }
 
 void Game::frame(float time)

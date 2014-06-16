@@ -22,7 +22,7 @@
 #include "Entity.hpp"
 #include "entities/WImage.hpp"
 #include "entities/WAnimation.hpp"
-#include "entities/Character.hpp"
+#include "entities/Player.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>
@@ -58,8 +58,8 @@ class Scene : public sf::Drawable, public sf::Transformable
   void setCam(const sf::Vector2f& v){ cam = v; }
 
   std::vector<Solid*>& getSolids(){ return solids; }
-  void setCharacterAction(Character::Action);
-	void setCharacter(Character);
+  void setPlayerAction(Player::Action);
+	void setPlayer(Player);
 
 	enum Action
 	{
@@ -69,7 +69,7 @@ class Scene : public sf::Drawable, public sf::Transformable
   
 
 	private:
-  Character character;
+        Player character;
 	int width;
 	int nb_sections;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

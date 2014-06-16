@@ -1,4 +1,3 @@
-﻿
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
@@ -14,22 +13,53 @@
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef PLAYER
-#define PLAYER
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include "Player.hpp"
-#include "LivingEntity.hpp"
+
+class Scene;
+
+#include "../debug.hpp"
+#include <iostream>
+#include <vector>
+#include <cmath>
 #include <SFML/Graphics.hpp>
+#include "../const.hpp"
+#include "../Segment.hpp"
+#include "../HitBox.hpp"
+#include "../Solid.hpp"
 
-	class Player: public LivingEntity {
-		bool double_jump;
+class Player : public Solid
+{
+	protected:
+	sf::RectangleShape rect;
+	Scene* scene;
+	int timer;
+	int motion_angle;
+	bool jumping;
+	bool double_jumping;
+	bool jumpCommand;
+	bool collided;
+	float gapToReference;
 
-		public:
-
-		Player(sf::Vector2i coord, float z ,int length , int width , float angle, sf::Vector2f movement);
-		Player(int x , int y , float z , int length , int width , float angle, sf::Vector2f movement);
-		bool getDoubleJump();
-		void doubleJump();
-		void landing();
+	public:
+	Player();
+	Player(Scene*, sf::Vector2f, sf::Vector2f, float, int, HitBox);
+	void move(sf::Vector2f);
+	void jump();
+	//sf::Vector2f computeTrajectory(int);
+	//void testTrajectory(const std::vector<Solid>&, const sf::Vector2f&);
+	//int findEscapeAngle(const std::vector<Solid>&);
+	void move(const std::vector<Solid*>&);
+	void move();
+	enum Action
+	{
+		JUMP,
+		SWIPE,
+		SHOOT,
+		SUICIDE,
+		TAKEAPOO
 	};
+};
+
 #endif
