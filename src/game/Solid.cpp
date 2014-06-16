@@ -13,3 +13,4 @@ HitBox Solid::getHitBox() const
 {
 	return hitBox;
 }
+

@@ -78,6 +78,7 @@ void Player::move(const std::vector<Solid*>& solids)
 		{
 			if(!jumping && jumpCommand)	
 			{
+
 				if(timer > 20)
 					double_jumping = true;
 				jumping = true;
@@ -138,13 +139,16 @@ void Player::move(const std::vector<Solid*>& solids)
 					hitBox.getSegments()[j].getP2() + sub_positions[cur_pos]
 				);
 
+
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
+
 				{
 					collisionDetected = true;
 					jumping = false;
 					double_jumping = false;
 					timer = 1;
 					move(sub_positions[cur_pos-1]);
+
 
 					int angle = -90;
 					float angle_rad;

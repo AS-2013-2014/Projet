@@ -13,11 +13,13 @@ Scene::Scene(Game *_game): game(_game)
 	//chargement du shader
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
+
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 }
 
 void Scene::addPlayer() {
 	//creation du joueur
+
 	// hitBox du perso
 	std::vector<sf::Vector2f> hbPoints;
 	hbPoints.push_back(sf::Vector2f(10, 45));
@@ -27,6 +29,7 @@ void Scene::addPlayer() {
 	HitBox hitBoxPerso(hbPoints);
 
 	// ajout du perso
+
 	setPlayer(new Player(
 		this,
 		sf::Vector2f(300, 0),
@@ -34,11 +37,14 @@ void Scene::addPlayer() {
 		0, 0, hitBoxPerso
 	));
 
+
 	entities.push_back(character);
+
 }
 
 Scene::~Scene()
 {
+
 	for(int i = entities.size()-1; i >= 0; i--)
 		delete entities[i];
 
@@ -62,6 +68,7 @@ void Scene::loadLevel(const std::string &file)
 		//création des sections pour la gestion des collisions
 		this->nb_sections = (int)ceil(width/SECTION_WIDTH);
 
+
 		for (int i=0 ; i<nb_sections ; i++)
 		{
 				sections.push_back(new Section());
@@ -71,7 +78,9 @@ void Scene::loadLevel(const std::string &file)
 		getline(lvl_file,line);
 		Platform* p;
 
+
 		while(line.find("END") == std::string::npos)
+
 		{				
 				p = readPlatform(line);
 				addPlatform(p);
@@ -93,6 +102,7 @@ void Scene::addPlatform(Platform* p)
 	int section_min = (int)p->getX()/SECTION_WIDTH;
 	int section_max = (int)p->getX()/SECTION_WIDTH;
 
+
 	std::vector<Segment> segs = p->getHitBox().getSegments();
 	for(int i=0; i < segs.size(); i++)
 	{
@@ -104,6 +114,7 @@ void Scene::addPlatform(Platform* p)
 				section_min = segs[i].getP2().x;
 		else if (segs[i].getP2().x/SECTION_WIDTH > section_min)
 				section_max = segs[i].getP2().x;
+
 	}
 	
 	for (int i=section_min; i<=section_max; i++)
@@ -119,6 +130,7 @@ Platform* readPlatform(std::string line)
 
 	std::string tmp = "";
 	while (line[i]!=':')
+
 	{
 		tmp += line[i];
 		i++;
@@ -175,6 +187,7 @@ Platform* readPlatform(std::string line)
 	int skin = 0;
 
 	return new Platform(x,y,z,length,width,angle,type,skin);
+
 }
 
 int readLvlWidth(std::string line)
@@ -205,6 +218,7 @@ void Scene::loadGraphics(const std::string& file)
 		//fichier ouvert
 		std::string line;
 		std::stringstream sline;
+
 		std::stringstream ss;
 		
 		char buff[SBUFF];
@@ -217,6 +231,7 @@ void Scene::loadGraphics(const std::string& file)
 			sline.getline(buff,SBUFF,';');
 			setBackground("images/"+std::string(buff));
 		}
+
 
 		//lecture de chaque ligne
 		while(getline(graph_file, line))
@@ -271,7 +286,9 @@ void Scene::loadGraphics(const std::string& file)
 			ss >> src;
 
 			if(type == "I")
+
 				entities.push_back(new WImage(x,y,z,w,h,r,"images/"+src));
+
 			else if(type == "A")
 			{
 				int wc,hc;
@@ -294,21 +311,27 @@ void Scene::loadGraphics(const std::string& file)
 
 				WAnimation* an = new WAnimation(x,y,z,w,h,r,"images/"+src,wc,hc,fps);
 				an->play();
+
 				entities.push_back(an);
 			}
 		}
 		std::sort(entities.begin(), entities.end(), Entity::sort);
+
 	}
 }
 
 void Scene::frame(float time)
 {
+
 	cam.x += 4;
+
 
 	for(int i = 0; i < entities.size(); i++)
 		entities[i]->frame(time);
 
+
 	character->move();
+
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -348,6 +371,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		e.setScale(pc,pc);
 		e.setRotation(r);
 
+
 		target.draw(e, states);
 	}
 }
@@ -360,6 +384,7 @@ void Scene::setPlayerAction(Player::Action a)
 			character->jump();
 			break;
 	}
+
 }
 
 void Scene::setPlayer(Player* c)

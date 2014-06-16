@@ -46,11 +46,14 @@ class Scene : public sf::Drawable, public sf::Transformable
 	Scene(Game *game);
 	~Scene();
 
+
 	void loadGraphics(const std::string& file);
+
 	void setBackground(const std::string file);
 	void frame(float time);
 	void loadLevel(const std::string &file); // charge le fichier txt du level
 	void addPlatform(Platform* p);
+
 	void addPlayer();
 
 	//accesseurs
@@ -70,11 +73,14 @@ class Scene : public sf::Drawable, public sf::Transformable
 
 	private:
 		Player* character;
+
 	int width;
 	int nb_sections;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::vector<Graphic*> graphics;
+
 	std::vector<Solid*> solids;
+
 	sf::Vector2f cam;
 
 	Game *game;

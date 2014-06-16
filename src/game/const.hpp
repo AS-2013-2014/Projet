@@ -7,7 +7,8 @@
 
 // graphic engine
 
-#define SBUFF 256
+#define SBUFF 250
+
 
 #define ANTI_ALIASING 10
 #define ICONE "media/icone.gif"
@@ -46,7 +47,9 @@
 #define MAX_MOVE_ANGLE 55
 #define DBLE_JUMP_SENSIBILITY 3
 
+
 // other
+
 
 typedef unsigned char Uint8;
 

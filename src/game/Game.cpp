@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
+
 Game::Game(sf::RenderWindow& _window)
 	:	scene(this)
 {
@@ -20,5 +21,6 @@ void Game::frame(float time)
 		scene.getCam().y -= time*cam_speed;
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		scene.getCam().y += time*cam_speed;
+
 	scene.frame(time);
 }
