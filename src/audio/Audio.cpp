@@ -1,17 +1,23 @@
 
+/****************************************************************************/
+/*                       DUT INFO AS - Projet AS                            */
+/*                                                                          */
+/*                                                                          */
+/* Categorie: audio                                                         */
+/*                                                                          */
+/* Fonction(s):                                                             */
+/*--------------------------------------------------------------------------*/
+/* Description: Procédure de lecture des sons                               */
+/* Evolution : Au lancement du programme, tous les sons sont chargés        */
+/*             et seront lus depuis le buffer.                              */
+/*                                                                          */
+/*                                                                          */
+/****************************************************************************/
+
+
+
 #include "Audio.hpp"
 
-//RAJOUTER 
-//#include "../misc/Resources.hpp" A METTRE DANS LE HPP
-/*
-case ASCENSEUR:     sf::SoundBuffer* sd = Resources::getSoundBuffer("Sounds/ASCENSEUR.ogg")
-                    if (sd)
-                            return;
-                        sound.setBuffer(*sd);
-                        sound.play();
-                        sf::sleep(sf::seconds(0));
-                        break;
-*/
 
 void Audio::setMusic(const std::string& file){
 	music.openFromFile(file);
@@ -24,161 +30,186 @@ void Audio::setMusicVolume(float volume){
 }
 
 
-// A voir : code trop long, répétition du load dans le buffer
-// A voir : dans le chemin jusqu'au son on met le nom du paramètre (nom fichier = nom constante)
+// Procédure
 void    Audio::setSound(const int lequel){
     switch(lequel){
 
-        case ASCENSEUR: if (!sdBuff.loadFromFile("Sounds/ASCENSEUR.ogg"))
+        case ASCENSEUR:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/ASCENSEUR.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case ASCENSEUR2: if (!sdBuff.loadFromFile("Sounds/ASCENSEUR2.ogg"))
+             }           break;
+
+        case ASCENSEUR2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/ASCENSEUR2.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;    
-        case ATTERIE: if (!sdBuff.loadFromFile("Sounds/ATTERIE.ogg"))
+             }           break;   
+        case ATTERIE:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/ATTERIE.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case ATTERIE2: if (!sdBuff.loadFromFile("Sounds/ATTERIE2.ogg"))
+             }           break;
+        case ATTERIE2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/ATTERIE2.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHECKPOINT: if (!sdBuff.loadFromFile("Sounds/CHECKPOINT.ogg"))
+             }           break;
+        case CHECKPOINT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHECKPOINT.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHUTE_EAU: if (!sdBuff.loadFromFile("Sounds/CHUTE_EAU.ogg"))
+             }           break;
+        case CHUTE_EAU:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_EAU.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHUTE_FEU: if (!sdBuff.loadFromFile("Sounds/CHUTE_FEU.ogg"))
+             }           break;
+        case CHUTE_FEU:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_FEU.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;                
-        case CHUTE_TERRE: if (!sdBuff.loadFromFile("Sounds/CHUTE_TERRE.ogg"))
+             }           break;              
+        case CHUTE_TERRE:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_TERRE.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHUTE_TERRE2: if (!sdBuff.loadFromFile("Sounds/CHUTE_TERRE2.ogg"))
+             }           break;
+        case CHUTE_TERRE2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_TERRE2.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHUTE_TERRE3: if (!sdBuff.loadFromFile("Sounds/CHUTE_TERRE3.ogg"))
+             }           break;
+        case CHUTE_TERRE3:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_TERRE3.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CHUTE_VENT: if (!sdBuff.loadFromFile("Sounds/CHUTE_VENT.ogg"))
+             }           break;
+        case CHUTE_VENT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CHUTE_VENT.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case COGNER_PLATEFORME: if (!sdBuff.loadFromFile("Sounds/COGNER_PLATEFORME.ogg"))
+             }           break;
+        case COGNER_PLATEFORME:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/COGNER_PLATEFORME.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-         case COGNER_SAUT_TROP_HAUT: if (!sdBuff.loadFromFile("Sounds/COGNER_SAUT_TROP_HAUT.ogg"))
+             }           break;
+        case COGNER_SAUT_TROP_HAUT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/COGNER_SAUT_TROP_HAUT.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CREATE_PLATEFORME_EAU: if (!sdBuff.loadFromFile("Sounds/CREATE_PLATEFORME_EAU.ogg"))
+             }           break;
+        case CREATE_PLATEFORME_EAU:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CREATE_PLATEFORME_EAU.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CREATE_PLATEFORME_FEU: if (!sdBuff.loadFromFile("Sounds/CREATE_PLATEFORME_FEU.ogg"))
+             }           break;
+        case CREATE_PLATEFORME_FEU:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CREATE_PLATEFORME_FEU.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CREATE_PLATEFORME_TERRE: if (!sdBuff.loadFromFile("Sounds/CREATE_PLATEFORME_TERRE.ogg"))
+             }           break;
+        case CREATE_PLATEFORME_TERRE:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CREATE_PLATEFORME_TERRE.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CREATE_PLATEFORME_TERRE2: if (!sdBuff.loadFromFile("Sounds/CREATE_PLATEFORME_TERRE2.ogg"))
+             }           break;
+        case CREATE_PLATEFORME_TERRE2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CREATE_PLATEFORME_TERRE2.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case CREATE_PLATEFORME_VENT: if (!sdBuff.loadFromFile("Sounds/CREATE_PLATEFORME_VENT.ogg"))
+             }           break;
+        case CREATE_PLATEFORME_VENT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/CREATE_PLATEFORME_VENT.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case DOUBLE_SAUT: if (!sdBuff.loadFromFile("Sounds/DOUBLE_SAUT.ogg"))
+             }           break;
+        case DOUBLE_SAUT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/DOUBLE_SAUT.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case GAME_OVER: if (!sdBuff.loadFromFile("Sounds/GAME_OVER.ogg"))
+             }           break;
+        case GAME_OVER:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/GAME_OVER.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
-                        sound.play();
-                        sf::sleep(sf::seconds(2));
-                        break;
-        case GAME_OVER2: if (!sdBuff.loadFromFile("Sounds/GAME_OVER2.ogg"))
-                            return;
-                        sound.setBuffer(sdBuff);
-                        sound.play();
-                        sf::sleep(sf::seconds(2));
-                        break;
-        case PAUSE: if (!sdBuff.loadFromFile("Sounds/PAUSE.ogg"))
-                            return;
-                        sound.setBuffer(sdBuff);
-                        sound.play();
-                        sf::sleep(sf::seconds(2));
-                        break;
-        case SAUT: if (!sdBuff.loadFromFile("Sounds/SAUT.ogg"))
-                            return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case SAUT2: if (!sdBuff.loadFromFile("Sounds/SAUT2.ogg"))
+             }           break;
+        case GAME_OVER2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/GAME_OVER2.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
-        case VICTOIRE: if (!sdBuff.loadFromFile("Sounds/VICTOIRE.ogg"))
+             }           break;
+        case PAUSE:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/PAUSE.ogg");
+                        if (!sd)
                             return;
-                        sound.setBuffer(sdBuff);
+                        sound.setBuffer(*sd);
                         sound.play();
                         sf::sleep(sf::seconds(0));
-                        break;
+             }           break;
+        case SAUT:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/SAUT.ogg");
+                        if (!sd)
+                            return;
+                        sound.setBuffer(*sd);
+                        sound.play();
+                        sf::sleep(sf::seconds(0));
+             }           break;
+        case SAUT2:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/SAUT2.ogg");
+                        if (!sd)
+                            return;
+                        sound.setBuffer(*sd);
+                        sound.play();
+                        sf::sleep(sf::seconds(0));
+             }           break;
+        case VICTOIRE:{ sf::SoundBuffer* sd = Resources::getSoundBuffer("resources/VICTOIRE.ogg");
+                        if (!sd)
+                            return;
+                        sound.setBuffer(*sd);
+                        sound.play();
+                        sf::sleep(sf::seconds(0));
+             }           break;
         default : //return;
             break;
     }
