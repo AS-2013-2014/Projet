@@ -1,19 +1,3 @@
-
-/****************************************************************************/
-/*                       DUT INFO AS - Projet AS                            */
-/*                                                                          */
-/*                                                                          */
-/* Categorie: main                                                          */
-/*                                                                          */
-/* Fonction(s):  main                                                       */
-/*--------------------------------------------------------------------------*/
-/* Description:  main                                                       */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/****************************************************************************/
-
 #include <iostream>
 
 //modules
@@ -29,30 +13,31 @@ int main(int argc, char** argv)
 	//chargements de ressources de test
 	Resources::loadTexture("images/test2.png");
 	Resources::loadTexture("images/test.png");
-  Resources::loadTexture("images/fond.jpg");
-  Resources::loadTexture("images/fire.png");
-  Resources::loadTexture("images/aura.png");
+	Resources::loadTexture("images/fond.jpg");
+	Resources::loadTexture("images/fire.png");
+	Resources::loadTexture("images/aura.png");
 
-  sf::RenderWindow window(sf::VideoMode(800,600), "Test");
-  window.setFramerateLimit(50);
-  sf::Clock clock;
-  Game game(window);
+	sf::RenderWindow window(sf::VideoMode(800,600), "Test");
+	window.setFramerateLimit(500);
+	sf::Clock clock;
+	Game game(window);
 
-  while(window.isOpen()){
-    sf::Event evt;
-    while(window.pollEvent(evt)){
-      if(evt.type == sf::Event::Closed)
-        window.close();
-    }
+	while(window.isOpen()){
+		sf::Event evt;
+		while(window.pollEvent(evt))
+		{
+			if(evt.type == sf::Event::Closed)
+				window.close();
+		}
 
-    float elapsed = clock.restart().asSeconds();
+		float elapsed = clock.restart().asSeconds();
 
-    game.frame(elapsed);
+		game.frame(elapsed);
 
-    window.clear();
-    window.draw(game.getScene());
-    window.display();
-  }
+		window.clear();
+		window.draw(game.getScene());
+		window.display();
+	}
 
 	return 0;
 }

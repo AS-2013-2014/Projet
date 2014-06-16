@@ -4,7 +4,6 @@ Game::Game(sf::RenderWindow& _window)
 	:	scene(this)
 {
 	window = &_window;
-	scene.addPlayer();
 	scene.loadLevel("level1.lvl");
 	scene.loadGraphics("base.graph");
 }

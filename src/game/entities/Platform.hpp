@@ -1,15 +1,16 @@
 #ifndef PLATEFORM
 #define PLATEFORM
 
-
 #include "../Segment.hpp"
 #include <SFML/Graphics.hpp>
-#include "../Entity.hpp"
+#include "../Solid.hpp"
 #include <vector>
+#include <cmath>
 
-class Platform: public Entity {
+class Platform: public Solid {
 	private:
-	sf::RectangleShape rect;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 	public:
 	Segment s1;
 	Segment s2;
@@ -19,13 +20,7 @@ class Platform: public Entity {
 	int skin;
 	Platform();
 	Platform(int x, int y, float z, int lenght, int width, float angle, int type, int skin);
-	Platform(sf::Vector2i coord, float z, int lenght, int width, float angle, int type, int skin);
-<<<<<<< HEAD
-	std::vector<float> getOtherX();
-=======
-  std::vector<float> getOtherX();
->>>>>>> ae63b3e55f7722250c172a30f20857d06ffb6aac
-	bool intersect(Segment s) const;
+	Platform(sf::Vector2f coord, float z, int lenght, int width, float angle, int type, int skin);
 };
 
 #endif

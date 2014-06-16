@@ -2,8 +2,8 @@ LIBS=-lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 OPT=-g
 
 #main
-run: main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o WImage.o WAnimation.o
-	g++ main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o WImage.o WAnimation.o -o run $(LIBS) $(OPT)
+run: main.o Resources.o Audio.o Game.o Segment.o Scene.o Section.o Entity.o Platform.o Graphic.o WImage.o WAnimation.o Player.o HitBox.o Solid.o
+	g++ $^ -o $@ $(LIBS) $(OPT)
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o $(OPT)
@@ -50,6 +50,16 @@ WImage.o: game/entities/WImage.cpp game/entities/WImage.hpp
 
 WAnimation.o: game/entities/WAnimation.cpp game/entities/WAnimation.hpp
 	g++ -c game/entities/WAnimation.cpp -o WAnimation.o $(OPT)
+
+Player.o: game/entities/Player.cpp game/entities/Player.hpp
+	g++ -c game/entities/Player.cpp -o Player.o $(OPT)
+
+HitBox.o: game/HitBox.cpp game/HitBox.hpp
+	g++ -c game/HitBox.cpp -o HitBox.o $(OPT)
+
+Solid.o: game/Solid.cpp game/Solid.hpp
+	g++ -c game/Solid.cpp -o Solid.o $(OPT)
+
 
 
 

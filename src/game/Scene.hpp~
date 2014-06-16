@@ -46,12 +46,12 @@ class Scene : public sf::Drawable, public sf::Transformable
 	Scene(Game *game);
 	~Scene();
 
-	void loadGraphics(const std::string& file);
+	bool loadGraphics(const std::string& file);
 	void setBackground(const std::string file);
 	void frame(float time);
 	void loadLevel(const std::string &file); // charge le fichier txt du level
 	void addPlatform(Platform* p);
-	void addPlayer();
+
 
 	//accesseurs
 	sf::Vector2f& getCam(){ return cam; }

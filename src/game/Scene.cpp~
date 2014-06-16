@@ -14,9 +14,7 @@ Scene::Scene(Game *_game): game(_game)
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
-}
 
-void Scene::addPlayer() {
 	//creation du joueur
 	// hitBox du perso
 	std::vector<sf::Vector2f> hbPoints;
@@ -197,7 +195,7 @@ void Scene::setBackground(const std::string file)
 		background.setTexture(*tex);
 }
 
-void Scene::loadGraphics(const std::string& file)
+bool Scene::loadGraphics(const std::string& file)
 {
 	std::ifstream graph_file(file.c_str());
 	if(graph_file)
@@ -206,15 +204,15 @@ void Scene::loadGraphics(const std::string& file)
 		std::string line;
 		std::stringstream sline;
 		std::stringstream ss;
-		
-		char buff[SBUFF];
+		int sbuff = 256;
+		char buff[sbuff];
 			
 
 		//lecture de la ligne d'en tête, le chargement du fond
 		if(getline(graph_file, line)) {
 			sline.str(line);
-			sline.getline(buff,SBUFF,';');
-			sline.getline(buff,SBUFF,';');
+			sline.getline(buff,sbuff,';');
+			sline.getline(buff,sbuff,';');
 			setBackground("images/"+std::string(buff));
 		}
 
@@ -230,42 +228,42 @@ void Scene::loadGraphics(const std::string& file)
 			std::string type, src;
 
 		
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> x;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> y;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> z;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> w;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> h;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> r;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> type;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> src;
@@ -277,17 +275,17 @@ void Scene::loadGraphics(const std::string& file)
 				int wc,hc;
 				float fps;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> wc;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> hc;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> fps;
