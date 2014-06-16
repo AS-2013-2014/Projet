@@ -20,7 +20,7 @@ class Platform: public Solid {
 	int skin;
 	Platform();
 	Platform(int x, int y, float z, int lenght, int width, float angle, int type, int skin);
-	Platform(sf::Vector2i coord, float z, int lenght, int width, float angle, int type, int skin);
+	Platform(sf::Vector2f coord, float z, int lenght, int width, float angle, int type, int skin);
 };
 
 #endif
