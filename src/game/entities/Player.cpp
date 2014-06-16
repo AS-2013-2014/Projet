@@ -38,7 +38,7 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 
 void Player::move(sf::Vector2f d)
 {
-    coord += sf::Vector2i(d);
+    coord += sf::Vector2f(d);
     rect.move(d);
     hitBox.move(d);
     float viewOrd = (scene->getCam()).y;
