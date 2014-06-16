@@ -1,7 +1,13 @@
 #ifndef CONST_HPP
 #define CONST_HPP
 
+// math
+
 #define PI 3.14159265
+
+// graphic engine
+
+#define SBUFF 250
 
 #define ANTI_ALIASING 10
 #define ICONE "media/icone.gif"
@@ -14,6 +20,8 @@
 #define PERSO_CONTENT_TEXTURE_2 "media/2.png"
 #define PERSO_CONTENT_TEXTURE_3 "media/4.png"
 #define PERSO_PASCONTENT_TEXTURE "media/1.png"
+
+// physic engine
 
 #define NB_ENTITIES 50
 #define MIN_WIDTH 20
@@ -37,6 +45,9 @@
 #define GRAVITY 0.30
 #define MAX_MOVE_ANGLE 55
 #define DBLE_JUMP_SENSIBILITY 3
+
+
+
 
 typedef unsigned char Uint8;
 
