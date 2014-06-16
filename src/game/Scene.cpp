@@ -228,15 +228,15 @@ bool Scene::loadGraphics(const std::string& file)
 		std::string line;
 		std::stringstream sline;
     std::stringstream ss;
-    int sbuff = 256;
-    char buff[sbuff];
+    //int SBUFF = 256;
+    char buff[SBUFF];
 			
 
     //lecture de la ligne d'en tête, le chargement du fond
     if(getline(graph_file, line)){
       sline.str(line);
-      sline.getline(buff,sbuff,';'); 
-      sline.getline(buff,sbuff,';'); 
+      sline.getline(buff,SBUFF,';'); 
+      sline.getline(buff,SBUFF,';'); 
       setBackground("images/"+std::string(buff));
     }
 
@@ -252,42 +252,42 @@ bool Scene::loadGraphics(const std::string& file)
 			std::string type, src;
 
 		
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> x;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> y;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> z;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> w;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> h;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> r;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> type;
 
-			sline.getline(buff, sbuff, ';');
+			sline.getline(buff, SBUFF, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> src;
@@ -301,17 +301,17 @@ bool Scene::loadGraphics(const std::string& file)
 				int wc,hc;
 				float fps;
 
-				sline.getline(buff, sbuff, ';');
+				sline.getline(buff, SBUFF, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> wc;
 
-				sline.getline(buff, sbuff, ';');
+				sline.getline(buff, SBUFF, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> hc;
 
-				sline.getline(buff, sbuff, ';');
+				sline.getline(buff, SBUFF, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> fps;
