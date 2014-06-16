@@ -1,4 +1,4 @@
-﻿
+
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
@@ -17,14 +17,14 @@
 #include "Player.hpp"
 #include <SFML/Graphics.hpp>
 
-Player::Player(sf::Vector2i coord, float z , int length , int width ,float angle, sf::Vector2f movement)
-    :LivingEntity(coord,z, length, width, angle , movement)
+Player::Player(sf::Vector2f coord, float z , int length , int width ,float angle, sf::Vector2f movement)
+    :LivingEntity(coord, length, width, angle , movement,z)
 {
 	double_jump = false;
 }
 
 Player::Player(int x , int y , float z , int length , int width ,float angle, sf::Vector2f movement)
-    :LivingEntity(x , y , z , length, width, angle , movement)
+    :LivingEntity(x , y , length, width, angle , movement, z)
 {
 	double_jump = false;
 }
