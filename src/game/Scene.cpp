@@ -3,7 +3,6 @@
 
 //inclusion reflexive, ne pas retirer ni rajouter dans le .hpp
 #include "Game.hpp"
-#include "../constantes.hpp"
 
 
 Scene::Scene(Game *_game): game(_game)
@@ -15,7 +14,6 @@ Scene::Scene(Game *_game): game(_game)
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
     sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
-<<<<<<< HEAD
 
   //creation du joueur
 	// hitBox du perso
@@ -35,8 +33,6 @@ Scene::Scene(Game *_game): game(_game)
 	));
 
   entities.push_back(&character);
-=======
->>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 }
 
 Scene::~Scene()
@@ -61,8 +57,6 @@ void Scene::loadLevel(const std::string &file)
 		getline(lvl_file,line);
 		this->width = readLvlWidth(line);
 
-		std::cout << "error1" << std::endl;
-
 		//création des sections pour la gestion des collisions
 		this->nb_sections = (int)ceil(width/SECTION_WIDTH);
 
@@ -71,19 +65,17 @@ void Scene::loadLevel(const std::string &file)
 				sections.push_back(new Section());
 		}
 
-		std::cout << "error2" << std::endl;
-
 		//création des plateformes
 		getline(lvl_file,line);
 		Platform* p;
-		while (line != "END")
+		while (line.find("END") == std::string::npos)
 		{				
 				p = readPlatform(line);
 				addPlatform(p);
 
 				getline(lvl_file,line);
 		}
-		std::cout << "error3" << std::endl;
+
 		//fermeture du fichier
 		lvl_file.close();
 	}
@@ -98,13 +90,23 @@ void Scene::addPlatform(Platform* p)
 	int section_min = (int)p->getX()/SECTION_WIDTH;
 	int section_max = (int)p->getX()/SECTION_WIDTH;
 
-	for (int i=0; i<3; i++)
+  std::vector<Segment> segs = p->getHitBox().getSegments();
+	for (int i=0; i < segs.size(); i++)
 	{
-			if ((int)p->getOtherX()[i]/SECTION_WIDTH < section_min)
-					section_min = p->getOtherX()[i];
+    
+			if (segs[i].getP1().x/SECTION_WIDTH < section_min)
+					section_min = segs[i].getP1().x;
 
-			else if (p->getOtherX()[i]/SECTION_WIDTH > section_min)
-					section_max = p->getOtherX()[i];
+			else if (segs[i].getP1().x/SECTION_WIDTH > section_min)
+					section_max = segs[i].getP1().x;
+
+ 
+			if (segs[i].getP2().x/SECTION_WIDTH < section_min)
+					section_min = segs[i].getP2().x;
+
+			else if (segs[i].getP2().x/SECTION_WIDTH > section_min)
+					section_max = segs[i].getP2().x;
+
 	}
 	
 	for (int i=section_min; i<=section_max; i++)
@@ -147,7 +149,7 @@ Platform* readPlatform(std::string line)
     i++;
 		*/
 		//pas de z dans la convention
-		float z = 1;
+		float z = 0;
 
     tmp = "";
     while (line[i]!=':')
@@ -226,15 +228,15 @@ bool Scene::loadGraphics(const std::string& file)
 		std::string line;
 		std::stringstream sline;
     std::stringstream ss;
-    // int sbuff = 256;
-    char buff[SBUFF];
+    int sbuff = 256;
+    char buff[sbuff];
 			
 
     //lecture de la ligne d'en tête, le chargement du fond
     if(getline(graph_file, line)){
       sline.str(line);
-      sline.getline(buff,SBUFF,';'); 
-      sline.getline(buff,SBUFF,';'); 
+      sline.getline(buff,sbuff,';'); 
+      sline.getline(buff,sbuff,';'); 
       setBackground("images/"+std::string(buff));
     }
 
@@ -250,42 +252,42 @@ bool Scene::loadGraphics(const std::string& file)
 			std::string type, src;
 
 		
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> x;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> y;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> z;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> w;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> h;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> r;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> type;
 
-			sline.getline(buff, SBUFF, ';');
+			sline.getline(buff, sbuff, ';');
 			ss.clear();
 			ss.str(buff);
 			ss >> src;
@@ -299,17 +301,17 @@ bool Scene::loadGraphics(const std::string& file)
 				int wc,hc;
 				float fps;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> wc;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> hc;
 
-				sline.getline(buff, SBUFF, ';');
+				sline.getline(buff, sbuff, ';');
 				ss.clear();
 				ss.str(buff);
 				ss >> fps;
@@ -327,9 +329,12 @@ bool Scene::loadGraphics(const std::string& file)
 
 void Scene::frame(float time)
 {
+  cam.x += 4;
+
 	for(int i = 0; i < entities.size(); i++)
 		entities[i]->frame(time);
-	//std::cout << time << std::endl;
+
+  character.move();
 }
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -373,7 +378,6 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
-<<<<<<< HEAD
 void Scene::setPlayerAction(Player::Action a)
 {
 	switch(a)
@@ -388,7 +392,5 @@ void Scene::setPlayer(Player c)
 {
 	character = c;
 }
-=======
->>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 
 
