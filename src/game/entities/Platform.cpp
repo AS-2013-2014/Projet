@@ -20,7 +20,7 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	this->skin=skin;
 }
 
-Platform::Platform(sf::Vector2i coord, float z, int length, int width, float angle, int type, int skin)
+Platform::Platform(sf::Vector2f coord, float z, int length, int width, float angle, int type, int skin)
 	:Solid(coord.x,coord.y,z,length,width,angle)
 {
 	//les operations de transformations sont effectuées par la scène
