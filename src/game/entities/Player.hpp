@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
@@ -42,6 +46,7 @@ class Player : public Solid
 	bool collided;
 	float gapToReference;
 
+<<<<<<< HEAD
 	public:
 	Player();
 	Player(Scene*, sf::Vector2f, sf::Vector2f, float, int, HitBox);
@@ -59,6 +64,13 @@ class Player : public Solid
 		SHOOT,
 		SUICIDE,
 		TAKEAPOO
+=======
+		Player(sf::Vector2f coord, float z ,int length , int width , float angle, sf::Vector2f movement);
+		Player(int x , int y , float z , int length , int width , float angle, sf::Vector2f movement);
+		bool getDoubleJump();
+		void doubleJump();
+		void landing();
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 	};
 };
 

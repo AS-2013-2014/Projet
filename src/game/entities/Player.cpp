@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
@@ -17,10 +21,16 @@
 #include "Player.hpp"
 #include "../Scene.hpp"
 
+<<<<<<< HEAD
 Player::Player()
+=======
+Player::Player(sf::Vector2f coord, float z , int length , int width ,float angle, sf::Vector2f movement)
+    :LivingEntity(coord, length, width, angle , movement,z)
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 {
 }
 
+<<<<<<< HEAD
 Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox hb)
 	:	Solid(p.x, p.y, z, d.x, d.y, 0),
 		scene(sc),
@@ -31,6 +41,10 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 		jumpCommand(false),
 		collided(false),
 		gapToReference(0)
+=======
+Player::Player(int x , int y , float z , int length , int width ,float angle, sf::Vector2f movement)
+    :LivingEntity(x , y , length, width, angle , movement, z)
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 {
 	hitBox = hb;
 	hitBox.move(p);

@@ -5,9 +5,9 @@
 /*                                                                          */
 /* Categorie: moteur physique                                               */
 /*                                                                          */
-/* Fonction(s): recupération coordonées                                     */
+/* Fonction(s): recupÃ©ration coordonÃ©es                                     */
 /*--------------------------------------------------------------------------*/
-/* Description:  classe mère de toutes les entitées                         */
+/* Description:  classe mÃ¨re de toutes les entitÃ©es                         */
 /*                                                                          */
 /*                                                                          */
 /*                                                                          */
@@ -17,21 +17,23 @@
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 
-Entity::Entity(sf::Vector2i coord, float z ,int length , int width, float angle){
+//Entity::Entity() {}
+
+Entity::Entity(sf::Vector2f coord, float z ,int length , int width, float angle){
 	this->coord=coord;
 	this->z=z;
-	this->size=sf::Vector2i(length, width);
+	this->size=sf::Vector2f(length, width);
 	this->angle=angle;
 }
 
 Entity::Entity(int x, int y, float z, int length, int width, float angle){
-	coord=sf::Vector2i(x,y);
+	coord=sf::Vector2f(x,y);
 	this->z=z;
-	this->size=sf::Vector2i(length, width);
+	this->size=sf::Vector2f(length, width);
 	this->angle=angle;
 }
 
-sf::Vector2i Entity::getCoord () const {
+sf::Vector2f Entity::getCoord () const {
 	return coord;
 }
 float Entity::getZ() const{
@@ -57,6 +59,7 @@ float Entity::getAngle() const{
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+<<<<<<< HEAD
   states.transform *= getTransform();
   states.texture = NULL;
 
@@ -64,4 +67,6 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
   r.setFillColor(sf::Color(255,0,0));
 
   target.draw(r, states);
+=======
+>>>>>>> 1f043b111c2dcc735d30de9f48925d170627e946
 }
