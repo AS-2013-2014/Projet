@@ -38,20 +38,20 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 
 void Player::move(sf::Vector2f d)
 {
-	coord += sf::Vector2i(d);
-	rect.move(d);
-	hitBox.move(d);
-	float viewOrd = (scene->getCam()).y;
-	if(coord.y < viewOrd + 150)
-		scene->getCam() += (sf::Vector2f(0, (d.y < 0)?d.y:0));
-	else if(coord.y > viewOrd+600 - 300)
-	{
-		if(viewOrd < 0)
-			scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y > 0)?d.y:0)));
-		else{
-      scene->getCam().y = 0;
+    coord += sf::Vector2i(d);
+    rect.move(d);
+    hitBox.move(d);
+    float viewOrd = (scene->getCam()).y;
+    if(coord.y < viewOrd + 150)
+            scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y < 0)?d.y:0)));
+    else if(coord.y > viewOrd+600 - 300)
+    {
+            if(viewOrd < 0)
+                    scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y > 0)?d.y:0)));
+            else{
+              scene->getCam().y = 0;
+            }
     }
-	}
 }
 
 void Player::jump()
