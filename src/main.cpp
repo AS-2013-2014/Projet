@@ -16,6 +16,7 @@ int main(int argc, char** argv)
 	Resources::loadTexture("images/fond.jpg");
 	Resources::loadTexture("images/fire.png");
 	Resources::loadTexture("images/aura.png");
+	Resources::loadTexture("images/platform_test.png");
 
 	sf::RenderWindow window(sf::VideoMode(800,600), "Test");
 	window.setFramerateLimit(500);
