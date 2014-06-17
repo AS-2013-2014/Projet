@@ -12,128 +12,361 @@
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
-#include "GUI.hpp"
+#include "Gui.hpp"
 
-GUI:: GUI(sf::RenderWindow  &window)
+Gui:: Gui(sf::RenderWindow &window)
 {
-/****************************************************
- *       Textures, Sprites & Couleurs
- ***************************************************/
-    // Texture menu
-    sf::Texture menu;
-    if (!menu.loadFromFile("img_menu.jpg"))
-        cout << "Erreur texture menu" << endl;
+    /*********************************************************/
+    /**          Textures, Sprites & Couleurs               **/
+    /*********************************************************/
+    /// à paramétrer avec les graphismes, code pour les tests
+    // Texture main dans LM
+    //sf::Texture handInLMTexture;
+    //if (!handInLMTexture.loadFromFile("img_menu.jpg"))
+     //   cout << "Erreur texture handInLMTexture" << endl;
+    // Texture portail
+    //sf::Texture portalTexture;
+    //if (!portalTexture.loadFromFile("img_menu.jpg"))
+    //    cout << "Erreur texture portalTexture" << endl;
+    // Texture fond principal
+    sf::Texture mainTexture;
+    if (!mainTexture.loadFromFile("img_menu.jpg"))
+        cout << "Erreur texture mainTexture" << endl;
 
-    // Texture jouer
-    sf::Texture jouer;
-    if (!jouer.loadFromFile("img_jouer.jpg"))
-        cout << "Erreur texture jouer" << endl;
-
+    // Texture fond terre
+    sf::Texture earthTexture;
+    if (!earthTexture.loadFromFile("img_jouer.jpg"))
+        cout << "Erreur texture earthTexture" << endl;
+    // Texture fond eau
+    /*sf::Texture waterTexture;
+    if (!waterTexture.loadFromFile("img_jouer.jpg"))
+        cout << "Erreur texture waterTexture" << endl;
+    // Texture fond air
+    sf::Texture airTexture;
+    if (!airTexture.loadFromFile("img_jouer.jpg"))
+        cout << "Erreur texture airTexture" << endl;
+    // Texture fond feu
+    sf::Texture fireTexture;
+    if (!fireTexture.loadFromFile("img_jouer.jpg"))
+        cout << "Erreur texture fireTexture" << endl;
+    */
     // Sprite fond
     sf::Sprite spriteBackground;
-    spriteBackground.setTexture(menu);
+    spriteBackground.setTexture(mainTexture);
 
-    // DÃ©claration des couleurs
+    // Déclaration des couleurs
     // sf::Color color = sf::Color(190,190,190,255);
 
-/****************************************************
- *    FIN : Textures, Sprites & Couleurs
- ***************************************************/
+    /*********************************************************/
+    /**               Création des pages                    **/
+    /*********************************************************/
+    vector<RectangleButton> mesRectZ = vector<RectangleButton>(0);
+    vector<RectangleButton> mesRectD = vector<RectangleButton>(2);
+    vector<RectangleButton> mesRectT = vector<RectangleButton>(3);
+    vector<RectangleButton> mesRectQ = vector<RectangleButton>(4);
+    vector<RectangleButton> mesRectC = vector<RectangleButton>(5);
 
-    // variable ecran
-    //int ecran = 0;
+    pageSet[HANDINLM]   = Page(mesRectZ,"");
+    pageSet[PORTAL]     = Page(mesRectZ,"");
+    /*pageSet[HOME]       = Page();
+    pageSet[PLAY]       = Page();
+    pageSet[WORLDS]     = Page();
+    pageSet[EARTH]      = Page();
+    pageSet[WATER]      = Page();
+    pageSet[AIR]        = Page();
+    pageSet[FIRE]       = Page();*/
+    pageSet[OPTION]     = Page(mesRectZ,"");
+    //pageSet[HELP]       = Page();
+    pageSet[JUMP]       = Page(mesRectZ,"");
+    pageSet[CREATEDECK] = Page(mesRectZ,"");
+    pageSet[CREDIT]     = Page(mesRectZ,"");
 
-    // DÃ©claration des Boutons
-/*    int x;
-    int y1;
-    int y2;
-    int y3;
-    int y4;
-    int y5;
-    x = (mainWindow.getSize().x - 400)/2;
-    y1 = 80;
-    y2 = 80 + 50 + 40;
-    y3 = 80 + 50*2 + 40*2;
-    y4 = 80 + 50*3 + 40*3;
-    y5 = 80 + 50*4 + 40*4;
-    RectangleButton rb1(x, y1, 400, 80,"JOUER");
-    RectangleButton rb2(x, y2, 400, 80,"OPTIONS");
-    RectangleButton rb3(x, y3, 400, 80,"AIDE");
-    RectangleButton rb4(x, y4, 400, 80,"CREDITS");
-    RectangleButton rb5(x, y5, 400, 80,"QUITTER");
+    // Définition de la page courante
+    /*currentPage = pageSet[HOME];
+    int currentCode;
+    currentCode = HOME;*/
 
-    RectangleButton rb6(x, y1, 400, 80,"NOUVELLE PARTIE");
-    RectangleButton rb7(x, y2, 400, 80,"CONTINUER");
-    RectangleButton rb8(x, y3, 400, 80,"MONDE");
+    /*********************************************************/
+    /**         Assignation des fonds à chaque page         **/
+    /*********************************************************/
 
-    RectangleButton rb9(x, y1, 400, 80,"TERRE");
-    RectangleButton rb10(x, y2, 400, 80,"EAU - GLACE");
-    RectangleButton rb11(x, y3, 400, 80,"AIR");
-    RectangleButton rb12(x, y4, 400, 80,"FEU");
 
-    RectangleButton rb13(x, y1, 400, 80,"NIVEAU 1");
-    RectangleButton rb14(x, y2, 400, 80,"NIVEAU 2");
-    RectangleButton rb15(x, y3, 400, 80,"NIVEAU 3");
-    RectangleButton rb16(x, y4, 400, 80,"NIVEAU 4");
+    /*********************************************************/
+    /**         Création des boutons pour chaque page       **/
+    /*********************************************************/
+    // Position selon les coordonnées (x,y) du coin haut gauche du bouton rectangle
+    int x;  // identique pour tous les boutons
+    int y1; // premier bouton
+    int y2; // deuxième bouton
+    int y3; // troisième bouton
+    int y4; // quatrième bouton
+    int y5; // cinquième bouton
 
-    RectangleButton rb17(x, y1, 400, 80,"SAUT");
-    RectangleButton rb18(x, y2, 400, 80,"CREATION DE PLATEFORME");
-    RectangleButton rb19(x, y3, 400, 80,"ASCENSEUR");
-*/
+    // x obtenu en divisant par 2 la largeur de la fenêtre moins la largeur d'un bouton
+    x = (window.getSize().x - 400)/2;
+    // 80 = marge haut
+    // 80 = hauteur bouton
+    // 40 = espace entre les boutons
+    y1 = 50;
+    y2 = 50 + 80 + 30;
+    y3 = 50 + 80*2 + 30*2;
+    y4 = 50 + 80*3 + 30*3;
+    y5 = 50 + 80*4 + 30*4;
 
-  //Zone  de  test  : on  ajoute  un  bouton  Ã  la  page  courante
-  setPage[0] = Page();
-  currentPage = setPage[0];
-  currentPage.ajouterWidget(b1);
 
-  //Game Loop
-  while(window.isOpen())
+    // menu principal
+    mesRectC[0] = RectangleButton(x, y1, 400, 80,"JOUER");
+    mesRectC[1] = RectangleButton(x, y2, 400, 80,"OPTIONS");
+    mesRectC[2] = RectangleButton(x, y3, 400, 80,"AIDE");
+    mesRectC[3] = RectangleButton(x, y4, 400, 80,"CREDITS");
+    mesRectC[4] = RectangleButton(x, y5, 400, 80,"QUITTER");
+    pageSet[HOME] = Page(mesRectC,"");
+
+    // menu jouer
+    mesRectT[0] = RectangleButton(x, y1, 400, 80,"NOUVELLE PARTIE");
+    mesRectT[1] = RectangleButton(x, y2, 400, 80,"CONTINUER");
+    mesRectT[2] = RectangleButton(x, y3, 400, 80,"MONDE");
+    pageSet[PLAY] = Page(mesRectT,"");
+
+    // menu mondes
+    mesRectQ[0] = RectangleButton(x, y1, 400, 80,"TERRE");
+    mesRectQ[1] = RectangleButton(x, y2, 400, 80,"EAU - GLACE");
+    mesRectQ[2] = RectangleButton(x, y3, 400, 80,"AIR");
+    mesRectQ[3] = RectangleButton(x, y4, 400, 80,"FEU");
+    pageSet[WORLDS] = Page(mesRectQ,"");
+
+    // menus niveaux
+    mesRectQ[0] = RectangleButton(x, y1, 400, 80,"NIVEAU 1");
+    mesRectQ[1] = RectangleButton(x, y2, 400, 80,"NIVEAU 2");
+    mesRectQ[2] = RectangleButton(x, y3, 400, 80,"NIVEAU 3");
+    mesRectQ[3] = RectangleButton(x, y4, 400, 80,"NIVEAU 4");
+    pageSet[EARTH] = Page(mesRectQ,"");
+    pageSet[WATER] = Page(mesRectQ,"");
+    pageSet[AIR] = Page(mesRectQ,"");
+    pageSet[FIRE] = Page(mesRectQ,"");
+
+    // menu aide
+    mesRectD[0] = RectangleButton(x, y1, 400, 80,"SAUT");
+    mesRectD[1] = RectangleButton(x, y2, 400, 80,"CREATION DE PLATEFORME");
+    pageSet[HELP] = Page(mesRectD,"");
+
+    // page courante
+    currentPage = pageSet[HOME];
+    int currentCode;
+    currentCode = HOME;
+
+    // variable pour les boucles for
+    unsigned int i;
+
+    cout << "creation des pages et des boutons reussie" << endl << "boucle de jeu" << endl;
+    //Game Loop
+    while(window.isOpen())
     {
-      sf::Event event;
-      while(window.pollEvent(event))
+        /****  Cycle de la fenêtre : Clear - Draw - Display  ****/
+        window.clear(sf::Color::Black);
+
+        /*** Gestionnaire des événements ***/
+        sf::Event event;
+        while (window.pollEvent(event))
         {
-          //CodeHugo
-          // Fermeture de la fenÃªtre
-          if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            /// à supprimer une fois GUI terminée ==> on ne quitte qu'avec le LM
+            // Fermeture de la fenêtre
+            if (event.type == sf::Event::Closed)
             {
-              window.close();
+                window.close();
             }
-          // std::cout<<currentPage.monWidget.getLongueur()<<std::endl;
-          // Clique sur fond
-          if (event.type == sf::Event::MouseButtonReleased)
+
+/**
+        Bouton retour à créer, code juste pour gestion lors des tests
+**/
+            // Retour écran précédent
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             {
-              if (event.mouseButton.button == sf::Mouse::Left)
+                switch(currentCode)
                 {
-                  std::cout<<event.mouseButton.x<<std::endl;
-                  std::cout<<event.mouseButton.y<<std::endl;
-                  //On  va  tester  tous  nos widgets : 3 boucles pour  les 3 widgets
-                  for(unsigned	int	i=0; i<currentPage.mesRect.size(); i++)
-                    {
-                      //Zone  de  test  : si  clic  dans  bouton
-                      if(currentPage.mesRect[i].estDansButton(event.mouseButton.x, event.mouseButton.y))
-                        {
-                          std::cout << "Yes !!!!" << std::endl;
-                        }
-                      else
-                        {
-                          std::cout<<"No  !!!!"<<std::endl;
-                        }
-
-                    }
-                  for(unsigned	int	i=0; i<currentPage.mesCircl.size(); i++)
-                    {
-
-                    }
-                  for(unsigned	int	i=0; i<currentPage.mesSlid.size(); i++)
-                    {
-
-                    }
+                case PLAY:
+                    currentPage = pageSet[HOME];
+                    break;
+                case WORLDS:
+                    currentPage = pageSet[PLAY];
+                    spriteBackground.setTexture(mainTexture);
+                    break;
+                case EARTH:
+                    currentPage = pageSet[WORLDS];
+                    break;
+                case WATER:
+                    currentPage = pageSet[WORLDS];
+                    break;
+                case AIR:
+                    currentPage = pageSet[WORLDS];
+                    break;
+                case FIRE:
+                    currentPage = pageSet[WORLDS];
+                    break;
+                case OPTION:
+                    currentPage = pageSet[HOME];
+                    break;
+                case HELP:
+                    currentPage = pageSet[HOME];
+                    break;
+                case JUMP:
+                    currentPage = pageSet[HELP];
+                    break;
+                case CREATEDECK:
+                    currentPage = pageSet[HELP];
+                    break;
+                default:
+                    currentPage = pageSet[HOME];
+                    break;
                 }
             }
+            // Clique sur bouton
+            if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+            {
+                cout << "il y a un clique gauche" << endl;
+                //On va tester tous nos widgets : 3 boucles pour les 3 widgets
+                for(i=0; i<currentPage.mesRect.size(); i++)
+                {
+                cout << "boucle for des boutons rectangles" << endl;
+                    //Zone de test : si clic dans bouton
+                    if(currentPage.mesRect[i].estDansButton(event.mouseButton.x, event.mouseButton.y))
+                    {
+                        // premier bouton
+                        if(i == 0)
+                        {
+                cout << "test premier bouton" << endl;
+                            switch(currentCode)
+                            {
+                            case HOME:
+                                currentPage = pageSet[PLAY];
+                                break;
+                            case PLAY:
+                                /// NOUVELLE PARTIE
+                                //currentPage = pageSet[HOME];
+                                break;
+                            case WORLDS:
+                                currentPage = pageSet[EARTH];
+                                spriteBackground.setTexture(earthTexture);
+                                break;
+                            case HELP:
+                                currentPage = pageSet[JUMP];
+                                break;
+                            default:
+                                currentPage = pageSet[HOME];
+                                break;
+                            }
+                        }
+                        // deuxième bouton
+                        else if(i == 1)
+                        {
+                cout << "test deuxieme bouton" << endl;
+                            switch(currentCode)
+                            {
+                            case HOME:
+                                currentPage = pageSet[OPTION];
+                                break;
+                            case PLAY:
+                                /// REPRENDRE
+                                //currentPage = pageSet[HOME];
+                                break;
+                            case WORLDS:
+                                currentPage = pageSet[WATER];
+                                spriteBackground.setTexture(earthTexture);
+                                break;
+                            case HELP:
+                                currentPage = pageSet[CREATEDECK];
+                                break;
+                            default:
+                                currentPage = pageSet[HOME];
+                                break;
+                            }
+                        }
+                        // troisième bouton
+                        else if(i == 2)
+                        {
+                cout << "test troisieme bouton" << endl;
+                            switch(currentCode)
+                            {
+                            case HOME:
+                                currentPage = pageSet[HELP];
+                                break;
+                            case PLAY:
+                                currentPage = pageSet[WORLDS];
+                                spriteBackground.setTexture(earthTexture);
+                                break;
+                            case WORLDS:
+                                currentPage = pageSet[AIR];
+                                spriteBackground.setTexture(earthTexture);
+                                break;
+                            default:
+                                currentPage = pageSet[HOME];
+                                break;
+                            }
+                        }
+                        // quatrième bouton
+                        else if(i == 3)
+                        {
+                cout << "test quatrieme bouton" << endl;
+                            switch(currentCode)
+                            {
+                            case HOME:
+                                currentPage = pageSet[CREDIT];
+                                break;
+                            case WORLDS:
+                                currentPage = pageSet[FIRE];
+                                spriteBackground.setTexture(earthTexture);
+                                break;
+                            default:
+                                currentPage = pageSet[HOME];
+                                break;
+                            }
+                        }
+                        // cinquième bouton
+                        else if(i == 4)
+                        {
+                cout << "test cinquieme bouton" << endl;
+                            switch(currentCode)
+                            {
+                            case HOME:
+                                window.close();
+                                break;
+                            default:
+                                currentPage = pageSet[HOME];
+                                break;
+                            }
+                        }
+                    }
+                }
+                /// pas encore implémenté !
+                /*for(i=0; i<currentPage.mesCircl.size(); i++)
+                {
+
+                }
+                for(i=0; i<currentPage.mesSlid.size(); i++)
+                {
+
+                }*/
+            }
         }
-      window.display();
+
+        /// on a la page courante, on dessine le fond puis les boutons
+        window.draw(spriteBackground);
+            //cout << "dessins   " << currentPage.mesRect.size() << endl;
+        for(i=0; i<currentPage.mesRect.size(); i++)
+        {
+            //cout << "rectangle" << i << endl;
+            window.draw(currentPage.mesRect[i]);
+        }
+        /*for(i=0; i<currentPage.mesCircl.size(); i++)
+        {
+           // window.draw(currentPage.mesCircl[i]);
+        }
+        for(i=0; i<currentPage.mesSlid.size(); i++)
+        {
+            //window.draw(currentPage.mesSlid[i]);
+        }*/
+
+        window.display();
     }
-
-
 }
 

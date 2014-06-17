@@ -21,8 +21,8 @@ using namespace std;
 #include "Page.hpp"
 #include "Widget.hpp"
 
-#ifndef H_GUI
-#define H_GUI
+#ifndef H_Gui
+#define H_Gui
 
 /** CONVENTION PAGES **/
 enum
@@ -43,14 +43,14 @@ enum
     CREDIT     = 13
 };
 
-class GUI
+class Gui
 {
-  vector<Page> pageSet(15);
+  vector<Page> pageSet = vector<Page>(15);
   Page currentPage;
 
 public:
-  //Constructeur  qui fait  tout
-  GUI(sf::RenderWindow  &window);
+  //Constructeur qui fait tout
+  Gui(sf::RenderWindow &window);
 };
 
 #endif

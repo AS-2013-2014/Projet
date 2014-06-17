@@ -20,7 +20,7 @@
 #include "Widget.hpp"
 #include "widgets/RectangleButton.hpp"
 #include "widgets/CircleButton.hpp"
-#include	"widgets/Slider.hpp"
+#include "widgets/Slider.hpp"
 using namespace sf;
 using namespace std;
 
@@ -31,16 +31,13 @@ private:
 
 
 public:
-  vector<RectangleButton>	mesRect;
-  vector<CircleButton>	mesCircl;
-  vector<Slider>	mesSlid;
+  vector<RectangleButton>   mesRect = vector<RectangleButton>(5);
+  vector<CircleButton>     mesCircl = vector<CircleButton>(4);
+  vector<Slider>            mesSlid = vector<Slider>(2);
   string cheminImage;
 
   // Constructeurs
-  Page ()
-  {
-
-  }
+  Page(){}
 
   Page (vector<RectangleButton> widgets, string chemin)
   {
