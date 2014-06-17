@@ -32,38 +32,8 @@ class RectangleButton : public sf::Drawable, public sf::Transformable,  public  
     int largeur_;
 
 public :
-    RectangleButton()
-    {
-
-    }
-
-    RectangleButton(int _x, int _y, int _width, int _height,  sf::String textB)
-    {
-        setType(BUTTON_RECT);
-        x_=_x;
-        y_=_y;
-        longueur_=_height;
-        largeur_=_width;
-        if (!font.loadFromFile("resources/sansation.ttf"))
-        {
-            std::cout<<"probleme de chargement"<<std::endl;
-        }
-// Definir la police du  texte ainsi que sa taille
-        text.setFont(font);
-        text.setString(textB);
-        text.setCharacterSize(20);
-
-// Recuperation des informations du texte pour le centrer dans le bouton
-        float tt = text.getLocalBounds().width;
-        float uu = text.getLocalBounds().height;
-        text.setPosition(sf::Vector2f(  (_width/2 - tt/2)  , (_height-uu)/ 2 - (text.getCharacterSize()-uu) ));
-        text.setColor(sf::Color::White);
-
-// On defini la taille ainsi que le position du bouton
-        rect.setSize(sf::Vector2f(_width, _height));
-        setPosition(sf::Vector2f(_x,_y));
-        rect.setFillColor(sf::Color::Black);
-    }
+    RectangleButton();
+    RectangleButton(int _x, int _y, int _width, int _height,  sf::String textB);
 // procédure qui permet de redéfinir la couleur du bouton
     void setColorButton(sf::Color color);
 //Getters
