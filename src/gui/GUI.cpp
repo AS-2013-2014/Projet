@@ -1,17 +1,90 @@
+/****************************************************************************/
+/*                       DUT INFO AS - Projet AS                            */
+/*                                                                          */
+/*                                                                          */
+/* Categorie: interface                                                     */
+/*                                                                          */
+/* Fonction(s):                                                             */
+/*--------------------------------------------------------------------------*/
+/* Description: Interface graphique (Graphical User Interface)              */
+/*                                                                          */
+/*                                                                          */
+/*                                                                          */
+/*                                                                          */
+/****************************************************************************/
 #include "GUI.hpp"
-
 
 GUI:: GUI(sf::RenderWindow  &window)
 {
+/****************************************************
+ *       Textures, Sprites & Couleurs
+ ***************************************************/
+    // Texture menu
+    sf::Texture menu;
+    if (!menu.loadFromFile("img_menu.jpg"))
+        cout << "Erreur texture menu" << endl;
+
+    // Texture jouer
+    sf::Texture jouer;
+    if (!jouer.loadFromFile("img_jouer.jpg"))
+        cout << "Erreur texture jouer" << endl;
+
+    // Sprite fond
+    sf::Sprite spriteBackground;
+    spriteBackground.setTexture(menu);
+
+    // Déclaration des couleurs
+    // sf::Color color = sf::Color(190,190,190,255);
+
+/****************************************************
+ *    FIN : Textures, Sprites & Couleurs
+ ***************************************************/
+
+    // variable ecran
+    //int ecran = 0;
+
+    // Déclaration des Boutons
+/*    int x;
+    int y1;
+    int y2;
+    int y3;
+    int y4;
+    int y5;
+    x = (mainWindow.getSize().x - 400)/2;
+    y1 = 80;
+    y2 = 80 + 50 + 40;
+    y3 = 80 + 50*2 + 40*2;
+    y4 = 80 + 50*3 + 40*3;
+    y5 = 80 + 50*4 + 40*4;
+    RectangleButton rb1(x, y1, 400, 80,"JOUER");
+    RectangleButton rb2(x, y2, 400, 80,"OPTIONS");
+    RectangleButton rb3(x, y3, 400, 80,"AIDE");
+    RectangleButton rb4(x, y4, 400, 80,"CREDITS");
+    RectangleButton rb5(x, y5, 400, 80,"QUITTER");
+
+    RectangleButton rb6(x, y1, 400, 80,"NOUVELLE PARTIE");
+    RectangleButton rb7(x, y2, 400, 80,"CONTINUER");
+    RectangleButton rb8(x, y3, 400, 80,"MONDE");
+
+    RectangleButton rb9(x, y1, 400, 80,"TERRE");
+    RectangleButton rb10(x, y2, 400, 80,"EAU - GLACE");
+    RectangleButton rb11(x, y3, 400, 80,"AIR");
+    RectangleButton rb12(x, y4, 400, 80,"FEU");
+
+    RectangleButton rb13(x, y1, 400, 80,"NIVEAU 1");
+    RectangleButton rb14(x, y2, 400, 80,"NIVEAU 2");
+    RectangleButton rb15(x, y3, 400, 80,"NIVEAU 3");
+    RectangleButton rb16(x, y4, 400, 80,"NIVEAU 4");
+
+    RectangleButton rb17(x, y1, 400, 80,"SAUT");
+    RectangleButton rb18(x, y2, 400, 80,"CREATION DE PLATEFORME");
+    RectangleButton rb19(x, y3, 400, 80,"ASCENSEUR");
+*/
+
   //Zone  de  test  : on  ajoute  un  bouton  à la  page  courante
-  RectangleButton b1( 0, 0, 800,600,"TEST BUTTON");
-  b1.setColorButton(sf::Color::Blue);
-  window.draw(b1);
-  currentPage= Page();
+  setPage[0] = Page();
+  currentPage = setPage[0];
   currentPage.ajouterWidget(b1);
-
-  //Window.setKeyRepeatEnabled(false);
-
 
   //Game Loop
   while(window.isOpen())
