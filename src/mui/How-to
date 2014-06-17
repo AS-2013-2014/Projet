@@ -1,0 +1,98 @@
+HOW-TO Use the MUI (Leap Motion) code
+
+
+Include requis :
+   - Leap.h
+   - MUI.hpp
+   - MUIEvent.hpp
+   - PlatformMui.hpp
+
+
+initialisation d'un objet MUI : 
+   MUI (windowWidth, windowHeight)
+
+les évènements renvoyé par la classe MUI sont de type MUIEvent.
+Utiliser la méthode getType() pour récupérer le type de l'évènement.
+
+
+Définir un mode parmis les suivant :
+   - MODE_POINT
+   - MODE_JUMP
+   - MODE_PLATFORM
+   
+en utilisant la méthode 
+   void setMode(MUI::Mode);
+
+Et le MODE_ALL qui réunis tous les modes (pas censé être utilisé)
+
+
+MODE_POINT :
+   Permet de récupérer un point correspondant à la moyenne des positions des pointables ou à la position de la main.
+
+   Evènements renvoyés :
+      MUIEvent::POINT_ENTER :
+         le point entre dans le champs détecté
+         
+      MUIEvent::POINT_EXIT :
+         le point est sortis du champ détecté
+         
+      MUIEvent::POINT_TOUCH
+         le point a touché l'écran virtuel (équivalent d'un clic)
+
+      
+   méthode de l'objet MUI :
+      sf::Vector3f getPoint()
+
+
+
+MODE_JUMP :
+   Permet de récupérer les sauts.
+   Les sauts sont définis par un geste de la main de bas en haut (swipe)
+
+   Evènement renvoyé :
+      MUIEvent::JUMP :
+         un saut est détecté
+
+
+
+MODE_PLATFORM :
+   Permet de récupérer les platformes créés par l'utilisateur
+   
+   Evènements renvoyés :
+      MUIEvent::PLATFORM_ENTER :
+         Les deux doigts formant la platforme entrent dans le champ détecté
+         
+      MUIEvent::PLATFORM_EXIT :
+         Les deux doigts formant la platforme sortent du champ détecté
+         
+      MUIEvent::PLATFORM_CREATE :
+         La platforme est créée
+
+
+      Méthode de l'objet MUI :
+         PlatformMui getPlatform()
+            on récupère un objet de type PlatformMui
+            
+      Méthode de l'objet PlatformMui :
+         float getLength()
+            récupérer la longueur de la plateforme
+         
+         sf::Vector2f getPositionP1()
+            récupère la position de la gauche de la plateforme
+         
+         sf::Vector2f getPositionP2()
+            récupère la position de la droite de la plateforme
+         
+         float getZ()
+            récupère la coordonnée de la plateforme sur l'axe z (profondeur) par rapport à l' "écran virtuel"
+         
+         float getRotation()
+            récupère l'angle de la platforme (entre 90 et 270)
+         
+
+
+
+
+
+
+
