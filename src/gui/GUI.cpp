@@ -13,7 +13,6 @@
 /* */
 /****************************************************************************/
 #include "GUI.hpp"
-#include "slide.hpp"
 
 void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

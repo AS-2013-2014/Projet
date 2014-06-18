@@ -18,7 +18,7 @@
 #include <SFML/Graphics.hpp>
 #include "CircleButton.hpp"
 #include "RectangleButton.hpp"
-#include "slide.hpp"
+#include "Slider.hpp"
 #include <vector>
 using namespace sf;
 using namespace std;

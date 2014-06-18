@@ -24,8 +24,7 @@ class Game
 	Scene& getScene();
 	void frame(float time);
 
-    MUI& getMui() {return *mui;};
-    
+  MUI& getMUI() {return *mui;}
 
 	int getDataVolume() { return dataVolume; };
 	void setDataVolume( int vol ) { dataVolume = vol; };
