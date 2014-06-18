@@ -18,7 +18,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-#include "Resources.hpp"
+#include "../misc/Resources.hpp"
 
 class RectangleButton : public sf::Drawable, public sf::Transformable{
 
