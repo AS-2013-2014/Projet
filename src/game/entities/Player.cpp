@@ -134,10 +134,9 @@ void Player::move(const std::vector<Solid*>& solids)
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
-                    /*if(solids[i].getType()=Platform.type.DEADLY)
-                        dead=true;
-                    */
-					collisionDetected = true;
+                    			if(solids[i].getType()=Platform.type.DEADLY)
+                				dead=true;
+		                    	collisionDetected = true;
 					jumping = false;
 					double_jumping = false;
 					timer = 1;

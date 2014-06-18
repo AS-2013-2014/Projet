@@ -1,4 +1,0 @@
-
-#include "Slider.hpp"
-
-
