@@ -2,7 +2,7 @@
 
 // constructeur
 Game::Game(sf::RenderWindow& _window, MUI& _mui)
-	:	scene(this), mui(&_mui)
+	:	 mui(&_mui), scene(this)
 {
 	window = &_window;
 	loadData();

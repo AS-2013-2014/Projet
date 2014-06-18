@@ -131,8 +131,6 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   sp.setPosition(0,0);
   target.draw(sp,states);
 
-
-   glDisable(GL_SCISSOR_TEST);
 }
 
 float Platform::skin_margin = -1;
