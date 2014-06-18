@@ -1,4 +1,3 @@
-
 #include "Scene.hpp"
 
 //inclusion reflexive, ne pas retirer ni rajouter dans le .hpp
@@ -101,27 +100,26 @@ void Scene::addPlatform(Platform* p)
 
 	//on ajoute la plateforme aux entitées du niveau
 	entities.push_back(p);
+    solids.push_back(p);
 
-	//on ajoute la plateforme aux sections correspondantes
-	int section_min = (int)p->getX()/SECTION_WIDTH;
-	int section_max = (int)p->getX()/SECTION_WIDTH;
-
+	// on ajoute la plateforme aux sections correspondantes
+	int section_min = (int)p->getX();
+	int section_max = (int)p->getX();
 
 	std::vector<Segment> segs = p->getHitBox().getSegments();
 	for(int i=0; i < segs.size(); i++)
 	{
-		if(segs[i].getP1().x/SECTION_WIDTH < section_min)
+		if(segs[i].getP1().x < section_min)
 				section_min = segs[i].getP1().x;
-		else if(segs[i].getP1().x/SECTION_WIDTH > section_min)
+		else if(segs[i].getP1().x > section_max)
 				section_max = segs[i].getP1().x;
-		if (segs[i].getP2().x/SECTION_WIDTH < section_min)
+		if (segs[i].getP2().x < section_min)
 				section_min = segs[i].getP2().x;
-		else if (segs[i].getP2().x/SECTION_WIDTH > section_min)
+		else if (segs[i].getP2().x > section_max)
 				section_max = segs[i].getP2().x;
-
 	}
 	
-	for (int i=section_min; i<=section_max; i++)
+	for (int i=section_min/SECTION_WIDTH; i<=section_max/SECTION_WIDTH; i++)
 	{
 		if(i >= 0 && i < sections.size())
 			sections[i]->platforms.push_back(p);
@@ -327,14 +325,14 @@ void Scene::loadGraphics(const std::string& file)
 void Scene::frame(float time)
 {
 
-	cam.x += 4;
+	cam.x += time*SPEED*50;
 
 
 	for(int i = 0; i < entities.size(); i++)
 		entities[i]->frame(time);
 
 
-	character->move();
+	//character->move();
 
 }
 

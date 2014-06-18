@@ -1,7 +1,6 @@
 
 #include "Platform.hpp"
 
-
 Platform::Platform(int x, int y, float z, int length, int width, float angle, int type, int skin)
 	:Solid(x,y,z,length,width,angle)
 {
@@ -9,8 +8,9 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	sf::RectangleShape rect(sf::Vector2f(length,width));	
 	rect.setFillColor(sf::Color(0,0,0));
         rect.setRotation(angle);
+    rect.setPosition(sf::Vector2f(x, y));
 	
-  std::vector<sf::Vector2f> points;
+    std::vector<sf::Vector2f> points;
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(0)));
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(1)));
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(2)));
@@ -27,9 +27,10 @@ Platform::Platform(sf::Vector2f coord, float z, int length, int width, float ang
 	//les operations de transformations sont effectuées par la scène
 	sf::RectangleShape rect(sf::Vector2f(length,width));	
 	rect.setFillColor(sf::Color(0,0,0));
-  rect.setRotation(angle);
+    rect.setPosition(coord);
+    rect.setRotation(angle);
 	
-  std::vector<sf::Vector2f> points;
+    std::vector<sf::Vector2f> points;
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(0)));
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(1)));
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(2)));

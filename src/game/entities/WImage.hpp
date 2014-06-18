@@ -1,28 +1,34 @@
+
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
 /*                                                                          */
-/* Categorie: moteur physique                                               */
+/* Categorie: graphic                                                       */
 /*                                                                          */
-/* Fonction(s): gérer les collisions                                        */
+/* Fonction(s):                                                             */
 /*--------------------------------------------------------------------------*/
-/* Description: le niveau courrant est divisé en sections,                  */
-/* le moteur de collision ne teste les collisions du joueur                 */
-/* qu'avec les plateformes (mortelles ou non) de la section où il se trouve */
+/* Description: Une image de la scène (world image)                         */
+/*                                                                          */
+/*                                                                          */
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
 
-#ifndef SECTION
-#define SECTION
+#ifndef H_WIMAGE
+#define H_WIMAGE
 
-#include <vector>
-#include "entities/Platform.hpp"
+#include "Graphic.hpp"
+#include "../../misc/Resources.hpp"
 
-class Section {
+class WImage : public Graphic
+{
 	public:
-	std::vector<Solid*> platforms;
-	Section();
-	~Section();
+		WImage(int x, int y, float z, int w, int h, int r, const std::string& file);
+
+	private:
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+		sf::Sprite sprite;
 };
+
 #endif

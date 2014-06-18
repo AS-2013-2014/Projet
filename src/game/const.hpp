@@ -11,6 +11,8 @@
 
 // physic engine
 
+#define SECTION_WIDTH 300
+
 #define CHARACTER_WIDTH 100
 #define CHARACTER_HEIGHT 50
 #define START_ABSC 0.50

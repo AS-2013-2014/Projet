@@ -23,6 +23,7 @@
 #include "entities/WImage.hpp"
 #include "entities/WAnimation.hpp"
 #include "entities/Player.hpp"
+#include "const.hpp"
 #include <math.h>
 #include <iostream>
 #include <fstream>
@@ -32,16 +33,33 @@
 #include <stdlib.h> // atof, atoi
 #include <SFML/Graphics.hpp>
 
-#define SECTION_WIDTH 300
-
 //parent pointer
 class Game;
 
 class Scene : public sf::Drawable, public sf::Transformable
 {
-	public:
+    
+    private:
+    Game *game;
+	Player* character;
+    std::vector<Entity*> entities;
 	std::vector<Section*> sections;
-	std::vector<Entity*> entities;
+	std::vector<Graphic*> graphics;
+	std::vector<Solid*> solids;
+	int width;
+	int nb_sections;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	sf::Vector2f cam;
+
+    //graphique
+    void setPlatformSkin(const std::string& src);
+	sf::Sprite background;
+	sf::Shader* sh_fade;
+    sf::Sprite splatform;
+    float platform_unit;
+    
+	public:
+
 
 	Scene(Game *game);
 	~Scene();
@@ -60,7 +78,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	//accesseurs
 	sf::Vector2f& getCam(){ return cam; }
 	void setCam(const sf::Vector2f& v){ cam = v; }
-
+    std::vector<Section*>& getSections() { return sections; }
 	std::vector<Solid*>& getSolids(){ return solids; }
 	void setPlayerAction(Player::Action);
 	void setPlayer(Player*);
@@ -72,27 +90,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	};
 	
 
-	private:
-		Player* character;
-
-	int width;
-	int nb_sections;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	std::vector<Graphic*> graphics;
-
-	std::vector<Solid*> solids;
-
-	sf::Vector2f cam;
-
-	Game *game;
-
-  //graphique
-  void setPlatformSkin(const std::string& src);
-
-	sf::Sprite background;
-	sf::Shader* sh_fade;
-  sf::Sprite splatform;
-  float platform_unit;
+	
 };
 
 Platform* readPlatform(std::string line);

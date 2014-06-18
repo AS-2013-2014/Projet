@@ -45,8 +45,7 @@ void Player::jump()
 
 void Player::move(const std::vector<Solid*>& solids)
 {
-std::cout << "PLAYER : (" << coord.x << ", " << coord.y << ")  ";
-std::cout << "CAM : (" << scene->getCam().x << ", " << scene->getCam().y << ")  " << std::endl;
+
 	gapToReference = coord.x - (REF_X*800 + (scene->getCam().x-400));
 
 	float rad = motion_angle*PI_ENGINE/180;
@@ -58,9 +57,8 @@ std::cout << "CAM : (" << scene->getCam().x << ", " << scene->getCam().y << ")  
 	{
 		if(motion_angle <= MAX_MOVE_ANGLE)
 		{
-			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50));
+			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/2);
 			dy = GRAVITY * timer - 20;
-std::cout << rad << std::endl;
 		}
 		if(motion_angle <= 90)
 		{
@@ -126,9 +124,6 @@ std::cout << rad << std::endl;
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
-
-					solids[i]->setColor(sf::Color(255, 0, 0));
-
 					collisionDetected = true;
 					jumping = false;
 					double_jumping = false;
@@ -188,7 +183,19 @@ std::cout << rad << std::endl;
 
 void Player::move()
 {
-	move(scene->getSolids());
+	int section1 = (hitBox.getSegments()[0]).getP1().x/SECTION_WIDTH;
+	int section2 = (hitBox.getSegments()[2]).getP1().x/SECTION_WIDTH;
+	
+	std::vector<Solid*> platforms = std::vector<Solid*>();
+
+	if(section1 != section2) {
+		platforms.reserve((scene->getSections())[section1]->platforms.size() +  (scene->getSections())[section2]->platforms.size());
+		platforms.insert(platforms.end(), (scene->getSections())[section1]->platforms.begin(), (scene->getSections())[section1]->platforms.end());
+		platforms.insert(platforms.end(), (scene->getSections())[section2]->platforms.begin(), (scene->getSections())[section2]->platforms.end());
+		move(platforms);
+	}
+	else
+		move((scene->getSections())[section1]->platforms);
 }
 
 void Player::frame(float time)
