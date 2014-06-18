@@ -75,7 +75,8 @@ class MUI : public Leap::Listener{
       
       //Destructor
       ~MUI() {
-         controller.removeListener(*this);
+         //controller.removeListener(*this);
+         //std::cout << "removed" << std::endl;
       }
       
       

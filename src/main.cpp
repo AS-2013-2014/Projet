@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include "gui/GUI.hpp"
 
+#include "mui/MUI.hpp"
+
 int main(int argc, char** argv)
 {
 	// instruction unique pour tout le programme
