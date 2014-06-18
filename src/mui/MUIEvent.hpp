@@ -9,7 +9,6 @@ class MUIEvent {
    
    private:
       int type;
-      //Motion motion;
    
    public:
       
@@ -34,24 +33,11 @@ class MUIEvent {
          this->type = type;
       }
       
-      /* 
-      MUIEvent(MUIEvent::Event type, Motion m) {
-         type = c;
-         motion = m;
-      }
-      */
       
       //Getters
       int getType(){
          return type;
       }
-      
-      /*
-      Motion getMotion() {
-         return motion;
-      }
-      */
-      
 };
 
 
