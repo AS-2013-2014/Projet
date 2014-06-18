@@ -1,8 +1,8 @@
 ﻿#include "Game.hpp"
 
 // constructeur
-Game::Game(sf::RenderWindow& _window, MUI& mui)
-	:	scene(this):    mui(this)
+Game::Game(sf::RenderWindow& _window, MUI& _mui)
+	:	scene(this), mui(&_mui)
 {
 	window = &_window;
 	loadData();

@@ -19,7 +19,7 @@ using namespace std;
 
 #include <SFML/Graphics.hpp>
 #include "Page.hpp"
-#include "slide.hpp"
+#include "Slider.hpp"
 
 #ifndef H_Gui
 #define H_Gui

@@ -16,11 +16,6 @@ MUI::MUI(int width, int height) {
    jumpNb = 0;
 }
 
-
-
-
-
-
 /**************************************
  ****Leap Motion (controller) Event****
  **************************************/
@@ -258,20 +253,6 @@ void MUI::updatePoint2(const Leap::Frame& frame, std::vector<MUIEvent>& MUIEvent
    }
    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

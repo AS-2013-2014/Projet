@@ -48,7 +48,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	std::vector<Section*> sections;
 	std::vector<Graphic*> graphics;
 	std::vector<Solid*> solids;
-    std::vector<Platform.type> flagsType;
+    std::vector<int> flagsType;
     std::vector<int> flagsX;
 	int width;
     int height;

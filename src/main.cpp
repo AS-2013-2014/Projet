@@ -5,6 +5,7 @@
 #include "game/Game.hpp"
 #include "game/Segment.hpp"
 #include <SFML/Graphics.hpp>
+#include "gui/GUI.hpp"
 
 int main(int argc, char** argv)
 {
@@ -29,8 +30,14 @@ int main(int argc, char** argv)
 	// horloge globale (sert à récupérer l'intervalle entre chaque frame)
 	sf::Clock clock;
 
+  //init MUI
+  MUI mui(800,600);
+  
+  //init GUI
+  GUI gui(window);
+
 	// nouveau jeu
-	Game game(window);
+	Game game(window, mui);
 	game.load(1,1);
 	game.setPlay(true);
 

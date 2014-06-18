@@ -4,11 +4,11 @@
 #include "Game.hpp"
 
 
-Scene::Scene(Game *_game): game(_game):win(false)
+Scene::Scene(Game *_game): game(_game),win(false)
 {
 	this->width = 0;
 	this->nb_sections = 0;
-    game->getMUI().setMode(MUI.Mode.MODE_JUMP);
+    game->getMUI().setMode(MUI::MODE_JUMP);
 	//chargement du shader
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
@@ -95,9 +95,9 @@ void Scene::addPlatform(Platform* p)
 
 	//on ajoute la plateforme aux entitées du niveau
 	entities.push_back(p);
-    if (p.getType()==Plateform.type.END_FLAG||p.getType()==Plateform.type.CREATION_FLAG||p.getType()==Plateform.type.JUMP_FLAG)
+    if (p->getType()==Platform::END_FLAG||p->getType()==Platform::CREATION_FLAG||p->getType()==Platform::JUMP_FLAG)
     {     
-        flagsType.push_back(p.getType());
+        flagsType.push_back(p->getType());
         flagsX.push_back(p->getX());  
         }
     else{
@@ -125,7 +125,6 @@ void Scene::addPlatform(Platform* p)
             if(i >= 0 && i < sections.size())
                 sections[i]->platforms.push_back(p);
         }
-        break;
     }
 }
 
@@ -423,20 +422,20 @@ void Scene::updateMode()
     int i;
     int j=0;
     bool flaged=false;
-    for(i=0;i<flagsX.size();i++){
+    for(i=flagsX.size()-1;i>=0;i--){
         if (flagsX[i]<character->getX())
         {
-            if(flagsType[i]==Platform.type.END_FLAG)
+            if(flagsType[i]==Platform::END_FLAG)
             {
                 win=true;
             }
-            else if(flagsType[i]==Platform.type.CREATION_FLAG)
+            else if(flagsType[i]==Platform::CREATION_FLAG)
             {
-                game->getMUI().setMode(MUI.Mode.MODE_PLATFORM);
+                game->getMUI().setMode(MUI::MODE_PLATFORM);
             }
             else
             {
-                game->getMUI().setMode(MUI.Mode.MODE_JUMP);
+                game->getMUI().setMode(MUI::MODE_JUMP);
             }
             j=i;
             flaged=true;
@@ -444,10 +443,11 @@ void Scene::updateMode()
             
         }
     
-    if (flaged)
-    {
-        flagsX.erase(j);
-        flagsType.erase(j);
+      if (flaged)
+      {
+          flagsX.erase(flagsX.begin()+j);
+          flagsType.erase(flagsType.begin()+j);
+      }
     }
 }
 
