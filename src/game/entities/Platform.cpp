@@ -16,7 +16,6 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(2)));
 	points.push_back(rect.getTransform().transformPoint(rect.getPoint(3)));
 	hitBox = HitBox(points);
-
 	this->type=type;
 	this->skin=skin;
 }

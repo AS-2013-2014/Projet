@@ -4,11 +4,11 @@
 #include "Game.hpp"
 
 
-Scene::Scene(Game *_game): game(_game)
+Scene::Scene(Game *_game): game(_game):win(false)
 {
 	this->width = 0;
 	this->nb_sections = 0;
-
+    game->getMUI().setMode(MUI.Mode.MODE_JUMP);
 	//chargement du shader
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
@@ -64,7 +64,7 @@ void Scene::loadLevel(const std::string &file)
 		//lecture de la longueur du niveau
 		std::string line;
 		getline(lvl_file,line);
-		this->width = readLvlWidth(line);
+		readLvl(line);
 
 		//création des sections pour la gestion des collisions
 		this->nb_sections = (int)ceil(width/SECTION_WIDTH);
@@ -100,30 +100,38 @@ void Scene::addPlatform(Platform* p)
 
 	//on ajoute la plateforme aux entitées du niveau
 	entities.push_back(p);
-    solids.push_back(p);
+    if (p.getType()==Plateform.type.END_FLAG||p.getType()==Plateform.type.CREATION_FLAG||p.getType()==Plateform.type.JUMP_FLAG)
+    {     
+        flagsType.push_back(p.getType());
+        flagsX.push_back(p->getX());  
+        }
+    else{
+        solids.push_back(p);// Utile?
 
-	// on ajoute la plateforme aux sections correspondantes
-	int section_min = (int)p->getX();
-	int section_max = (int)p->getX();
+        // on ajoute la plateforme aux sections correspondantes
+        int section_min = (int)p->getX();
+        int section_max = (int)p->getX();
 
-	std::vector<Segment> segs = p->getHitBox().getSegments();
-	for(int i=0; i < segs.size(); i++)
-	{
-		if(segs[i].getP1().x < section_min)
-				section_min = segs[i].getP1().x;
-		else if(segs[i].getP1().x > section_max)
-				section_max = segs[i].getP1().x;
-		if (segs[i].getP2().x < section_min)
-				section_min = segs[i].getP2().x;
-		else if (segs[i].getP2().x > section_max)
-				section_max = segs[i].getP2().x;
-	}
-	
-	for (int i=section_min/SECTION_WIDTH; i<=section_max/SECTION_WIDTH; i++)
-	{
-		if(i >= 0 && i < sections.size())
-			sections[i]->platforms.push_back(p);
-	}
+        std::vector<Segment> segs = p->getHitBox().getSegments();
+        for(int i=0; i < segs.size(); i++)
+        {
+            if(segs[i].getP1().x < section_min)
+                    section_min = segs[i].getP1().x;
+            else if(segs[i].getP1().x > section_max)
+                    section_max = segs[i].getP1().x;
+            if (segs[i].getP2().x < section_min)
+                    section_min = segs[i].getP2().x;
+            else if (segs[i].getP2().x > section_max)
+                    section_max = segs[i].getP2().x;
+        }
+        
+        for (int i=section_min/SECTION_WIDTH; i<=section_max/SECTION_WIDTH; i++)
+        {
+            if(i >= 0 && i < sections.size())
+                sections[i]->platforms.push_back(p);
+        }
+        break;
+    }
 }
 
 Platform* readPlatform(std::string line)
@@ -192,17 +200,26 @@ Platform* readPlatform(std::string line)
 
 }
 
-int readLvlWidth(std::string line)
+void Scene::readLvl(std::string line)
 {
-	int width = 0;
+	int w = 0;
+    int h=0;
 	int i = 0;
 	while (line[i]!=':')
 	{
-		width *= 10;
-		width += (int)(line[i]-'0');
+		w *= 10;
+		w += (int)(line[i]-'0');
 		i++;
 	}
-	return width;
+    i++;
+    while (line[i]!=':')
+	{
+		h *= 10;
+		h += (int)(line[i]-'0');
+		i++;
+	}
+	this->width=w;
+    this->height=h;
 }
 
 void Scene::setBackground(const std::string file)
@@ -404,5 +421,38 @@ void Scene::setPlayerAction(Player::Action a)
 void Scene::setPlayer(Player* c)
 {
 	character = c;
+}
+
+void Scene::updateMode()
+{
+    int i;
+    int j=0;
+    bool flaged=false;
+    for(i=0;i<flagsX.size();i++){
+        if (flagsX[i]<character->getX())
+        {
+            if(flagsType[i]==Platform.type.END_FLAG)
+            {
+                win=true;
+            }
+            else if(flagsType[i]==Platform.type.CREATION_FLAG)
+            {
+                game->getMUI().setMode(MUI.Mode.MODE_PLATFORM);
+            }
+            else
+            {
+                game->getMUI().setMode(MUI.Mode.MODE_JUMP);
+            }
+            j=i;
+            flaged=true;
+            
+            
+        }
+    
+    if (flaged)
+    {
+        flagsX.erase(j);
+        flagsType.erase(j);
+    }
 }
 

@@ -16,6 +16,7 @@ class Scene;
 class Player : public Solid
 {
 	private:
+    bool dead;
 	sf::RectangleShape rect;
 	Scene* scene;
 	float timer;
@@ -27,8 +28,10 @@ class Player : public Solid
 	float gapToReference;
 	float clockTime;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void isDead();
 
 	public:
+    bool getDead() const { return dead; } 
 	Player();
 	Player(Scene*, sf::Vector2f, sf::Vector2f, float, int, HitBox);
 	void move(sf::Vector2f);

@@ -5,6 +5,15 @@ Player::Player()
 {
 }
 
+void Player::isDead()
+{
+    float viewAbs = (scene->getCam()).x; 
+    if (coord.x<viewAbs-400-DEAD_MARGIN_X)
+        dead=true;
+    else if(coord.y>DEAD_MARGIN_Y+scene->getHeight())
+        dead=true;
+}
+
 Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox hb)
 	:	Solid(p.x, p.y, z, d.x, d.y, 0),
 		scene(sc),
@@ -31,11 +40,12 @@ void Player::move(sf::Vector2f d)
 	}
     else if(coord.y > viewOrd+200)
     {
-		if(viewOrd < 300) // FIXME passer max(y) des plate-formes
+		if(viewOrd < scene->getHeight()-100) // TEST ME
 			scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y > 0)?d.y:0)));
 		else
 			scene->setCam(sf::Vector2f(scene->getCam().x, 300));
     }
+    isDead();
 }
 
 void Player::jump()
@@ -124,6 +134,9 @@ void Player::move(const std::vector<Solid*>& solids)
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
+                    /*if(solids[i].getType()=Platform.type.DEADLY)
+                        dead=true;
+                    */
 					collisionDetected = true;
 					jumping = false;
 					double_jumping = false;

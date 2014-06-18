@@ -11,6 +11,9 @@
 
 // physic engine
 
+#define DEAD_MARGIN_X 300
+#define DEAD_MARGIN_Y 100
+
 #define SECTION_WIDTH 300
 
 #define CHARACTER_WIDTH 100

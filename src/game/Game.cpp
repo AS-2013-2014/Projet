@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
 // constructeur
-Game::Game(sf::RenderWindow& _window)
-	:	scene(this)
+Game::Game(sf::RenderWindow& _window, MUI& mui)
+	:	scene(this):    mui(this)
 {
 	window = &_window;
 	scene.addPlayer();
@@ -40,3 +40,5 @@ void Game::frame(float time)
 
 	scene.frame(time);
 }
+
+
