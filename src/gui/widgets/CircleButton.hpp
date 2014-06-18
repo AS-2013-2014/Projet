@@ -7,13 +7,13 @@
 /* Fonction : Classe CircleButton                                       */
 /* ------------------------------------------------------------         */
 /* Description :                                                        */
-/*  Cette classe permet de créer un bouton circulaire avec un anneau de */
+/*  Cette classe permet de crï¿½er un bouton circulaire avec un anneau de */
 /*   couleur differentes.                                               */
 /*                                                                      */
 /*                                                                      */
 /************************************************************************/
-#ifndef BUTTON
-#define BUTTON
+#ifndef CIRCLE_BUTTON
+#define CIRCLE_BUTTON
 #include <SFML/Graphics.hpp>
 
 /*  Classe : CircleButton
@@ -47,10 +47,10 @@ public :
 
     }
 
-// procédure qui permet de redéfinir les couleur du circleButton
+// procï¿½dure qui permet de redï¿½finir les couleur du circleButton
     void setColorButton(sf::Color colorCircle, sf::Color colorRing);
 
-// redifnition de la méthode draw afin de dessiné le circleButton
+// redifnition de la mï¿½thode draw afin de dessinï¿½ le circleButton
 virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 
