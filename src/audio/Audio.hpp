@@ -67,7 +67,7 @@
 
 #include <SFML/Audio.hpp>
 // Pour le chargement des sons optimisé
-#include "misc/Resources.hpp"
+#include "../misc/Resources.hpp"
 
 
 enum
@@ -94,7 +94,12 @@ enum
 	  GAME_OVER2 = 18,
 	  SAUT2 = 19,
 	  VICTOIRE = 20,
+    COGNER_PLATEFORME=21,
+    DOUBLE_SAUT=22,
+    PAUSE=23,
+    SAUT=24
 
+    /*
   ASCENSEUR,
   ASCENSEUR2,
   ATTERIE,
@@ -116,6 +121,7 @@ enum
   GAME_OVER2,
   SAUT2,
   VICTOIRE
+  */
 };
 
 class Audio

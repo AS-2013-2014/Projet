@@ -1,4 +1,4 @@
-#ifndef RECT_BUTTON
+﻿#ifndef RECT_BUTTON
 #define RECT_BUTTON
 
 /************************************************************************/
@@ -33,7 +33,9 @@ class RectangleButton : public sf::Drawable, public sf::Transformable, public Wi
 
 public :
     RectangleButton();
+
     RectangleButton(int _x, int _y, int _width, int _height, sf::String textB);
+
 // procédure qui permet de redéfinir la couleur du bouton
     void setColorButton(sf::Color color);
 //Getters

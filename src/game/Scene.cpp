@@ -15,6 +15,8 @@ Scene::Scene(Game *_game): game(_game)
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))
 
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
+
+  setPlatformSkin("images/platform_test.png");
 }
 
 void Scene::addPlayer() {
@@ -95,6 +97,8 @@ void Scene::loadLevel(const std::string &file)
 
 void Scene::addPlatform(Platform* p) 
 {
+  p->setSkin(splatform, platform_unit);
+
 	//on ajoute la plateforme aux entitées du niveau
 	entities.push_back(p);
 
@@ -374,6 +378,18 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 		target.draw(e, states);
 	}
+}
+
+
+void Scene::setPlatformSkin(const std::string& src){
+  sf::Texture* tex = Resources::getTexture(src);
+  if(tex != NULL){
+    splatform.setTexture(*tex);
+    const sf::Vector2u& size = tex->getSize();
+    platform_unit = (size.x > size.y ? size.y : size.x) / 3.0;
+  }
+  else
+    platform_unit = 1000;
 }
 
 void Scene::setPlayerAction(Player::Action a)

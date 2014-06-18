@@ -1,20 +1,24 @@
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 #include "RectangleButton.hpp"
 #include <iostream>
 using namespace std;
 
+
 RectangleButton::RectangleButton(){}
 RectangleButton::RectangleButton(int _x, int _y, int _width, int _height, sf::String textB)
 {
+
   x_=_x;
   y_=_y;
   longueur_=_height;
   largeur_=_width;
+
   if (!font.loadFromFile("arial.ttf"/*"resources/sansation.ttf"*/))
     {
       cout << "probleme de chargement" << endl;
     }
 // Definir la police du texte ainsi que sa taille
+
   text.setFont(font);
   text.setString(textB);
   text.setCharacterSize(20);
@@ -22,13 +26,17 @@ RectangleButton::RectangleButton(int _x, int _y, int _width, int _height, sf::St
 // Recuperation des informations du texte pour le centrer dans le bouton
   float tt = text.getLocalBounds().width;
   float uu = text.getLocalBounds().height;
+
   text.setPosition(sf::Vector2f( (_width/2 - tt/2) , (_height-uu)/ 2 - (text.getCharacterSize()-uu) ));
   text.setColor(sf::Color::Red);
+
 
 // On defini la taille ainsi que le position du bouton
   rect.setSize(sf::Vector2f(_width, _height));
   setPosition(sf::Vector2f(_x,_y));
+
   rect.setFillColor(sf::Color::White);
+
 }
 void RectangleButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

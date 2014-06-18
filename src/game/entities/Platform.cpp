@@ -41,11 +41,93 @@ Platform::Platform(sf::Vector2f coord, float z, int length, int width, float ang
 
 Platform::Platform():Solid(0,0,0,0,0,0)
 {
-} void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+} 
+
+void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   states.transform *= getTransform();
   states.texture = NULL;
 
-  sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
-  rect.setFillColor(sf::Color(0,255,0));
-  target.draw(rect, states);
+  //rendu des plateformes
+  sf::Sprite sp = splatform;
+  const float& pu = platform_unit;
+
+  //left
+  sp.setTextureRect(sf::IntRect(0,pu,pu,pu));
+  sp.setPosition(0,0);
+  while(sp.getPosition().y < size.y-2*pu){
+    sp.move(0,pu);
+    target.draw(sp, states);
+  }
+
+
+  //right
+  sp.setTextureRect(sf::IntRect(2*pu,pu,pu,pu));
+  sp.setPosition(size.x-pu,0);
+  while(sp.getPosition().y < size.y-2*pu){
+    sp.move(0,pu);
+    target.draw(sp, states);
+  }
+
+  //top
+  sp.setTextureRect(sf::IntRect(pu,0,pu,pu));
+  sp.setPosition(0,0);
+  while(sp.getPosition().x < size.x-2*pu){
+    sp.move(pu,0);
+    target.draw(sp, states);
+  }
+
+
+  //middle
+
+  sp.setTextureRect(sf::IntRect(pu,pu,pu,pu));
+  sp.setPosition(0,0);
+  while(sp.getPosition().x < size.x-2*pu){
+    sf::Vector2f pos = sp.getPosition();
+    pos.y = 0;
+    sp.setPosition(pos);
+
+    sp.move(pu,0);
+    while(sp.getPosition().y < size.y-2*pu){
+      sp.move(0,pu);
+      target.draw(sp,states);
+    }
+  }
+
+  //bot
+  sp.setTextureRect(sf::IntRect(pu,2*pu,pu,pu));
+  sp.setPosition(0,size.y-pu);
+  while(sp.getPosition().x < size.x-2*pu){
+    sp.move(pu,0);
+    target.draw(sp, states);
+  }
+
+
+  //top left
+  sp.setTextureRect(sf::IntRect(0,0,pu,pu));
+  sp.setPosition(0,0);
+  target.draw(sp,states);
+
+  //bot left
+  sp.setTextureRect(sf::IntRect(0,2*pu,pu,pu));
+  sp.setPosition(0,size.y-pu);
+  target.draw(sp,states);
+
+  //top right
+  sp.setTextureRect(sf::IntRect(2*pu,0,pu,pu));
+  sp.setPosition(size.x-pu,0);
+  target.draw(sp,states);
+
+  //bot right
+  sp.setTextureRect(sf::IntRect(2*pu,2*pu,pu,pu));
+  sp.setPosition(size.x-pu,size.y-pu);
+  target.draw(sp,states);
+
+
+
+}
+
+
+void Platform::setSkin(sf::Sprite& splat, float platu){
+  platform_unit = platu;
+  splatform = splat;
 }
