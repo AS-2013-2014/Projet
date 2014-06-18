@@ -6,6 +6,8 @@
 #include "game/Segment.hpp"
 #include <SFML/Graphics.hpp>
 
+#include "mui/MUI.hpp"
+
 int main(int argc, char** argv)
 {
 	// instruction unique pour tout le programme
