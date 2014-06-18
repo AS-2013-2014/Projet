@@ -25,7 +25,6 @@ class Game
 	void frame(float time);
 
   MUI& getMUI() {return *mui;}
-    
 
 	int getDataVolume() { return dataVolume; };
 	void setDataVolume( int vol ) { dataVolume = vol; };
