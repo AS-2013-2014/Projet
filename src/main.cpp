@@ -60,6 +60,19 @@ int main(int argc, char** argv)
 				
 		}
 
+    MUIEvent mevt;
+    while(mui.pollEvent(mevt)){
+      switch(mevt.getType()){
+        case MUIEvent::POINT_ENTER:
+          std::cout << "enter" << std::endl;
+        break;
+
+        default:
+          std::cout << "ok" << std::endl;
+        break;
+      }
+    }
+
 		// temps écoulé depuis la dernière frame
 		float elapsed = clock.restart().asSeconds();
 
