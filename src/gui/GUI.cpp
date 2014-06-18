@@ -12,7 +12,7 @@
 /*                                                                          */
 /*                                                                          */
 /****************************************************************************/
-#include "Gui.hpp"
+#include "GUI.hpp"
 
 Gui:: Gui(sf::RenderWindow &window)
 {
