@@ -22,6 +22,8 @@ int main(int argc, char** argv)
 	Resources::loadTexture("images/fire.png");
 	Resources::loadTexture("images/aura.png");
 	Resources::loadTexture("images/platform_test.png");
+  Resources::loadFont("arial.ttf");
+
 
 	// fenêtre
 	sf::RenderWindow window(sf::VideoMode(800,600), "Test");
@@ -36,7 +38,7 @@ int main(int argc, char** argv)
   MUI mui(800,600);
   
   //init GUI
-//  GUI gui(window);
+  GUI gui(window);
 
 	// nouveau jeu
 	Game game(window, mui);
@@ -59,19 +61,6 @@ int main(int argc, char** argv)
 			}
 				
 		}
-
-    MUIEvent mevt;
-    while(mui.pollEvent(mevt)){
-      switch(mevt.getType()){
-        case MUIEvent::POINT_ENTER:
-          std::cout << "enter" << std::endl;
-        break;
-
-        default:
-          std::cout << "ok" << std::endl;
-        break;
-      }
-    }
 
 		// temps écoulé depuis la dernière frame
 		float elapsed = clock.restart().asSeconds();
