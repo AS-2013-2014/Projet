@@ -29,20 +29,17 @@ class Page
 private:
   // Attributs
 
-
 public:
   vector<RectangleButton>   mesRect = vector<RectangleButton>(6);
-  vector<CircleButton>     mesCircl = vector<CircleButton>(4);
+  vector<CircleButton>      mesCircl = vector<CircleButton>(4);
   vector<Slider>            mesSlid = vector<Slider>(1);
-  string cheminImage;
 
   // Constructeurs
   Page(){}
 
-  Page (vector<RectangleButton> widgets, string chemin)
+  Page (vector<RectangleButton> widgets)
   {
     mesRect = widgets;
-    cheminImage = chemin;
   }
 
   ~Page()
@@ -52,22 +49,6 @@ public:
         delete mesWidgets[i];  //On libère la i-ème case mémoire allouée
         mesWidgets[i] = 0;  //On met le pointeur à 0 pour éviter les soucis
     }*/
-  }
-
-  // Méthodes
-  void ajouterWidget (RectangleButton monWidget)
-  {
-    mesRect.push_back(monWidget);
-  }
-
-  void ajouterWidget (CircleButton monWidget)
-  {
-    mesCircl.push_back(monWidget);
-  }
-
-  void ajouterWidget (Slider monWidget)
-  {
-    mesSlid.push_back(monWidget);
   }
 
 };
