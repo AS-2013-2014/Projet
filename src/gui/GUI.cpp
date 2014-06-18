@@ -24,10 +24,6 @@ Gui:: Gui(sf::RenderWindow &window)
     //sf::Texture handInLMTexture;
     //if (!handInLMTexture.loadFromFile("img_menu.jpg"))
      //   cout << "Erreur texture handInLMTexture" << endl;
-    // Texture portail
-    //sf::Texture portalTexture;
-    //if (!portalTexture.loadFromFile("img_menu.jpg"))
-    //    cout << "Erreur texture portalTexture" << endl;
     // Texture fond principal
     sf::Texture mainTexture;
     if (!mainTexture.loadFromFile("img_menu.jpg"))
@@ -61,10 +57,10 @@ Gui:: Gui(sf::RenderWindow &window)
     /**               Création des pages                    **/
     /*********************************************************/
     vector<RectangleButton> mesRectZ = vector<RectangleButton>(0);
-    vector<RectangleButton> mesRectD = vector<RectangleButton>(2);
     vector<RectangleButton> mesRectT = vector<RectangleButton>(3);
     vector<RectangleButton> mesRectQ = vector<RectangleButton>(4);
     vector<RectangleButton> mesRectC = vector<RectangleButton>(5);
+    vector<RectangleButton> mesRectS = vector<RectangleButton>(6);
 
     pageSet[HANDINLM]   = Page(mesRectZ,"");
     pageSet[PORTAL]     = Page(mesRectZ,"");
@@ -115,40 +111,45 @@ Gui:: Gui(sf::RenderWindow &window)
 
 
     // menu principal
-    mesRectC[0] = RectangleButton(x, y1, 400, 80,"JOUER");
-    mesRectC[1] = RectangleButton(x, y2, 400, 80,"OPTIONS");
-    mesRectC[2] = RectangleButton(x, y3, 400, 80,"AIDE");
-    mesRectC[3] = RectangleButton(x, y4, 400, 80,"CREDITS");
-    mesRectC[4] = RectangleButton(x, y5, 400, 80,"QUITTER");
-    pageSet[HOME] = Page(mesRectC,"");
+    mesRectS[0] = RectangleButton(x, y1, 400, 80,"JOUER");
+    mesRectS[1] = RectangleButton(x, y2, 400, 80,"OPTIONS");
+    mesRectS[2] = RectangleButton(x, y3, 400, 80,"AIDE");
+    mesRectS[3] = RectangleButton(x, y4, 400, 80,"CREDITS");
+    mesRectS[4] = RectangleButton(x, y5, 400, 80,"QUITTER");
+    mesRectS[5] = RectangleButton(x+450, y5+50, 200, 80,"RETOUR");
+    pageSet[HOME] = Page(mesRectS,"");
 
     // menu jouer
-    mesRectT[0] = RectangleButton(x, y1, 400, 80,"NOUVELLE PARTIE");
-    mesRectT[1] = RectangleButton(x, y2, 400, 80,"CONTINUER");
-    mesRectT[2] = RectangleButton(x, y3, 400, 80,"MONDE");
-    pageSet[PLAY] = Page(mesRectT,"");
+    mesRectQ[0] = RectangleButton(x, y1, 400, 80,"NOUVELLE PARTIE");
+    mesRectQ[1] = RectangleButton(x, y2, 400, 80,"CONTINUER");
+    mesRectQ[2] = RectangleButton(x, y3, 400, 80,"MONDE");
+    mesRectQ[3] = RectangleButton(x+450, y5+50, 200, 80,"RETOUR");
+    pageSet[PLAY] = Page(mesRectQ,"");
 
     // menu mondes
-    mesRectQ[0] = RectangleButton(x, y1, 400, 80,"TERRE");
-    mesRectQ[1] = RectangleButton(x, y2, 400, 80,"EAU - GLACE");
-    mesRectQ[2] = RectangleButton(x, y3, 400, 80,"AIR");
-    mesRectQ[3] = RectangleButton(x, y4, 400, 80,"FEU");
-    pageSet[WORLDS] = Page(mesRectQ,"");
+    mesRectC[0] = RectangleButton(x, y1, 400, 80,"TERRE");
+    mesRectC[1] = RectangleButton(x, y2, 400, 80,"EAU - GLACE");
+    mesRectC[2] = RectangleButton(x, y3, 400, 80,"AIR");
+    mesRectC[3] = RectangleButton(x, y4, 400, 80,"FEU");
+    mesRectC[4] = RectangleButton(x+450, y5+50, 200, 80,"RETOUR");
+    pageSet[WORLDS] = Page(mesRectC,"");
 
     // menus niveaux
-    mesRectQ[0] = RectangleButton(x, y1, 400, 80,"NIVEAU 1");
-    mesRectQ[1] = RectangleButton(x, y2, 400, 80,"NIVEAU 2");
-    mesRectQ[2] = RectangleButton(x, y3, 400, 80,"NIVEAU 3");
-    mesRectQ[3] = RectangleButton(x, y4, 400, 80,"NIVEAU 4");
-    pageSet[EARTH] = Page(mesRectQ,"");
-    pageSet[WATER] = Page(mesRectQ,"");
-    pageSet[AIR] = Page(mesRectQ,"");
-    pageSet[FIRE] = Page(mesRectQ,"");
+    mesRectC[0] = RectangleButton(x, y1, 400, 80,"NIVEAU 1");
+    mesRectC[1] = RectangleButton(x, y2, 400, 80,"NIVEAU 2");
+    mesRectC[2] = RectangleButton(x, y3, 400, 80,"NIVEAU 3");
+    mesRectC[3] = RectangleButton(x, y4, 400, 80,"NIVEAU 4");
+    mesRectC[4] = RectangleButton(x+450, y5+50, 200, 80,"RETOUR");
+    pageSet[EARTH] = Page(mesRectC,"");
+    pageSet[WATER] = Page(mesRectC,"");
+    pageSet[AIR] = Page(mesRectC,"");
+    pageSet[FIRE] = Page(mesRectC,"");
 
     // menu aide
-    mesRectD[0] = RectangleButton(x, y1, 400, 80,"SAUT");
-    mesRectD[1] = RectangleButton(x, y2, 400, 80,"CREATION DE PLATEFORME");
-    pageSet[HELP] = Page(mesRectD,"");
+    mesRectT[0] = RectangleButton(x, y1, 400, 80,"SAUT");
+    mesRectT[1] = RectangleButton(x, y2, 400, 80,"CREATION DE PLATEFORME");
+    mesRectT[2] = RectangleButton(x+450, y5+50, 200, 80,"RETOUR");
+    pageSet[HELP] = Page(mesRectT,"");
 
     // page courante
     currentPage = pageSet[HOME];

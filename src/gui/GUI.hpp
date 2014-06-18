@@ -25,7 +25,7 @@ using namespace std;
 #define H_Gui
 
 /** CONVENTION PAGES **/
-enum
+enum pageCode
 {
     HANDINLM   = 0,
     PORTAL     = 1,

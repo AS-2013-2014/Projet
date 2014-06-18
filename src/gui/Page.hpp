@@ -31,9 +31,9 @@ private:
 
 
 public:
-  vector<RectangleButton>   mesRect = vector<RectangleButton>(5);
+  vector<RectangleButton>   mesRect = vector<RectangleButton>(6);
   vector<CircleButton>     mesCircl = vector<CircleButton>(4);
-  vector<Slider>            mesSlid = vector<Slider>(2);
+  vector<Slider>            mesSlid = vector<Slider>(1);
   string cheminImage;
 
   // Constructeurs
