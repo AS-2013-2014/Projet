@@ -14,3 +14,6 @@ HitBox Solid::getHitBox() const
 	return hitBox;
 }
 
+void Solid::setColor(sf::Color c){
+	color = c;
+}

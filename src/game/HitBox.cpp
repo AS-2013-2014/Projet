@@ -1,4 +1,6 @@
 #include "HitBox.hpp"
+#include <iostream>
+#include <sstream>
 
 HitBox::HitBox()
 {
@@ -26,12 +28,27 @@ std::vector<Segment> HitBox::getSegments() const
 
 void HitBox::move(sf::Vector2f d)
 {
+	coord += d;
 	for(int s = 0; s < segments.size(); s++)
 		segments[s].move(d);
 }
 
-void HitBox::draw(sf::RenderWindow &w) const
+void HitBox::draw(sf::RenderTarget &w) const
 {
 	for(int s = 0; s < segments.size(); s++)
 		segments[s].draw(w);
+}
+
+void HitBox::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	states.transform *= getTransform();
+	states.texture = NULL;
+
+	sf::RectangleShape r(sf::Vector2f(40, 40));
+
+	for (int s = 0; s < segments.size(); s++)
+		target.draw(segments[s],states);
+}
+
+sf::Vector2f HitBox::getPos() const { 
+	return coord;
 }

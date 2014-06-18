@@ -1,19 +1,3 @@
-/****************************************************************************/
-/*                       DUT INFO AS - Projet AS                            */
-/*                                                                          */
-/*                                                                          */
-/* Categorie: moteur physique                                               */
-/*                                                                          */
-/* Fonction(s): récupération et affectation du bool de double jump          */
-/*--------------------------------------------------------------------------*/
-/* Description:  joueur                                                     */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/****************************************************************************/
-
-
 #include "Player.hpp"
 #include "../Scene.hpp"
 
@@ -42,15 +26,15 @@ void Player::move(sf::Vector2f d)
     rect.move(d);
     hitBox.move(d);
     float viewOrd = (scene->getCam()).y;
-    if(coord.y < viewOrd + 150)
-            scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y < 0)?d.y:0)));
-    else if(coord.y > viewOrd+600 - 300)
+    if(coord.y < viewOrd - 150) {
+		scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y < 0)?d.y:0)));
+	}
+    else if(coord.y > viewOrd+200)
     {
-            if(viewOrd < 0)
-                    scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y > 0)?d.y:0)));
-            else{
-              scene->getCam().y = 0;
-            }
+		if(viewOrd < 300) // FIXME passer max(y) des plate-formes
+			scene->setCam(scene->getCam()+(sf::Vector2f(0, (d.y > 0)?d.y:0)));
+		else
+			scene->setCam(sf::Vector2f(scene->getCam().x, 300));
     }
 }
 
@@ -61,8 +45,11 @@ void Player::jump()
 
 void Player::move(const std::vector<Solid*>& solids)
 {
-	gapToReference = coord.x - REF_X*600 - scene->getCam().x;
-	float rad = motion_angle*PI/180;
+std::cout << "PLAYER : (" << coord.x << ", " << coord.y << ")  ";
+std::cout << "CAM : (" << scene->getCam().x << ", " << scene->getCam().y << ")  " << std::endl;
+	gapToReference = coord.x - (REF_X*800 + (scene->getCam().x-400));
+
+	float rad = motion_angle*PI_ENGINE/180;
 	float dx = 0;
 	float dy = 0;
 
@@ -71,14 +58,14 @@ void Player::move(const std::vector<Solid*>& solids)
 	{
 		if(motion_angle <= MAX_MOVE_ANGLE)
 		{
-			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/2);
-			dy = GRAVITY * timer - 4;
+			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50));
+			dy = GRAVITY * timer - 20;
+std::cout << rad << std::endl;
 		}
 		if(motion_angle <= 90)
 		{
 			if(!jumping && jumpCommand)	
 			{
-
 				if(timer > 20)
 					double_jumping = true;
 				jumping = true;
@@ -98,12 +85,12 @@ void Player::move(const std::vector<Solid*>& solids)
 	if(jumping)
 	{
 		dx = SPEED * (1-sin(rad)*std::abs(sin(rad)));
-		dy = GRAVITY * timer - 10;
-		if(dy >= -DBLE_JUMP_SENSIBILITY && dy <= DBLE_JUMP_SENSIBILITY && !double_jumping && timer >= 10)
+		dy = GRAVITY * timer - 23;
+		if(dy >= -DBLE_JUMP_SENSIBILITY && dy <= DBLE_JUMP_SENSIBILITY && !double_jumping && timer >= 1.20)
 		{
 			if(jumpCommand)
 			{
-				double_jumping = true;
+				double_jumping = true;	
 				timer = 1;
 			}
 		}
@@ -127,7 +114,6 @@ void Player::move(const std::vector<Solid*>& solids)
 
 	bool collisionDetected = false;
 
-
 	for(int cur_pos = 1; cur_pos < sub_positions.size() && !collisionDetected; cur_pos++)
 	{
 		for(int i = 0; i < solids.size() && !collisionDetected; i++)
@@ -138,17 +124,16 @@ void Player::move(const std::vector<Solid*>& solids)
 					hitBox.getSegments()[j].getP1() + sub_positions[cur_pos],
 					hitBox.getSegments()[j].getP2() + sub_positions[cur_pos]
 				);
-
-
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
-
 				{
+
+					solids[i]->setColor(sf::Color(255, 0, 0));
+
 					collisionDetected = true;
 					jumping = false;
 					double_jumping = false;
 					timer = 1;
 					move(sub_positions[cur_pos-1]);
-
 
 					int angle = -90;
 					float angle_rad;
@@ -166,7 +151,7 @@ void Player::move(const std::vector<Solid*>& solids)
 						}
 						else if(angle < MAX_MOVE_ANGLE-180)
 							break;
-						angle_rad = angle*PI/180;
+						angle_rad = angle*PI_ENGINE/180;
 						possible = true;
 
 						vect = sf::Vector2f(module*cos(angle_rad), -module*sin(angle_rad));
@@ -195,7 +180,7 @@ void Player::move(const std::vector<Solid*>& solids)
 	if(!collisionDetected)
 	{
 		move(sub_positions.back());
-		++ timer;
+		timer += clockTime;
 	}
 	collided = collisionDetected;
 	jumpCommand = false;
@@ -203,6 +188,21 @@ void Player::move(const std::vector<Solid*>& solids)
 
 void Player::move()
 {
-	// à ajouter : moteur de sélection des plate-formes à considérer
 	move(scene->getSolids());
+}
+
+void Player::frame(float time)
+{
+	clockTime = time;
+	move();
+}
+void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	states.transform *= getTransform();
+	states.texture = NULL;
+
+	sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
+	rect.setFillColor(sf::Color(0, 255, 0));
+	target.draw(rect, states);
+	states.transform.translate(-(hitBox.getPos()));
+	target.draw(hitBox, states);
 }

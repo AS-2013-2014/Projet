@@ -14,7 +14,7 @@
 /****************************************************************************/
 
 #include "Segment.hpp"
-
+#include <iostream>
 
 Segment::Segment()
 {
@@ -65,11 +65,11 @@ void Segment::move(sf::Vector2f d)
 	p2 += d;
 }
 
-void Segment::draw(sf::RenderWindow &w) const
+void Segment::draw(sf::RenderTarget &w) const
 {
 	sf::Vertex vertices[] = {
-		sf::Vertex(p1, sf::Color::Black),
-		sf::Vertex(p2, sf::Color::Black)
+		sf::Vertex(p1, sf::Color::Green),
+		sf::Vertex(p2, sf::Color::Blue)
 	};
 	w.draw(vertices, 2, sf::Lines);
 }
@@ -97,4 +97,23 @@ sf::Vector2f Segment::getP2() const
 bool Segment::isVertical() const
 {
 	return vertical;
+}
+void Segment::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	states.transform *= getTransform();
+	states.texture = NULL;
+
+	sf::Vertex vertices[] = {
+	sf::Vertex(p1, sf::Color::Black),
+	sf::Vertex(p2, sf::Color::Black)
+	};
+	target.draw(vertices, 2, sf::Lines, states);
+	//w.draw(vertices, 2, sf::Lines);
+}
+
+void Segment::draw(sf::RenderWindow& w) {
+	sf::Vertex vertices[] = {
+	sf::Vertex(p1, sf::Color::Red),
+	sf::Vertex(p2, sf::Color::Red)
+	};
+	w.draw(vertices, 2, sf::Lines);
 }

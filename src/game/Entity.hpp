@@ -1,6 +1,4 @@
-
-/****************************************************************************/
-
+﻿/****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
 /*                                                                          */
@@ -20,33 +18,30 @@
 #include <SFML/Graphics.hpp>
 
 class Entity : public sf::Drawable, public sf::Transformable{
+	protected:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	sf::Vector2f coord;
+	float z, angle;
+	sf::Vector2f size;
 
-  protected:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	public:
+	Entity(sf::Vector2f coord , float z , int length , int width, float angle);
+	Entity(int x , int y , float z , int length , int width, float angle);
 
-    sf::Vector2f coord;
-    float z, angle;
-    sf::Vector2f size;
+	// pour réordonner un vector de pointeur d'entités
+	static bool sort(Entity *lhs, Entity *rhs){
+		return lhs->getZ() > rhs->getZ();
+	}
 
-  public:
-    Entity(sf::Vector2f coord , float z , int length , int width, float angle);
-    Entity(int x , int y , float z , int length , int width, float angle);
+	virtual void frame(float time){}
 
-    //pour réordonner un vector de pointeur d'entités
-    static bool sort(Entity *lhs, Entity *rhs){
-      return lhs->getZ() > rhs->getZ();
-    }
-
-    virtual void frame(float time){}
-
-    sf::Vector2f getCoord() const;
-    int getX()const;
-    int getY()const;
-    float getZ() const;
-    int getLength() const;
-    int getWidth() const;
-    float getAngle() const;
-
+	sf::Vector2f getCoord() const;
+	int getX() const;
+	int getY() const;
+	float getZ() const;
+	int getLength() const;
+	int getWidth() const;
+	float getAngle() const;
 };
 
 #endif

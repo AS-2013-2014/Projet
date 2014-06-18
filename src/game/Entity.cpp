@@ -1,21 +1,5 @@
-/****************************************************************************/
-/*                       DUT INFO AS - Projet AS                            */
-/*                                                                          */
-/*                                                                          */
-/* Categorie: moteur physique                                               */
-/*                                                                          */
-/* Fonction(s): recupération coordonées                                     */
-/*--------------------------------------------------------------------------*/
-/* Description:  classe mère de toutes les entitées                         */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/*                                                                          */
-/****************************************************************************/
-
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
-
 
 Entity::Entity(sf::Vector2f coord, float z ,int length , int width, float angle)
 {
@@ -48,7 +32,6 @@ int Entity::getX() const
 	return coord.x;
 }
 
-
 int Entity::getY() const
 {
 	return coord.y;
@@ -75,7 +58,6 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
   states.texture = NULL;
 
   sf::RectangleShape r(sf::Vector2f(size.x, size.y));
-
   r.setFillColor(sf::Color(255, 0, 0));
 
   target.draw(r, states);

@@ -1,4 +1,4 @@
-
+﻿
 /****************************************************************************/
 /*                       DUT INFO AS - Projet AS                            */
 /*                                                                          */
@@ -17,17 +17,13 @@
 #include "LivingEntity.hpp"
 #include <SFML/Graphics.hpp>
 
-
-LivingEntity::LivingEntity(sf::Vector2f coord, int length, int width, float angle, sf::Vector2f movement, float z)
-	:Entity(coord, z, length, width, angle)
-{
+LivingEntity::LivingEntity(sf::Vector2f coord, int length, int width, float angle, sf::Vector2f movement, float z):
+	Entity(coord ,z, length, width, angle){
 	this->movement=movement;
 }
 
-LivingEntity::LivingEntity(int x, int y, int length, int width, float angle, sf::Vector2f movement, float z)
-: Entity(x, y, z, length, width, angle)
-{
-
+LivingEntity::LivingEntity(int x, int y, int length, int width, float angle, sf::Vector2f movement, float z):
+	Entity(x, y, z, length, width, angle){
 	this->movement=movement;
 }
 
