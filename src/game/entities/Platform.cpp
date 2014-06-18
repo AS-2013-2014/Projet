@@ -1,6 +1,7 @@
 
 #include "Platform.hpp"
 
+
 Platform::Platform(int x, int y, float z, int length, int width, float angle, int type, int skin)
 	:Solid(x,y,z,length,width,angle)
 {
@@ -51,31 +52,6 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   sf::Sprite sp = splatform;
   const float& pu = platform_unit;
 
-  //left
-  sp.setTextureRect(sf::IntRect(0,pu,pu,pu));
-  sp.setPosition(0,0);
-  while(sp.getPosition().y < size.y-2*pu){
-    sp.move(0,pu);
-    target.draw(sp, states);
-  }
-
-
-  //right
-  sp.setTextureRect(sf::IntRect(2*pu,pu,pu,pu));
-  sp.setPosition(size.x-pu,0);
-  while(sp.getPosition().y < size.y-2*pu){
-    sp.move(0,pu);
-    target.draw(sp, states);
-  }
-
-  //top
-  sp.setTextureRect(sf::IntRect(pu,0,pu,pu));
-  sp.setPosition(0,0);
-  while(sp.getPosition().x < size.x-2*pu){
-    sp.move(pu,0);
-    target.draw(sp, states);
-  }
-
 
   //middle
 
@@ -86,18 +62,45 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     pos.y = 0;
     sp.setPosition(pos);
 
-    sp.move(pu,0);
+    sp.move(pu+skin_margin,0);
     while(sp.getPosition().y < size.y-2*pu){
-      sp.move(0,pu);
+      sp.move(0,pu+skin_margin);
       target.draw(sp,states);
     }
   }
+
+
+  //left
+  sp.setTextureRect(sf::IntRect(0,pu,pu,pu));
+  sp.setPosition(0,0);
+  while(sp.getPosition().y < size.y-2*pu){
+    sp.move(0,pu+skin_margin);
+    target.draw(sp, states);
+  }
+
+
+  //right
+  sp.setTextureRect(sf::IntRect(2*pu,pu,pu,pu));
+  sp.setPosition(size.x-pu,0);
+  while(sp.getPosition().y < size.y-2*pu){
+    sp.move(0,pu+skin_margin);
+    target.draw(sp, states);
+  }
+
+  //top
+  sp.setTextureRect(sf::IntRect(pu,0,pu,pu));
+  sp.setPosition(0,0);
+  while(sp.getPosition().x < size.x-2*pu){
+    sp.move(pu+skin_margin,0);
+    target.draw(sp, states);
+  }
+
 
   //bot
   sp.setTextureRect(sf::IntRect(pu,2*pu,pu,pu));
   sp.setPosition(0,size.y-pu);
   while(sp.getPosition().x < size.x-2*pu){
-    sp.move(pu,0);
+    sp.move(pu+skin_margin,0);
     target.draw(sp, states);
   }
 
@@ -126,6 +129,7 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 }
 
+float Platform::skin_margin = -1;
 
 void Platform::setSkin(sf::Sprite& splat, float platu){
   platform_unit = platu;

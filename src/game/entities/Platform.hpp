@@ -26,6 +26,8 @@ class Platform: public Solid {
 	Platform(sf::Vector2f coord, float z, int lenght, int width, float angle, int type, int skin);
 
   void setSkin(sf::Sprite& splat, float platu);
+
+  static float skin_margin;
 };
 
 #endif
