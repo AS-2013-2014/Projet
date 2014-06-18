@@ -34,7 +34,7 @@ int main(int argc, char** argv)
   MUI mui(800,600);
   
   //init GUI
-  GUI gui(window);
+//  GUI gui(window);
 
 	// nouveau jeu
 	Game game(window, mui);

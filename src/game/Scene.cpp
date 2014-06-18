@@ -8,7 +8,7 @@ Scene::Scene(Game *_game): game(_game),win(false)
 {
 	this->width = 0;
 	this->nb_sections = 0;
-    game->getMUI().setMode(MUI::MODE_JUMP);
+  game->getMUI().setMode(MUI::MODE_JUMP);
 	//chargement du shader
 	sh_fade = new sf::Shader;
 	if(sf::Shader::isAvailable() && sh_fade->loadFromFile("misc/fade.frag", sf::Shader::Fragment))

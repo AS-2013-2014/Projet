@@ -52,9 +52,7 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   sf::Sprite sp = splatform;
   const float& pu = platform_unit;
 
-
   //middle
-
   sp.setTextureRect(sf::IntRect(pu,pu,pu,pu));
   sp.setPosition(0,0);
   while(sp.getPosition().x < size.x-2*pu){
@@ -87,6 +85,17 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(sp, states);
   }
 
+  
+  //bot
+  sp.setTextureRect(sf::IntRect(pu,2*pu,pu,pu));
+  sp.setPosition(0,size.y-pu);
+  while(sp.getPosition().x < size.x-2*pu){
+    sp.move(pu+skin_margin,0);
+
+    if(sp.getPosition().y >= 0)
+      target.draw(sp, states);
+  }
+
   //top
   sp.setTextureRect(sf::IntRect(pu,0,pu,pu));
   sp.setPosition(0,0);
@@ -96,13 +105,25 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   }
 
 
-  //bot
-  sp.setTextureRect(sf::IntRect(pu,2*pu,pu,pu));
+
+  //bot right
+  sp.setTextureRect(sf::IntRect(2*pu,2*pu,pu,pu));
+  sp.setPosition(size.x-pu,size.y-pu);
+  if(sp.getPosition().y >= 0)
+    target.draw(sp,states);
+
+  //bot left
+  sp.setTextureRect(sf::IntRect(0,2*pu,pu,pu));
   sp.setPosition(0,size.y-pu);
-  while(sp.getPosition().x < size.x-2*pu){
-    sp.move(pu+skin_margin,0);
-    target.draw(sp, states);
-  }
+  if(sp.getPosition().y >= 0)
+    target.draw(sp,states);
+
+
+
+  //top right
+  sp.setTextureRect(sf::IntRect(2*pu,0,pu,pu));
+  sp.setPosition(size.x-pu,0);
+  target.draw(sp,states);
 
 
   //top left
@@ -110,20 +131,8 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   sp.setPosition(0,0);
   target.draw(sp,states);
 
-  //bot left
-  sp.setTextureRect(sf::IntRect(0,2*pu,pu,pu));
-  sp.setPosition(0,size.y-pu);
-  target.draw(sp,states);
 
-  //top right
-  sp.setTextureRect(sf::IntRect(2*pu,0,pu,pu));
-  sp.setPosition(size.x-pu,0);
-  target.draw(sp,states);
-
-  //bot right
-  sp.setTextureRect(sf::IntRect(2*pu,2*pu,pu,pu));
-  sp.setPosition(size.x-pu,size.y-pu);
-  target.draw(sp,states);
+   glDisable(GL_SCISSOR_TEST);
 }
 
 float Platform::skin_margin = -1;

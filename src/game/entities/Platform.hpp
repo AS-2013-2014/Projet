@@ -6,6 +6,7 @@
 #include "../Solid.hpp"
 #include <vector>
 #include <cmath>
+#include <GL/gl.h>
 
 class Platform: public Solid {
 	private:
