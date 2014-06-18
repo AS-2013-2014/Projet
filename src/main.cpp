@@ -8,10 +8,6 @@
 
 int main(int argc, char** argv)
 {
-	Segment s1(sf::Vector2f(322,-39), sf::Vector2f(322,0));
-	Segment s2(sf::Vector2f(300,200), sf::Vector2f(340,200));
-	if(s2.intersectsWith(s1)) return 1;
-
 	// instruction unique pour tout le programme
 	// initialise le gestionnaire de ressources
 	Resources resources;
@@ -35,6 +31,8 @@ int main(int argc, char** argv)
 
 	// nouveau jeu
 	Game game(window);
+	game.load(1,1);
+	game.setPlay(true);
 
 	// boucle principale
 	while(window.isOpen())
@@ -45,6 +43,12 @@ int main(int argc, char** argv)
 		{
 			if(evt.type == sf::Event::Closed)
 				window.close();
+			else if (evt.type == sf::Event::KeyPressed) {
+				if (evt.key.code == sf::Keyboard::P) {
+					game.setPlay(!game.getPlay());
+				}
+			}
+				
 		}
 
 		// temps écoulé depuis la dernière frame

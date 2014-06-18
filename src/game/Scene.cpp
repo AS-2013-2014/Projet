@@ -45,14 +45,9 @@ void Scene::addPlayer() {
 
 Scene::~Scene()
 {
+	clear();
 
-	for(int i = entities.size()-1; i >= 0; i--)
-		delete entities[i];
-
-	for(int i = sections.size()-1; i >= 0; i--)
-		delete sections[i];
-
-	delete sh_fade;
+	delete sh_fade;	
 }
 
 void Scene::loadLevel(const std::string &file)
@@ -325,7 +320,7 @@ void Scene::loadGraphics(const std::string& file)
 void Scene::frame(float time)
 {
 
-	cam.x += time*SPEED*50;
+	cam.x += time*SPEED*20;
 
 
 	for(int i = 0; i < entities.size(); i++)
@@ -348,7 +343,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	//utilisation du shader
 	if(background.getTexture() != NULL){
-		states.shader = sh_fade;
+		//states.shader = sh_fade;
 		sh_fade->setParameter("background", *background.getTexture());
 		sh_fade->setParameter("width", game->getWindow().getSize().x);
 		sh_fade->setParameter("height", game->getWindow().getSize().y);
@@ -405,4 +400,24 @@ void Scene::setPlayer(Player* c)
 {
 	character = c;
 }
+
+
+
+void Scene::clear()
+{
+	for(int i = entities.size()-1; i >= 0; i--)
+		delete entities[i];
+
+	for(int i = sections.size()-1; i >= 0; i--)
+		delete sections[i];
+	
+	entities.clear();
+	sections.clear();
+	solids.clear();
+}
+
+
+
+
+
 
