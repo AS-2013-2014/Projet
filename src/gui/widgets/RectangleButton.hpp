@@ -1,5 +1,5 @@
-#ifndef BUTTON
-#define BUTTON
+#ifndef RECT_BUTTON
+#define RECT_BUTTON
 
 /************************************************************************/
 /*                      DUT INFO AS - PROJET AS                         */
@@ -10,7 +10,7 @@
 /* Fonction : Classe RectangleBoutton                                            */
 /* ------------------------------------------------------------         */
 /* Description :                                                        */
-/*  Cette classe permet de créer un bouton rectangulaire                */
+/*  Cette classe permet de crï¿½er un bouton rectangulaire                */
 /*  avec un texte predefini.                                            */
 /*                                                                      */
 /*                                                                      */
@@ -51,10 +51,10 @@ public :
         setPosition(sf::Vector2f(_x,_y));
         rect.setFillColor(sf::Color::Black);
     }
-// procédure qui permet de redéfinir la couleur du bouton
+// procï¿½dure qui permet de redï¿½finir la couleur du bouton
     void setColorButton(sf::Color color);
 
-// redifnition de la méthode draw afin de dessiné le bouton avec son texte respectif
+// redifnition de la mï¿½thode draw afin de dessinï¿½ le bouton avec son texte respectif
 virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
