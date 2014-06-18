@@ -96,6 +96,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 		END_PLATFORM_CREATION
 	};
 	
+	void clear();
 
 	
 };
