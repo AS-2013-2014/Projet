@@ -22,6 +22,7 @@ int main(int argc, char** argv)
 	Resources::loadTexture("images/fond.jpg");
 	Resources::loadTexture("images/fire.png");
 	Resources::loadTexture("images/aura.png");
+	Resources::loadTexture("images/platform_test.png");
 
 	// fenêtre
 	sf::RenderWindow window(sf::VideoMode(800,600), "Test");

@@ -36,7 +36,7 @@ void Game::frame(float time)
 		scene.getCam().y += time*cam_speed;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		scene.getPlayer().jump();
+		scene.getPlayer()->jump();
 
 	scene.frame(time);
 }
