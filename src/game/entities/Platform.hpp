@@ -19,7 +19,7 @@ class Platform: public Solid {
 	Segment s2;
 	Segment s3;
 	Segment s4;
-	int getType() const { return type }
+	int getType() const { return type; };
 	int skin;
 	Platform();
 	Platform(int x, int y, float z, int lenght, int width, float angle, int type, int skin);
