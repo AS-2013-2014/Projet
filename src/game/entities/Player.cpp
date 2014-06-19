@@ -23,7 +23,8 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 		double_jumping(false),
 		jumpCommand(false),
 		collided(false),
-		gapToReference(0)
+		gapToReference(0),
+		dead(false)
 {
   setEType(Entity::PLAYER);
 
@@ -86,7 +87,7 @@ void Player::move(const std::vector<Solid*>& solids)
 	{
 		if(motion_angle <= MAX_MOVE_ANGLE)
 		{
-			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/2);
+			dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/1.5);
 			dy = GRAVITY * timer - 20;
 		}
 		if(motion_angle <= 90)
@@ -111,7 +112,7 @@ void Player::move(const std::vector<Solid*>& solids)
 	// mode saut
 	if(jumping)
 	{
-		dx = SPEED * (1-sin(rad)*std::abs(sin(rad)));
+		dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/5);
 		dy = GRAVITY * timer - 23;
 		if(dy >= -DBLE_JUMP_SENSIBILITY && dy <= DBLE_JUMP_SENSIBILITY && !double_jumping && timer >= 1.20)
 		{
@@ -239,6 +240,10 @@ void Player::frame(float time)
 {
 	clockTime = time;
 	move();
+	if (dead)
+	{
+	   std::cout<<"T'ES MORT!!!"<<std::endl;
+	}
 }
 
 

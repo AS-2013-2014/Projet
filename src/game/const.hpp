@@ -18,7 +18,7 @@
 #define SECTION_WIDTH 300
 
 #define REF_X 0.25
-#define SPEED 5
+#define SPEED 10
 #define GRAVITY 15
 #define MAX_MOVE_ANGLE 55
 #define DBLE_JUMP_SENSIBILITY 3

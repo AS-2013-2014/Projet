@@ -15,15 +15,12 @@ Scene::Scene(Game *_game): game(_game),win(false)
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 
   setPlatformSkin("images/platform_test.png");
-<<<<<<< HEAD
-  
+    
   drawPlatform = false;
-=======
 
   preview_plat = NULL;
   preview_a1 = NULL;
   preview_a2 = NULL;
->>>>>>> 11502caa11ab5ff182fb4574fe48bd857034e12b
 }
 
 void Scene::addPlayer() {
