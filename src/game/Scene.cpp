@@ -81,7 +81,8 @@ void Scene::loadLevel(const std::string &file)
 		{				
         if(line.size() > 0){
           p = readPlatform(line);
-          addPlatform(p);
+          if(p != NULL)
+            addPlatform(p);
         }
 
 				getline(lvl_file,line);
@@ -131,7 +132,7 @@ void Scene::addPlatform(Platform* p)
     }
 }
 
-Platform* readPlatform(std::string line)
+Platform* Scene::readPlatform(std::string line)
 {
 	int i = 0;
 
@@ -193,8 +194,7 @@ Platform* readPlatform(std::string line)
 
 	int skin = 0;
 
-	return new Platform(x,y,z,length,width,angle,type,skin);
-
+  return new Platform(x,y,z,length,width,angle,type,skin);
 }
 
 void Scene::readLvl(std::string line)
@@ -432,7 +432,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	//utilisation du shader
 	if(background.getTexture() != NULL){
-		//states.shader = sh_fade;
+		states.shader = sh_fade;
 		sh_fade->setParameter("background", *background.getTexture());
 		sh_fade->setParameter("width", game->getWindow().getSize().x);
 		sh_fade->setParameter("height", game->getWindow().getSize().y);

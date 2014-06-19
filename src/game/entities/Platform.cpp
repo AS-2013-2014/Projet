@@ -52,6 +52,9 @@ void Platform::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   states.transform *= getTransform();
   states.texture = NULL;
 
+  if(type == 3 || type == 2)
+    return;
+
   //rendu des plateformes
   sf::Sprite sp = splatform;
   const float& pu = platform_unit;

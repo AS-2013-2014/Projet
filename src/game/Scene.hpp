@@ -82,6 +82,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	void loadLevel(const std::string &file); // charge le fichier txt du level
 	void addPlatform(Platform* p);
     void readLvl(std::string line);
+  Platform* readPlatform(std::string line);
 	void addPlayer();
         Player* getPlayer(){ return character; }
 
@@ -109,7 +110,6 @@ class Scene : public sf::Drawable, public sf::Transformable
 	
 };
 
-Platform* readPlatform(std::string line);
 
 
 #endif

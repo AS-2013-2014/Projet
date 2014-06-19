@@ -87,6 +87,8 @@ void Game::load(int world, int level)
 	scene.loadLevel("levels/level_" + w + "_" + l + ".txt");
 	scene.addPlayer();
 	scene.loadGraphics("levels/level_" + w + "_" + l + ".graph");
+
+  play = true;
 }
 
 void Game::setPlay(bool playing)
