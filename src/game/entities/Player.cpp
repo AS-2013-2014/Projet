@@ -53,7 +53,7 @@ void Player::jump()
 	jumpCommand = true;
 }
 
-void Player::move(const std::vector<Solid*>& solids)
+void Player::move(const std::vector<Platform*>& solids)
 {
 
 	gapToReference = coord.x - (REF_X*800 + (scene->getCam().x-400));
@@ -134,10 +134,10 @@ void Player::move(const std::vector<Solid*>& solids)
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
-          /* TODO: problème de cast 
+         
                     			if(solids[i]->getType()==Platform::DEADLY)
                 				dead=true;
-                      */
+
 
 		                    	collisionDetected = true;
 					jumping = false;
