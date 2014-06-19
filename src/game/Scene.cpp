@@ -355,6 +355,10 @@ void Scene::frame(float time)
 	
 	updateMode();
 	
+	if (win)
+	   {
+	     // exit (777);
+	   }
 	
       Platform* pl;
 	
@@ -499,6 +503,7 @@ void Scene::updateMode()
             if(flagsType[i]==Platform::END_FLAG)
             {
                 win=true;
+                std::cout<<"You just won !"<<std::endl;
             }
             else if(flagsType[i]==Platform::CREATION_FLAG)
             {

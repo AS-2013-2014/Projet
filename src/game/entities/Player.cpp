@@ -9,9 +9,15 @@ void Player::isDead()
 {
     float viewAbs = (scene->getCam()).x; 
     if (coord.x<viewAbs-400-DEAD_MARGIN_X)
-        dead=true;
+        {
+            dead=true;
+            std::cout<<"You just died!"<<std::endl;
+        }
     else if(coord.y>DEAD_MARGIN_Y+scene->getHeight())
-        dead=true;
+        {
+            dead=true;
+            std::cout<<"You just died!"<<std::endl;
+        }
 }
 
 Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox hb)
@@ -242,7 +248,7 @@ void Player::frame(float time)
 	move();
 	if (dead)
 	{
-	  // std::cout<<"T'ES MORT!!!"<<std::endl;
+	 // exit (666);
 	}
 }
 
