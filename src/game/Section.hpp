@@ -21,7 +21,7 @@
 
 class Section {
 	public:
-	std::vector<Solid*> platforms;
+	std::vector<Platform*> platforms;
 	Section();
 	~Section();
 };
