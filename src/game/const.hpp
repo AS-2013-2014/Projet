@@ -16,11 +16,7 @@
 
 #define SECTION_WIDTH 300
 
-#define CHARACTER_WIDTH 100
-#define CHARACTER_HEIGHT 50
-#define START_ABSC 0.50
 #define REF_X 0.25
-
 #define SPEED 5
 #define GRAVITY 15
 #define MAX_MOVE_ANGLE 55
