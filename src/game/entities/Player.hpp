@@ -12,6 +12,7 @@ class Scene;
 #include "../Segment.hpp"
 #include "../HitBox.hpp"
 #include "../Solid.hpp"
+#include "Platform.hpp"
 
 class Player : public Solid
 {
@@ -36,7 +37,7 @@ class Player : public Solid
 	Player(Scene*, sf::Vector2f, sf::Vector2f, float, int, HitBox);
 	void move(sf::Vector2f);
 	void jump();
-	void move(const std::vector<Solid*>&);
+	void move(const std::vector<Platform*>&);
 	void move();
 	void frame(float);
 	enum Action
