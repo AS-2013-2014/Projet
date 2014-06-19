@@ -22,6 +22,7 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::Vector2f coord;
 	float z, angle;
+  int type;
 	sf::Vector2f size;
 
 	public:
@@ -42,6 +43,15 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	int getLength() const;
 	int getWidth() const;
 	float getAngle() const;
+  int getType(){ return type; }
+  void setType(int t){ type = t; }
+
+  enum{
+    NONE=1,
+    SOLID=2,
+    PLATFORM=3,
+    PLAYER=4
+  };
 };
 
 #endif

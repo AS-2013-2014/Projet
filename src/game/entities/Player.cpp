@@ -25,9 +25,12 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 		collided(false),
 		gapToReference(0)
 {
+  setType(Entity::PLAYER);
+
 	hitBox = hb;
 	hitBox.move(p);
 
+  //init graphiques
   sf::Texture* tex = Resources::getTexture("images/player.png");
   if(tex != NULL){
     anim_size.x = tex->getSize().x/4.0;
