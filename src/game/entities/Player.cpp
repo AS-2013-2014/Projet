@@ -113,7 +113,7 @@ void Player::move(const std::vector<Solid*>& solids)
 	if(jumping)
 	{
 		dx = SPEED * (1-sin(rad)*std::abs(sin(rad))) * (1-tanh(gapToReference/50)/5);
-		dy = GRAVITY * timer - 23;
+		dy = GRAVITY * timer - 26;
 		if(dy >= -DBLE_JUMP_SENSIBILITY && dy <= DBLE_JUMP_SENSIBILITY && !double_jumping && timer >= 1.20)
 		{
 			if(jumpCommand)
@@ -242,7 +242,7 @@ void Player::frame(float time)
 	move();
 	if (dead)
 	{
-	   std::cout<<"T'ES MORT!!!"<<std::endl;
+	  // std::cout<<"T'ES MORT!!!"<<std::endl;
 	}
 }
 
