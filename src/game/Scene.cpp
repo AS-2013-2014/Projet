@@ -15,12 +15,8 @@ Scene::Scene(Game *_game): game(_game),win(false)
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 
   setPlatformSkin("images/platform_test.png");
-    
+  
   drawPlatform = false;
-
-  preview_plat = NULL;
-  preview_a1 = NULL;
-  preview_a2 = NULL;
 }
 
 void Scene::addPlayer() {
@@ -339,14 +335,6 @@ void Scene::loadGraphics(const std::string& file)
 
 	}
 
-  preview_plat = new Platform(0,0,0,0,0,0,0,0);
-  preview_plat->setSkin(splatform, platform_unit);
-  preview_a1 = new WAnimation(0,0,0,0,0,0,"",0,0,0);
-  preview_a2 = new WAnimation(0,0,0,0,0,0,"",0,0,0);
-
-  entities.push_back(preview_plat);
-  entities.push_back(preview_a1);
-  entities.push_back(preview_a2);
 }
 
 

@@ -40,14 +40,10 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
   //if (!handInLMTexture.loadFromFile("img_menu.jpg"))
   // cout << "Erreur texture handInLMTexture" << endl;
   // Texture fond principal
-  sf::Texture mainTexture;
-  if (!mainTexture.loadFromFile("resources/img_menu.jpg"))
-    cout << "Erreur texture mainTexture" << endl;
+  sf::Texture* mainTexture;
 
-  // Texture fond terre
-  sf::Texture earthTexture;
-  if (!earthTexture.loadFromFile("resources/img_jouer.jpg"))
-    cout << "Erreur texture earthTexture" << endl;
+  mainTexture = Resources::getTexture("images/fond.jpg");
+
   // Texture fond eau
   /*sf::Texture waterTexture;
   if (!waterTexture.loadFromFile("img_jouer.jpg"))
@@ -63,7 +59,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
   */
   // Sprite fond
   sf::Sprite spriteBackground;
-  spriteBackground.setTexture(mainTexture);
+  spriteBackground.setTexture(*mainTexture);
 
   // Déclaration des couleurs
   // sf::Color color = sf::Color(190,190,190,255);
@@ -231,7 +227,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                   break;
                 case WORLDS:
                   currentPage = pageSet[PLAY];
-                  spriteBackground.setTexture(mainTexture);
+                  spriteBackground.setTexture(*mainTexture);
                   currentCode=PLAY;
                   break;
                 case EARTH:
@@ -304,7 +300,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             case WORLDS:
                               currentPage = pageSet[EARTH];
                               currentCode=EARTH;
-                              spriteBackground.setTexture(earthTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               world=1;
                               break;
                             case HELP:
@@ -356,7 +352,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               break;
                             case WORLDS:
                               currentPage = pageSet[WATER];
-                              spriteBackground.setTexture(earthTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               currentCode=WATER;
                               world=2;
                               break;
@@ -385,7 +381,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             case PLAY:
                               currentPage = pageSet[WORLDS];
                               currentCode=WORLDS;
-                              spriteBackground.setTexture(earthTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               break;
                             case  HELP://Bouton  Retour
                               currentPage=pageSet[HOME];
@@ -394,7 +390,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             case WORLDS:
                               currentPage = pageSet[AIR];
                               currentCode=AIR;
-                              spriteBackground.setTexture(earthTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               world=3;
                               break;
                               default:
@@ -422,7 +418,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             case WORLDS:
                               currentPage = pageSet[FIRE];
                               currentCode=FIRE;
-                              spriteBackground.setTexture(earthTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               world=4;
                               break;
 
@@ -444,7 +440,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               window.close();
                               break;
                             case  WORLDS://Bouton  Retour
-                              spriteBackground.setTexture(mainTexture);
+                              spriteBackground.setTexture(*mainTexture);
                               currentPage=pageSet[PLAY];
                               currentCode=PLAY;
                               break;
