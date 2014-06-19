@@ -43,8 +43,8 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	int getLength() const;
 	int getWidth() const;
 	float getAngle() const;
-  int getType(){ return type; }
-  void setType(int t){ type = t; }
+  int getEType(){ return type; }
+  void setEType(int t){ type = t; }
 
   enum{
     NONE=1,

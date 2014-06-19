@@ -19,7 +19,7 @@ Platform::Platform(int x, int y, float z, int length, int width, float angle, in
 	this->type=type;
 	this->skin=skin;
 
-  setType(Entity::PLATFORM);
+  setEType(Entity::PLATFORM);
 }
 
 Platform::Platform(sf::Vector2f coord, float z, int length, int width, float angle, int type, int skin)
@@ -41,7 +41,7 @@ Platform::Platform(sf::Vector2f coord, float z, int length, int width, float ang
 	this->type=type;
 	this->skin=skin;
 
-  setType(Entity::PLATFORM);
+  setEType(Entity::PLATFORM);
 }
 
 Platform::Platform():Solid(0,0,0,0,0,0)

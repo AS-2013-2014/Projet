@@ -25,7 +25,7 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 		collided(false),
 		gapToReference(0)
 {
-  setType(Entity::PLAYER);
+  setEType(Entity::PLAYER);
 
 	hitBox = hb;
 	hitBox.move(p);
@@ -70,7 +70,7 @@ void Player::jump()
 	jumpCommand = true;
 }
 
-void Player::move(const std::vector<Platform*>& solids)
+void Player::move(const std::vector<Solid*>& solids)
 {
 
 	gapToReference = coord.x - (REF_X*800 + (scene->getCam().x-400));
@@ -151,9 +151,12 @@ void Player::move(const std::vector<Platform*>& solids)
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
-         
-                    			if(solids[i]->getType()==Platform::DEADLY)
-                				dead=true;
+
+          if(solids[i]->getEType() == Entity::PLATFORM){
+              Platform* plat = (Platform*)(solids[i]);
+                if(plat->getType()==Platform::DEADLY)
+              dead=true;
+          }
 
 
 		                    	collisionDetected = true;
@@ -218,16 +221,16 @@ void Player::move()
 	int section1 = (hitBox.getSegments()[0]).getP1().x/SECTION_WIDTH;
 	int section2 = (hitBox.getSegments()[2]).getP1().x/SECTION_WIDTH;
 	
-	std::vector<Solid*> platforms = std::vector<Solid*>();
+	std::vector<Solid*> solids = std::vector<Solid*>();
 
 	if(section1 != section2) {
-		platforms.reserve((scene->getSections())[section1]->platforms.size() +  (scene->getSections())[section2]->platforms.size());
-		platforms.insert(platforms.end(), (scene->getSections())[section1]->platforms.begin(), (scene->getSections())[section1]->platforms.end());
-		platforms.insert(platforms.end(), (scene->getSections())[section2]->platforms.begin(), (scene->getSections())[section2]->platforms.end());
-		move(platforms);
+		solids.reserve((scene->getSections())[section1]->solids.size() +  (scene->getSections())[section2]->solids.size());
+		solids.insert(solids.end(), (scene->getSections())[section1]->solids.begin(), (scene->getSections())[section1]->solids.end());
+		solids.insert(solids.end(), (scene->getSections())[section2]->solids.begin(), (scene->getSections())[section2]->solids.end());
+		move(solids);
 	}
 	else
-		move((scene->getSections())[section1]->platforms);
+		move((scene->getSections())[section1]->solids);
 }
 
 void Player::frame(float time)

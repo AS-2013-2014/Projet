@@ -124,7 +124,7 @@ void Scene::addPlatform(Platform* p)
         for (int i=section_min/SECTION_WIDTH; i<=section_max/SECTION_WIDTH; i++)
         {
             if(i >= 0 && i < sections.size())
-                sections[i]->platforms.push_back(p);
+                sections[i]->solids.push_back(p);
         }
     }
 }

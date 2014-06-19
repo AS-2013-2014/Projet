@@ -7,7 +7,7 @@ Entity::Entity(sf::Vector2f coord, float z ,int length , int width, float angle)
 	this->z = z;
 	this->size = sf::Vector2f(length, width);
 	this->angle = angle;
-  setType(NONE);
+  setEType(NONE);
 }
 
 Entity::Entity(int x, int y, float z, int length, int width, float angle)
@@ -16,7 +16,7 @@ Entity::Entity(int x, int y, float z, int length, int width, float angle)
 	this->z = z;
 	this->size = sf::Vector2f(length, width);
 	this->angle = angle;
-  setType(NONE);
+  setEType(NONE);
 }
 
 sf::Vector2f Entity::getCoord() const
