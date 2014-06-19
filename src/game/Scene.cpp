@@ -77,8 +77,10 @@ void Scene::loadLevel(const std::string &file)
 		while(line.find("END") == std::string::npos)
 
 		{				
-				p = readPlatform(line);
-				addPlatform(p);
+        if(line.size() > 0){
+          p = readPlatform(line);
+          addPlatform(p);
+        }
 
 				getline(lvl_file,line);
 		}

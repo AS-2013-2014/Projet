@@ -28,7 +28,7 @@ void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
 
-GUI::GUI(sf::RenderWindow &window)
+GUI::GUI(sf::RenderWindow &window, Game* game)
 {
   pageSet= vector<Page>(15);
   /*********************************************************/

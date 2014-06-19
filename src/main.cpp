@@ -36,14 +36,15 @@ int main(int argc, char** argv)
 
   //init MUI
   MUI mui(800,600);
-  
-  //init GUI
-  GUI gui(window);
 
 	// nouveau jeu
 	Game game(window, mui);
 	game.load(1,1);
 	game.setPlay(true);
+
+ 
+  //init GUI
+  GUI gui(window, &game);
 
 	// boucle principale
 	while(window.isOpen())

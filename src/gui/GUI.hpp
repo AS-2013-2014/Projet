@@ -20,6 +20,7 @@ using namespace std;
 #include <SFML/Graphics.hpp>
 #include "Page.hpp"
 #include "Slider.hpp"
+#include "../game/Game.hpp"
 
 #ifndef H_Gui
 #define H_Gui
@@ -50,7 +51,7 @@ class GUI : public sf::Drawable, public sf::Transformable
 
 public:
   //Constructeur qui fait tout
-  GUI(sf::RenderWindow &window);
+  GUI(sf::RenderWindow &window, Game* game);
  // redifnition de la méthode draw afin de dessiné le bouton avec son texte respectif
 virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
