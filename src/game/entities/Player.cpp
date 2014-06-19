@@ -31,16 +31,18 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 	hitBox.move(p);
 
   //init graphiques
-  sf::Texture* tex = Resources::getTexture("images/player.png");
+  sf::Texture* tex = Resources::getTexture("images/anim-player.png");
   if(tex != NULL){
     anim_size.x = tex->getSize().x/4.0;
     anim_size.y = tex->getSize().y;
     anim.setTexture(*tex);
-    anim.setOrigin(anim_size.x/2, anim_size.y/2);
-    anim.setPosition(size.x/2, size.y/2);
+    anim.setScale(0.5,0.5);
+    anim.setOrigin(anim_size.x/2, anim_size.y);
+    anim.setPosition(size.x/4, size.y);
   }
 
   cur_frame = 0;
+  dist_reached = 0;
 }
 
 void Player::move(sf::Vector2f d)
@@ -241,10 +243,14 @@ void Player::frame(float time)
 
 
 void Player::updateAnim(sf::Vector2f d){
-  float dist = sqrt(d.x*d.x+d.y*d.y);
-  int nf = dist/10;
-  cur_frame += nf;
-  cur_frame %= 4;
+  dist_reached += d.x;
+
+  int nf = dist_reached/PLAYER_FRAME_PIXELS;
+  if(nf > 0){
+    cur_frame += nf;
+    cur_frame %= 4;
+    dist_reached -= PLAYER_FRAME_PIXELS*nf;
+  }
 
   //changement d'image
   anim.setTextureRect(sf::IntRect(cur_frame*anim_size.x,0, anim_size.x, anim_size.y));

@@ -8,6 +8,7 @@
 // graphic engine
 
 #define SBUFF 256
+#define PLAYER_FRAME_PIXELS 46
 
 // physic engine
 

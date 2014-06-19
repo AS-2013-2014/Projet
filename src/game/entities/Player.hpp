@@ -25,6 +25,7 @@ class Player : public Solid
   sf::Sprite anim;
   sf::Vector2f anim_size;
   int cur_frame;
+  float dist_reached;
   void updateAnim(sf::Vector2f d);
   //fin graphiques
     
