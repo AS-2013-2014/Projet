@@ -15,6 +15,8 @@ Scene::Scene(Game *_game): game(_game),win(false)
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 
   setPlatformSkin("images/platform_test.png");
+  
+  drawPlatform = false;
 }
 
 void Scene::addPlayer() {
@@ -334,6 +336,8 @@ void Scene::loadGraphics(const std::string& file)
 	}
 }
 
+
+
 void Scene::frame(float time)
 {
 
@@ -345,8 +349,69 @@ void Scene::frame(float time)
 
 
 	//character->move();
+	
+	updateMode();
+	
+	
+      Platform* pl;
+	
+	while( game->getMUI().pollEvent(MuiEvt) ){
+	   std::cout << "ok" << std::endl;
+      switch (MuiEvt.getType()){
+         case MUIEvent::JUMP:
+            std::cout<<"JUMP detected"<<std::endl;
+				getPlayer()->jump();
+            break;
+            
+         case MUIEvent::PLATFORM_ENTER:
+            drawPlatform = true;
+            std::cout<<"PLATFORM_ENTER"<<std::endl;
+            break;
+            
+         case MUIEvent::PLATFORM_EXIT:
+            drawPlatform = false;
+            std::cout<<"PLATFORM_EXIT"<<std::endl;
+            break;
+            
+         case MUIEvent::PLATFORM_CREATE:
+         
+            drawPlatform = true;
+            std::cout<<"PLATFORM_CREATE"<<std::endl;
+				pl->setColor(sf::Color(0,255,0));
+            //entities.push_back(pl);
+            break;
+      }
+   }
+   
+      //std::cout << "draw" << std::endl;
+   /*
+   if (drawPlatform) {
+	   
+   	pl = new Platform (game->getMUI().getPlatform().getPositionP1().x+getCam().x, 
+   	               game->getMUI().getPlatform().getPositionP1().y+getCam().y,  
+   	               game->getMUI().getPlatform().getZ(),
+   	               game->getMUI().getPlatform().getLength(),
+   	               25,
+   	               game->getMUI().getPlatform().getRotation(),
+   	               2,
+   	               0
+   	              );
+   	
+   	*pl = Platform (300.0, 300.0, 0.5, 200.0, 25, 220, 2, 0);             
+      
+   	if (game->getMUI().getPlatform().getZ() <= 0)
+   		pl->setColor(sf::Color((-1)*game->getMUI().getPlatform().getZ()*255,0,0));
+   	else
+   		pl->setColor(sf::Color(0, 0, game->getMUI().getPlatform().getZ()*255));
+   	   
+   	entities.pop_back();
+      entities.push_back(pl);
+   }
+   */
+
 
 }
+
 
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

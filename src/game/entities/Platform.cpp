@@ -1,7 +1,7 @@
 
 #include "Platform.hpp"
 
-Platform::Platform(int x, int y, float z, int length, int width, float angle, int type, int skin)
+Platform::Platform(float x, float y, float z, float length, int width, float angle, int type, int skin)
 	:Solid(x,y,z,length,width,angle)
 {
 	//les operations de transformations sont effectuées par la scène

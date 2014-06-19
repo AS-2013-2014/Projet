@@ -6,6 +6,7 @@ Game::Game(sf::RenderWindow& _window, MUI& _mui)
 {
 	window = &_window;
 	loadData();
+	
   mui->setMode(MUI::MODE_JUMP);
 }
 

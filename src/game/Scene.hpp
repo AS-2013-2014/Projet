@@ -18,6 +18,7 @@
 #define SCENE
 
 #include "../mui/MUI.hpp"
+#include "../mui/MUIEvent.hpp"
 #include "Section.hpp"
 #include "entities/Platform.hpp"
 #include "Entity.hpp"
@@ -62,6 +63,11 @@ class Scene : public sf::Drawable, public sf::Transformable
 	sf::Shader* sh_fade;
     sf::Sprite splatform;
     float platform_unit;
+    
+    MUIEvent MuiEvt;
+    bool drawPlatform;
+    
+    
     
 	public:
 

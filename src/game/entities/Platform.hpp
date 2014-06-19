@@ -22,7 +22,7 @@ class Platform: public Solid {
 	int getType() const { return type; }
 	int skin;
 	Platform();
-	Platform(int x, int y, float z, int lenght, int width, float angle, int type, int skin);
+	Platform(float x, float y, float z, float lenght, int width, float angle, int type, int skin);
 	Platform(sf::Vector2f coord, float z, int lenght, int width, float angle, int type, int skin);
     void setSkin(sf::Sprite& splat, float platu);
     static float skin_margin;

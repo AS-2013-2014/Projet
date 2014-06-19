@@ -36,7 +36,6 @@ int main(int argc, char** argv)
 
   //init MUI
   MUI mui(800,600);
-
 	// nouveau jeu
 	Game game(window, mui);
 	game.load(1,1);
