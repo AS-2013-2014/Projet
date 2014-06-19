@@ -334,6 +334,8 @@ void Scene::loadGraphics(const std::string& file)
 		std::sort(entities.begin(), entities.end(), Entity::sort);
 
 	}
+  else //fond par defaut
+    setBackground("images/terre-bg.jpg");
 
 }
 

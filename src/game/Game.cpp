@@ -70,6 +70,9 @@ void Game::saveData()
 
 void Game::load(int world, int level)
 {
+  //mise a jour des skin de scene
+  scene.setPlatformSkin((world == 1 ? "images/terre-plat.png" : "images/eau-plat.png"));
+
 	std::stringstream ss;
 	ss << world;
 	std::string w = ss.str();
@@ -84,7 +87,6 @@ void Game::load(int world, int level)
 	scene.loadLevel("levels/level_" + w + "_" + l + ".txt");
 	scene.addPlayer();
 	scene.loadGraphics("levels/level_" + w + "_" + l + ".graph");
-	
 }
 
 void Game::setPlay(bool playing)

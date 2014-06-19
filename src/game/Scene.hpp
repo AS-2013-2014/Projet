@@ -58,7 +58,6 @@ class Scene : public sf::Drawable, public sf::Transformable
 	sf::Vector2f cam;
 
     //graphique
-    void setPlatformSkin(const std::string& src);
 	sf::Sprite background;
 	sf::Shader* sh_fade;
     sf::Sprite splatform;
@@ -85,6 +84,8 @@ class Scene : public sf::Drawable, public sf::Transformable
     void readLvl(std::string line);
 	void addPlayer();
         Player* getPlayer(){ return character; }
+
+    void setPlatformSkin(const std::string& src);
 
 	//accesseurs
 	sf::Vector2f& getCam(){ return cam; }
