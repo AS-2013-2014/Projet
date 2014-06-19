@@ -27,6 +27,17 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 {
 	hitBox = hb;
 	hitBox.move(p);
+
+  sf::Texture* tex = Resources::getTexture("images/player.png");
+  if(tex != NULL){
+    anim_size.x = tex->getSize().x/4.0;
+    anim_size.y = tex->getSize().y;
+    anim.setTexture(*tex);
+    anim.setOrigin(anim_size.x/2, anim_size.y/2);
+    anim.setPosition(size.x/2, size.y/2);
+  }
+
+  cur_frame = 0;
 }
 
 void Player::move(sf::Vector2f d)
@@ -46,6 +57,9 @@ void Player::move(sf::Vector2f d)
 			scene->setCam(sf::Vector2f(scene->getCam().x, 300));
     }
     isDead();
+
+    //graphiques
+    updateAnim(d);
 }
 
 void Player::jump()
@@ -218,13 +232,25 @@ void Player::frame(float time)
 	clockTime = time;
 	move();
 }
+
+
+void Player::updateAnim(sf::Vector2f d){
+  float dist = sqrt(d.x*d.x+d.y*d.y);
+  int nf = dist/10;
+  cur_frame += nf;
+  cur_frame %= 4;
+
+  //changement d'image
+  anim.setTextureRect(sf::IntRect(cur_frame*anim_size.x,0, anim_size.x, anim_size.y));
+}
+
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = NULL;
 
 	sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
 	rect.setFillColor(sf::Color(0, 255, 0));
-	target.draw(rect, states);
+	target.draw(anim, states);
 	states.transform.translate(-(hitBox.getPos()));
 	target.draw(hitBox, states);
 }

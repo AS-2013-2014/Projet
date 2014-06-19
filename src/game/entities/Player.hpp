@@ -18,7 +18,16 @@ class Player : public Solid
 {
 	private:
     bool dead;
+
+
+  //graphiques
 	sf::RectangleShape rect;
+  sf::Sprite anim;
+  sf::Vector2f anim_size;
+  int cur_frame;
+  void updateAnim(sf::Vector2f d);
+  //fin graphiques
+    
 	Scene* scene;
 	float timer;
 	int motion_angle;
@@ -29,7 +38,7 @@ class Player : public Solid
 	float gapToReference;
 	float clockTime;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void isDead();
+  void isDead();
 
 	public:
     bool getDead() const { return dead; } 
