@@ -47,7 +47,7 @@ class Scene : public sf::Drawable, public sf::Transformable
     std::vector<Entity*> entities;
 	std::vector<Section*> sections;
 	std::vector<Graphic*> graphics;
-	std::vector<Solid*> solids;
+	std::vector<Platform*> solids;
     std::vector<int> flagsType;
     std::vector<int> flagsX;
 	int width;
@@ -83,7 +83,7 @@ class Scene : public sf::Drawable, public sf::Transformable
 	sf::Vector2f& getCam(){ return cam; }
 	void setCam(const sf::Vector2f& v){ cam = v; }
     std::vector<Section*>& getSections() { return sections; }
-	std::vector<Solid*>& getSolids(){ return solids; }
+	std::vector<Platform*>& getSolids(){ return solids; }
 	void setPlayerAction(Player::Action);
 	void setPlayer(Player*);
     int getHeight() const{ return height; }
