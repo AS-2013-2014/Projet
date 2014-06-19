@@ -110,6 +110,7 @@ public:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void setCursorPosition (int val);
     int getCursorPosition ();
+    int getWidth(){ return _width; }
     void moveCursor (int x, int y);
     bool estDansSlide (int xSouris, int ySouris);
     int ouDansSlide (int xSouris, int ySouris);

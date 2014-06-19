@@ -312,8 +312,13 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               currentCode=JUMP;
                               break;
                             case  OPTION:
+                            {
+                              int percent = currentPage.mesSlide[0].getCursorPosition()*100/currentPage.mesSlide[0].getWidth();
+                              game->setDataVolume(percent);
+                              std::cout << percent << std::endl;
                               currentPage=pageSet[HOME];
                               currentCode=HOME;
+                            }
                               break;
                             case  CREDIT:
                               currentPage=pageSet[HOME];
