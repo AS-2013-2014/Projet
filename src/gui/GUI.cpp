@@ -192,9 +192,14 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
   // variable pour les boucles for
   unsigned int i;
 
+  //monde selectionné
+  int world = 1;
+
+  bool running = true;
+
   cout << "creation des pages et des boutons reussie" << endl << "boucle de jeu" << endl;
   //Game Loop
-  while(window.isOpen())
+  while(window.isOpen() && running)
     {
       /**** Cycle de la fenêtre : Clear - Draw - Display ****/
       window.clear(sf::Color::Black);
@@ -292,11 +297,15 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             case PLAY:
                               /// NOUVELLE PARTIE
                               //currentPage = pageSet[HOME];
+                              //lance une partie au dernier niveau débloqué
+                              running = false;
+                              game->load(game->getDataUnlockedWorld(), game->getDataUnlockedLevel());
                               break;
                             case WORLDS:
                               currentPage = pageSet[EARTH];
                               currentCode=EARTH;
                               spriteBackground.setTexture(earthTexture);
+                              world=1;
                               break;
                             case HELP:
                               currentPage = pageSet[JUMP];
@@ -321,6 +330,8 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             default:
                               currentPage = pageSet[HOME];
                               currentCode=HOME;
+                              game->load(world, 1);
+                              running = false;
                               break;
                             }
                         }
@@ -342,6 +353,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               currentPage = pageSet[WATER];
                               spriteBackground.setTexture(earthTexture);
                               currentCode=WATER;
+                              world=2;
                               break;
                             case HELP:
                               currentPage = pageSet[CREATEDECK];
@@ -350,6 +362,8 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             default:
                               currentPage = pageSet[HOME];
                               currentCode=HOME;
+                             game->load(world, 2);
+                              running = false;
                               break;
                             }
                         }
@@ -376,10 +390,13 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               currentPage = pageSet[AIR];
                               currentCode=AIR;
                               spriteBackground.setTexture(earthTexture);
+                              world=3;
                               break;
                               default:
                                 currentPage = pageSet[HOME];
                                 currentCode=HOME;
+                              game->load(world, 3);
+                              running = false;
                                 break;
                             }
                         }
@@ -401,10 +418,14 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                               currentPage = pageSet[FIRE];
                               currentCode=FIRE;
                               spriteBackground.setTexture(earthTexture);
+                              world=4;
                               break;
+
                             default:
                               currentPage = pageSet[HOME];
                               currentCode=HOME;
+                              game->load(world, 4);
+                              running = false;
                               break;
                             }
                         }
@@ -441,6 +462,7 @@ GUI::GUI(sf::RenderWindow &window, Game* game)
                             default:
                               currentPage = pageSet[HOME];
                               currentCode=HOME;
+                              running = false;
                               break;
                             }
                         }
