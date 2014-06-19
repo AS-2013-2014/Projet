@@ -15,8 +15,15 @@ Scene::Scene(Game *_game): game(_game),win(false)
 		sh_fade->setParameter("texture", sf::Shader::CurrentTexture);
 
   setPlatformSkin("images/platform_test.png");
+<<<<<<< HEAD
   
   drawPlatform = false;
+=======
+
+  preview_plat = NULL;
+  preview_a1 = NULL;
+  preview_a2 = NULL;
+>>>>>>> 11502caa11ab5ff182fb4574fe48bd857034e12b
 }
 
 void Scene::addPlayer() {
@@ -126,7 +133,7 @@ void Scene::addPlatform(Platform* p)
         for (int i=section_min/SECTION_WIDTH; i<=section_max/SECTION_WIDTH; i++)
         {
             if(i >= 0 && i < sections.size())
-                sections[i]->platforms.push_back(p);
+                sections[i]->solids.push_back(p);
         }
     }
 }
@@ -334,6 +341,15 @@ void Scene::loadGraphics(const std::string& file)
 		std::sort(entities.begin(), entities.end(), Entity::sort);
 
 	}
+
+  preview_plat = new Platform(0,0,0,0,0,0,0,0);
+  preview_plat->setSkin(splatform, platform_unit);
+  preview_a1 = new WAnimation(0,0,0,0,0,0,"",0,0,0);
+  preview_a2 = new WAnimation(0,0,0,0,0,0,"",0,0,0);
+
+  entities.push_back(preview_plat);
+  entities.push_back(preview_a1);
+  entities.push_back(preview_a2);
 }
 
 
@@ -434,24 +450,26 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	for(int i = 0; i < entities.size(); i++)
 	{
 		Entity& e = *(entities[i]);
+    if(e.isVisible()){
 
-		//calcul pour l'affichage
-		float pc = (10.0-(float)e.getZ())/10.0;
-		float x = ((float)e.getX()-cam.x)*pc+view.x/2.0;
-		float y = ((float)e.getY()-cam.y)*pc+view.y/2.0;
-		float a = (10.0-(float)e.getZ())/10.0;
-		float r = e.getAngle();
+      //calcul pour l'affichage
+      float pc = (10.0-(float)e.getZ())/10.0;
+      float x = ((float)e.getX()-cam.x)*pc+view.x/2.0;
+      float y = ((float)e.getY()-cam.y)*pc+view.y/2.0;
+      float a = (10.0-(float)e.getZ())/10.0;
+      float r = e.getAngle();
 
-		//parametre du shader
-		sh_fade->setParameter("a", a);
+      //parametre du shader
+      sh_fade->setParameter("a", a);
 
-		//transformation
-		e.setPosition(x,y);
-		e.setScale(pc,pc);
-		e.setRotation(r);
+      //transformation
+      e.setPosition(x,y);
+      e.setScale(pc,pc);
+      e.setRotation(r);
 
 
-		target.draw(e, states);
+      target.draw(e, states);
+    }
 	}
 }
 

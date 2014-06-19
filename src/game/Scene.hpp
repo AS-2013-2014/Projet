@@ -63,6 +63,11 @@ class Scene : public sf::Drawable, public sf::Transformable
 	sf::Shader* sh_fade;
     sf::Sprite splatform;
     float platform_unit;
+
+  //construction de plateformes/preview
+  Platform* preview_plat;
+  WAnimation *preview_a1, *preview_a2;
+
     
     MUIEvent MuiEvt;
     bool drawPlatform;

@@ -22,6 +22,7 @@ int main(int argc, char** argv)
 	Resources::loadTexture("images/fire.png");
 	Resources::loadTexture("images/aura.png");
 	Resources::loadTexture("images/platform_test.png");
+	Resources::loadTexture("images/anim-player.png");
   Resources::loadFont("arial.ttf");
 
 

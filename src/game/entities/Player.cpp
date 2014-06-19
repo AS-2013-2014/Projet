@@ -25,8 +25,24 @@ Player::Player(Scene* sc, sf::Vector2f p, sf::Vector2f d, float z, int s, HitBox
 		collided(false),
 		gapToReference(0)
 {
+  setEType(Entity::PLAYER);
+
 	hitBox = hb;
 	hitBox.move(p);
+
+  //init graphiques
+  sf::Texture* tex = Resources::getTexture("images/anim-player.png");
+  if(tex != NULL){
+    anim_size.x = tex->getSize().x/4.0;
+    anim_size.y = tex->getSize().y;
+    anim.setTexture(*tex);
+    anim.setScale(0.5,0.5);
+    anim.setOrigin(anim_size.x/2, anim_size.y);
+    anim.setPosition(size.x/4, size.y);
+  }
+
+  cur_frame = 0;
+  dist_reached = 0;
 }
 
 void Player::move(sf::Vector2f d)
@@ -46,6 +62,9 @@ void Player::move(sf::Vector2f d)
 			scene->setCam(sf::Vector2f(scene->getCam().x, 300));
     }
     isDead();
+
+    //graphiques
+    updateAnim(d);
 }
 
 void Player::jump()
@@ -134,10 +153,13 @@ void Player::move(const std::vector<Solid*>& solids)
 				);
 				if((solids[i]->getHitBox()).intersectsWith(new_segm))
 				{
-          /* TODO: problème de cast 
-                    			if(solids[i]->getType()==Platform::DEADLY)
-                				dead=true;
-                      */
+
+          if(solids[i]->getEType() == Entity::PLATFORM){
+              Platform* plat = (Platform*)(solids[i]);
+                if(plat->getType()==Platform::DEADLY)
+              dead=true;
+          }
+
 
 		                    	collisionDetected = true;
 					jumping = false;
@@ -201,16 +223,16 @@ void Player::move()
 	int section1 = (hitBox.getSegments()[0]).getP1().x/SECTION_WIDTH;
 	int section2 = (hitBox.getSegments()[2]).getP1().x/SECTION_WIDTH;
 	
-	std::vector<Solid*> platforms = std::vector<Solid*>();
+	std::vector<Solid*> solids = std::vector<Solid*>();
 
 	if(section1 != section2) {
-		platforms.reserve((scene->getSections())[section1]->platforms.size() +  (scene->getSections())[section2]->platforms.size());
-		platforms.insert(platforms.end(), (scene->getSections())[section1]->platforms.begin(), (scene->getSections())[section1]->platforms.end());
-		platforms.insert(platforms.end(), (scene->getSections())[section2]->platforms.begin(), (scene->getSections())[section2]->platforms.end());
-		move(platforms);
+		solids.reserve((scene->getSections())[section1]->solids.size() +  (scene->getSections())[section2]->solids.size());
+		solids.insert(solids.end(), (scene->getSections())[section1]->solids.begin(), (scene->getSections())[section1]->solids.end());
+		solids.insert(solids.end(), (scene->getSections())[section2]->solids.begin(), (scene->getSections())[section2]->solids.end());
+		move(solids);
 	}
 	else
-		move((scene->getSections())[section1]->platforms);
+		move((scene->getSections())[section1]->solids);
 }
 
 void Player::frame(float time)
@@ -218,13 +240,29 @@ void Player::frame(float time)
 	clockTime = time;
 	move();
 }
+
+
+void Player::updateAnim(sf::Vector2f d){
+  dist_reached += d.x;
+
+  int nf = dist_reached/PLAYER_FRAME_PIXELS;
+  if(nf > 0){
+    cur_frame += nf;
+    cur_frame %= 4;
+    dist_reached -= PLAYER_FRAME_PIXELS*nf;
+  }
+
+  //changement d'image
+  anim.setTextureRect(sf::IntRect(cur_frame*anim_size.x,0, anim_size.x, anim_size.y));
+}
+
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = NULL;
 
 	sf::RectangleShape rect(sf::Vector2f(size.x, size.y));
 	rect.setFillColor(sf::Color(0, 255, 0));
-	target.draw(rect, states);
+	target.draw(anim, states);
 	states.transform.translate(-(hitBox.getPos()));
 	target.draw(hitBox, states);
 }

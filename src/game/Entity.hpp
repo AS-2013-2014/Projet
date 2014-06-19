@@ -22,7 +22,9 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::Vector2f coord;
 	float z, angle;
+  int type;
 	sf::Vector2f size;
+  bool visible;
 
 	public:
 	Entity(sf::Vector2f coord , float z , int length , int width, float angle);
@@ -42,6 +44,18 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	int getLength() const;
 	int getWidth() const;
 	float getAngle() const;
+  int getEType(){ return type; }
+  void setEType(int t){ type = t; }
+
+  bool isVisible(){ return visible; }
+  void setVisible(bool v){ visible = v; }
+
+  enum{
+    NONE=1,
+    SOLID=2,
+    PLATFORM=3,
+    PLAYER=4
+  };
 };
 
 #endif

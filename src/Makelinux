@@ -51,7 +51,7 @@ WImage.o: game/entities/WImage.cpp game/entities/WImage.hpp
 WAnimation.o: game/entities/WAnimation.cpp game/entities/WAnimation.hpp
 		g++ -c game/entities/WAnimation.cpp -o WAnimation.o $(OPT)
 
-Player.o: game/entities/Player.cpp game/entities/Player.hpp
+Player.o: game/entities/Player.cpp game/entities/Player.hpp game/const.hpp
 		g++ -c game/entities/Player.cpp -o Player.o $(OPT)
 
 HitBox.o: game/HitBox.cpp game/HitBox.hpp
