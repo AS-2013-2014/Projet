@@ -24,6 +24,7 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	float z, angle;
   int type;
 	sf::Vector2f size;
+  bool visible;
 
 	public:
 	Entity(sf::Vector2f coord , float z , int length , int width, float angle);
@@ -45,6 +46,9 @@ class Entity : public sf::Drawable, public sf::Transformable{
 	float getAngle() const;
   int getEType(){ return type; }
   void setEType(int t){ type = t; }
+
+  bool isVisible(){ return visible; }
+  void setVisible(bool v){ visible = v; }
 
   enum{
     NONE=1,

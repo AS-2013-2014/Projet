@@ -17,7 +17,6 @@ class Game
 	int dataVolume, dataUnlockedWorld, dataUnlockedLevel;
 	bool play;
 
-
 	public:
 	Game(sf::RenderWindow& window, MUI& mui);
 	sf::RenderWindow& getWindow();
