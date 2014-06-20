@@ -275,5 +275,5 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	rect.setFillColor(sf::Color(0, 255, 0));
 	target.draw(anim, states);
 	states.transform.translate(-(hitBox.getPos()));
-	target.draw(hitBox, states);
+	//target.draw(hitBox, states);
 }
