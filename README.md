@@ -1,8 +1,7 @@
-Projet
+Ex-Projet
 ======
-Au boulot!
 
-Et plus vite que ça!
+Avis aux volontaires : amélioration en tout genre possible et bienvenue.
 
 =============
 
@@ -10,4 +9,4 @@ Et plus vite que ça!
 
 =============
 
-Commit Forbidden until new order
+
